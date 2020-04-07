@@ -117,23 +117,30 @@ namespace CovidSimApp.Diagram
             //TODO: different algorithms for barWidth < 1 and >= 1
             double verticalScale = Height / MaxSum;
             double barWidth = Math.Min((double)Width / barData.Count, MinBarWidth);
-            
 
-            for (int i = 0; i < barData.Count; i++)
-            {
-                BarData data = barData[i];
-                double sumValues = 0;
 
-                for (int j = data.Values.Count - 1; j >= 0; j--)
-                    if (bars[j].IsVisible)
-                    {
-                        float barHeight = (float)(data.Values[j] * verticalScale);
-                        float barX = (float)(i * barWidth);
-                        float barY = Height - (float)(sumValues * verticalScale) - barHeight;
-                        e.Graphics.FillRectangle(brushes[j], barX, barY, (float)barWidth, barHeight);
-                        sumValues += data.Values[j];
-                    }
-            }
+            //if (barWidth >= 1)
+            //{
+                for (int i = 0; i < barData.Count; i++)
+                {
+                    BarData data = barData[i];
+                    double sumValues = 0;
+
+                    for (int j = data.Values.Count - 1; j >= 0; j--)
+                        if (bars[j].IsVisible)
+                        {
+                            float barHeight = (float)(data.Values[j] * verticalScale);
+                            float barX = (float)(i * barWidth);
+                            float barY = Height - (float)(sumValues * verticalScale) - barHeight;
+                            e.Graphics.FillRectangle(brushes[j], barX, barY, (float)barWidth, barHeight);
+                            sumValues += data.Values[j];
+                        }
+                }
+            //}
+            //else
+            //{
+
+            //}
 
             brushes.ForEach(b => b.Dispose());
         }

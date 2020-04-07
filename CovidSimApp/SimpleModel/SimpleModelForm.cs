@@ -79,7 +79,7 @@ namespace CovidSimApp.SimpleModel
             diagram.AddData(simulator.Time, stats.SusceptibleCount, stats.InfectedCount, stats.RecoveredCount, stats.DiedCount);
 
             realTimeStats.SetTime(simulator.Time);
-            realTimeStats.SetPopulation(stats.Population);
+            realTimeStats.SetPopulation(stats.PopulationCount);
             realTimeStats.SetInfectedTotal(stats.InfectedTotalCount);
             realTimeStats.SetMaxInfected(stats.MaxInfectedCount);
             realTimeStats.SetSusceptible(stats.SusceptibleCount);

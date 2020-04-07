@@ -46,7 +46,7 @@ namespace CovidSimApp.SimpleModel
                 int infected = ValidateAndGet<int>(infectedEdit, x => x >= 0,
                     "Expected an integer value greater than 0 for Infected Initially");
                 ValidateAndGet<int>(infectedEdit, x => x <= population,
-                    "Infected Initially cannot exceed to Population");
+                    "Infected Initially cannot exceed Population");
                 double transitionRate = ValidateAndGet<double>(transitionRateEdit, x => x >= 0,
                     "Transition Rate should be greater or equal to 0");
                 double illnessDuration = ValidateAndGet<double>(illnessDurationEdit, x => x > 0,

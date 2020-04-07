@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CovidSim.SimpleModel
+namespace CovidSim.Model2D
 {
     public class Simulator
     {
+        List<Human> humans = new List<Human>();
+
         public int Time { get; private set; }
         public Settings Settings = new Settings();
         public Statistics Stats { get; private set; } = new Statistics();
@@ -20,23 +22,25 @@ namespace CovidSim.SimpleModel
             Stats.SusceptibleCount = Settings.Population - Settings.InitiallyInfected;
             Stats.InfectedCount = Settings.InitiallyInfected;
             Stats.InfectedTotalCount = Settings.InitiallyInfected;
-            Stats.MaxInfectedCount = double.MinValue;
+            Stats.MaxInfectedCount = int.MinValue;
+
+            for (var i = 0; i < Settings.Population; i++)
+                humans.Add(new Human());
+
+            for (var i = 0; i < Settings.InitiallyInfected; i++)
+            {
+                var index = Utils.Random.Next(humans.Count);
+                var human = humans[index];
+                //if (human.IsInfected)
+                //    continue;
+                //else
+                //    human.Infect(this);
+            }
         }
 
         public void Step()
         {
-            double deltaSusceptible = -Settings.TransitionRate * Stats.InfectedCount * Stats.SusceptibleCount / Settings.Population;
-            double deltaRemoved = Stats.InfectedCount / Settings.IllnessDuration;
-            double deltaInfected = -deltaSusceptible - deltaRemoved;
 
-            Stats.SusceptibleCount += deltaSusceptible;
-            Stats.InfectedCount += deltaInfected;
-            Stats.InfectedTotalCount += -deltaSusceptible;
-            Stats.RecoveredCount += deltaRemoved * (1 - Settings.FatalityRate);
-            Stats.DiedCount += deltaRemoved * Settings.FatalityRate;
-            Stats.MaxInfectedCount = Math.Max(Stats.MaxInfectedCount, Stats.InfectedCount);
-
-            Time++;
         }
     }
 }

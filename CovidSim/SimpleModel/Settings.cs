@@ -6,37 +6,11 @@ using System.Threading.Tasks;
 
 namespace CovidSim.SimpleModel
 {
-    public class Settings
+    public class Settings : BasicSettings
     {
-        int population = 1000000;
-        int initiallyInfected = 1;
         double transitionRate = 0.2;
         double fatalityRate = 0.2;
         double illnessDuration = 21;
-
-        public int Population
-        {
-            get { return population; }
-
-            set
-            {
-                if (value < 1)
-                    throw new ArgumentException("Population");
-                population = value;
-            }
-        }
-
-        public int InitiallyInfected
-        {
-            get { return initiallyInfected; }
-
-            set
-            {
-                if (value < 0)
-                    throw new ArgumentException("InitiallyInfected");
-                initiallyInfected = value;
-            }
-        }
 
         /// <summary>
         /// Transition rate is the number of contacts per person per time,
@@ -80,6 +54,12 @@ namespace CovidSim.SimpleModel
                     throw new ArgumentException("FatalityRate");
                 fatalityRate = value;
             }
+        }
+
+        public Settings()
+        {
+            Population = 1000000;
+            InitiallyInfected = 1;
         }
     }
 }
