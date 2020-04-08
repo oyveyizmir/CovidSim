@@ -8,6 +8,83 @@ namespace CovidSim.Model2D
 {
     public class Settings : BasicSettings
     {
+        double transmissionRange = 10;
+        double transmissionProbabilityAt0 = 0.1;
+        double transmissionProbabilityAtRange = 0;
+        double minWalk = 0;
+        double maxWalk = 5;
+        double worldSize = 1000;
+
+        public double TransmissionRange
+        {
+            get => transmissionRange;
+
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("TransmissionRange");
+                transmissionRange = value;
+            }
+        }
+
+        public double TransmissionProbabilityAt0
+        {
+            get => transmissionProbabilityAt0;
+
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("TransmissionProbabilityAt0");
+                transmissionProbabilityAt0 = value;
+            }
+        }
+
+        public double TransmissionProbabilityAtRange
+        {
+            get => transmissionProbabilityAtRange;
+
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("TransmissionProbabilityAtRange");
+                transmissionProbabilityAtRange = value;
+            }
+        }
+
+        public double MinWalk
+        {
+            get => minWalk;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("MinWalk");
+                minWalk = value;
+            }
+        }
+
+        public double MaxWalk
+        {
+            get => maxWalk;
+            set
+            {
+                if (value < 0)
+                    throw new ArgumentException("MaxWalk");
+                maxWalk = value;
+            }
+        }
+
+        public double WorldSize
+        {
+            get => worldSize;
+
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("WorldSize");
+                worldSize = value;
+            }
+        }
+
         public Settings()
         {
             Population = 1000;

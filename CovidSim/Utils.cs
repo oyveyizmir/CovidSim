@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace CovidSim
 {
-    public static class Utils
+    public static class RandomUtils
     {
         public static Random Random = new Random();
 
-        public static bool LessThanThreshold(double threshold)
-        {
-            return Random.NextDouble() < threshold;
-        }
+        public static bool LessThanThreshold(double threshold) => Random.NextDouble() < threshold;
+
+        public static double GetDouble(double from, double to) => from + (to - from) * Random.NextDouble();
+
+        public static double GetDouble(double max) => max * Random.NextDouble();
+
+        public static int GetInt(int max) => Random.Next(max);
     }
 }

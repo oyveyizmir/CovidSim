@@ -65,8 +65,7 @@ namespace CovidSimApp.SimpleModel
 
         void UpdateTransitionRateFromTextBox()
         {
-            double newValue;
-            if (!double.TryParse(transitionRateEdit.Text, out newValue))
+            if (!double.TryParse(transitionRateEdit.Text, out var newValue))
                 return;
             if (newValue < 0)
                 return;

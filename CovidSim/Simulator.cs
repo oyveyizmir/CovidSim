@@ -25,7 +25,7 @@ namespace CovidSim
 
             for (var i = 0; i < Settings.InitiallyInfected; i++)
             {
-                var index = Utils.Random.Next(Humans.Count);
+                var index = RandomUtils.Random.Next(Humans.Count);
                 var human = Humans[index];
                 if (human.IsInfected)
                     continue;
@@ -48,9 +48,9 @@ namespace CovidSim
 
             for (var i = 0; i < Humans.Count; i++)
             {
-                if (Utils.LessThanThreshold(Settings.SwapProbability))
+                if (RandomUtils.LessThanThreshold(Settings.SwapProbability))
                 {
-                    var index = Utils.Random.Next(Humans.Count);
+                    var index = RandomUtils.Random.Next(Humans.Count);
                     var tmp = Humans[index];
                     Humans[index] = Humans[i];
                     Humans[i] = tmp;

@@ -9,7 +9,9 @@ namespace CovidSim
     public class Human
     {
         public bool IsAlive { get; set; } = true;
+
         public bool IsImmune { get; set; }
+
         public bool IsInfected
         {
             get { return TimeToRecovery > 0 || IsMortallyIll; }
@@ -26,7 +28,7 @@ namespace CovidSim
 
         void TryToInfect(Simulator simulator)
         {
-            if (Utils.LessThanThreshold(simulator.Settings.InfectionProbability))
+            if (RandomUtils.LessThanThreshold(simulator.Settings.InfectionProbability))
                 Infect(simulator);
         }
 
@@ -37,7 +39,7 @@ namespace CovidSim
 
             Settings settings = simulator.Settings;
 
-            if (Utils.LessThanThreshold(settings.FatalityRate))
+            if (RandomUtils.LessThanThreshold(settings.FatalityRate))
                 TimeToDeath = settings.MortallyInfectedLifeSpan;
             else
                 TimeToRecovery = settings.IllnessDuration;

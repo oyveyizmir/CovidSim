@@ -19,7 +19,7 @@ namespace CovidSim.SimpleModel
         /// </summary>
         public double TransitionRate
         {
-            get { return transitionRate; }
+            get => transitionRate;
 
             set
             {
@@ -31,7 +31,7 @@ namespace CovidSim.SimpleModel
 
         public double IllnessDuration
         {
-            get { return illnessDuration; }
+            get => illnessDuration;
 
             set
             {
@@ -46,7 +46,7 @@ namespace CovidSim.SimpleModel
         /// </summary>
         public double FatalityRate
         {
-            get { return fatalityRate; }
+            get => fatalityRate;
 
             set
             {

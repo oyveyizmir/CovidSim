@@ -20,7 +20,6 @@ namespace CovidSim.SimpleModel
             Stats.SusceptibleCount = Settings.Population - Settings.InitiallyInfected;
             Stats.InfectedCount = Settings.InitiallyInfected;
             Stats.InfectedTotalCount = Settings.InitiallyInfected;
-            Stats.MaxInfectedCount = double.MinValue;
         }
 
         public void Step()
@@ -34,7 +33,6 @@ namespace CovidSim.SimpleModel
             Stats.InfectedTotalCount += -deltaSusceptible;
             Stats.RecoveredCount += deltaRemoved * (1 - Settings.FatalityRate);
             Stats.DiedCount += deltaRemoved * Settings.FatalityRate;
-            Stats.MaxInfectedCount = Math.Max(Stats.MaxInfectedCount, Stats.InfectedCount);
 
             Time++;
         }

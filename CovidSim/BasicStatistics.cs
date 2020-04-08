@@ -7,13 +7,32 @@ using System.Threading.Tasks;
 namespace CovidSim
 {
     public abstract class BasicStatistics<T>
+        where T : IComparable<T>
     {
+        T infectedCount;
+
         public abstract T PopulationCount { get; }
+
         public T SusceptibleCount { get; set; }
-        public T InfectedCount { get; set; }
+
+        public T InfectedCount
+        {
+            get => infectedCount;
+
+            set
+            {
+                if (value.CompareTo(MaxInfectedCount) > 0)
+                    MaxInfectedCount = value;
+                infectedCount = value;
+            }
+        }
+
         public T InfectedTotalCount { get; set; }
+
         public T MaxInfectedCount { get; set; }
+
         public T RecoveredCount { get; set; }
+
         public T DiedCount { get; set; }
 
         public override string ToString()

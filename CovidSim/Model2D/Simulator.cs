@@ -19,26 +19,81 @@ namespace CovidSim.Model2D
             if (Settings.Population < Settings.InitiallyInfected)
                 throw new InvalidOperationException("Population cannot be less than InitiallyInfected");
 
-            Stats.SusceptibleCount = Settings.Population - Settings.InitiallyInfected;
-            Stats.InfectedCount = Settings.InitiallyInfected;
-            Stats.InfectedTotalCount = Settings.InitiallyInfected;
-            Stats.MaxInfectedCount = int.MinValue;
+            Stats.SusceptibleCount = Settings.Population;
 
             for (var i = 0; i < Settings.Population; i++)
-                humans.Add(new Human());
-
-            for (var i = 0; i < Settings.InitiallyInfected; i++)
             {
-                var index = Utils.Random.Next(humans.Count);
+                var human = new Human();
+                human.Position = new Point(RandomUtils.GetDouble(Settings.WorldSize), RandomUtils.GetDouble(Settings.WorldSize));
+                humans.Add(human);
+            }
+
+            for (var i = 0; i < Settings.InitiallyInfected;)
+            {
+                var index = RandomUtils.GetInt(humans.Count);
                 var human = humans[index];
-                //if (human.IsInfected)
-                //    continue;
-                //else
-                //    human.Infect(this);
+                if (!human.IsInfected)
+                {
+                    Infect(human);
+                    i++;
+                }
             }
         }
 
         public void Step()
+        {
+            Time++;
+            Move();
+            Infect();
+            Remove();
+        }
+
+        void Move()
+        {
+            foreach (var human in humans)
+            {
+                double moveAngle = RandomUtils.GetDouble(0, 2 * Math.PI);
+                double moveRange = RandomUtils.GetDouble(Settings.MinWalk, Settings.MaxWalk);
+                Point randomWalkVector = new Point(moveRange * Math.Cos(moveAngle), moveRange * Math.Sin(moveAngle));
+                human.Position += randomWalkVector; //TODO: wrap coordinates
+            }
+        }
+
+        void Infect()
+        {
+            double transmissionProbabilityRange = Settings.TransmissionProbabilityAtRange - Settings.TransmissionProbabilityAt0;
+
+            foreach (var human in humans)
+            {
+                if (!human.IsAlive || !human.IsInfected || human.InfectionTime >= Time)
+                    continue;
+
+                foreach (var humanToInfect in humans)
+                {
+                    if (!humanToInfect.IsAlive || humanToInfect.IsImmune || humanToInfect.IsInfected)
+                        continue;
+
+                    double distance = Point.Distance(human.Position, humanToInfect.Position);
+                    if (distance <= Settings.TransmissionRange)
+                    {
+                        double transmissionProbability = Settings.TransmissionProbabilityAt0 + transmissionProbabilityRange * distance / Settings.TransmissionRange;
+                        if (RandomUtils.LessThanThreshold(transmissionProbability))
+                            Infect(humanToInfect);
+                    }
+                }
+            }
+        }
+
+        void Infect(Human human)
+        {
+            human.IsInfected = true;
+            human.InfectionTime = Time;
+            Stats.InfectedTotalCount++;
+            Stats.InfectedCount++;
+            Stats.SusceptibleCount--;
+        }
+
+        void Remove()
         {
 
         }

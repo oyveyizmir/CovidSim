@@ -13,7 +13,7 @@ namespace CovidSim
 
         public int Population
         {
-            get { return population; }
+            get => population;
 
             set
             {
@@ -25,7 +25,7 @@ namespace CovidSim
 
         public int InitiallyInfected
         {
-            get { return initiallyInfected; }
+            get => initiallyInfected;
 
             set
             {
