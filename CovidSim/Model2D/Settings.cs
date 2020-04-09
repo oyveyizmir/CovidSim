@@ -14,6 +14,8 @@ namespace CovidSim.Model2D
         double minWalk = 0;
         double maxWalk = 5;
         double worldSize = 1000;
+        int illnessDuration = 21;
+        double fatalityRate = 0.21;
 
         public double TransmissionRange
         {
@@ -82,6 +84,30 @@ namespace CovidSim.Model2D
                 if (value <= 0)
                     throw new ArgumentException("WorldSize");
                 worldSize = value;
+            }
+        }
+
+        public int IllnessDuration
+        {
+            get => illnessDuration;
+
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("IllnessDiration");
+                illnessDuration = value;
+            }
+        }
+
+        public double FatalityRate
+        {
+            get => fatalityRate;
+
+            set
+            {
+                if (value < 0 || value > 1)
+                    throw new ArgumentException("FatalityRate");
+                fatalityRate = value;
             }
         }
 

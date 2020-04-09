@@ -63,22 +63,16 @@ namespace CovidSim.Model2D
         {
             double transmissionProbabilityRange = Settings.TransmissionProbabilityAtRange - Settings.TransmissionProbabilityAt0;
 
-            foreach (var human in humans)
+            foreach (var subject in humans.Where(x => x.CanInfect(Time)))
             {
-                if (!human.IsAlive || !human.IsInfected || human.InfectionTime >= Time)
-                    continue;
-
-                foreach (var humanToInfect in humans)
+                foreach (var @object in humans.Where(x => x.CanBeInfected))
                 {
-                    if (!humanToInfect.IsAlive || humanToInfect.IsImmune || humanToInfect.IsInfected)
-                        continue;
-
-                    double distance = Point.Distance(human.Position, humanToInfect.Position);
+                    double distance = Point.Distance(subject.Position, @object.Position);
                     if (distance <= Settings.TransmissionRange)
                     {
                         double transmissionProbability = Settings.TransmissionProbabilityAt0 + transmissionProbabilityRange * distance / Settings.TransmissionRange;
                         if (RandomUtils.LessThanThreshold(transmissionProbability))
-                            Infect(humanToInfect);
+                            Infect(@object);
                     }
                 }
             }
@@ -88,14 +82,39 @@ namespace CovidSim.Model2D
         {
             human.IsInfected = true;
             human.InfectionTime = Time;
+            human.TimeToRemoval = Settings.IllnessDuration;
             Stats.InfectedTotalCount++;
             Stats.InfectedCount++;
             Stats.SusceptibleCount--;
         }
 
+        void Die(Human human)
+        {
+            human.IsAlive = false;
+            Stats.InfectedCount--;
+            Stats.DiedCount++;
+        }
+
+        void Recover(Human human)
+        {
+            human.IsImmune = true;
+            human.IsInfected = false;
+            Stats.InfectedCount--;
+            Stats.RecoveredCount++;
+        }
+
         void Remove()
         {
-
+            foreach (var human in humans.Where(x => x.CanInfect(Time)))
+            {
+                if (--human.TimeToRemoval <= 0)
+                {
+                    if (RandomUtils.LessThanThreshold(Settings.FatalityRate))
+                        Die(human);
+                    else
+                        Recover(human);
+                }
+            }
         }
     }
 }
