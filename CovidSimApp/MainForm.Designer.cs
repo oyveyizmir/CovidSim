@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.simpleModelButton = new System.Windows.Forms.Button();
+            this.buttonModel2D = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // simpleModelButton
@@ -41,11 +42,22 @@
             this.simpleModelButton.UseVisualStyleBackColor = true;
             this.simpleModelButton.Click += new System.EventHandler(this.simpleModelButton_Click);
             // 
+            // buttonModel2D
+            // 
+            this.buttonModel2D.Location = new System.Drawing.Point(12, 42);
+            this.buttonModel2D.Name = "buttonModel2D";
+            this.buttonModel2D.Size = new System.Drawing.Size(268, 23);
+            this.buttonModel2D.TabIndex = 1;
+            this.buttonModel2D.Text = "2D Model";
+            this.buttonModel2D.UseVisualStyleBackColor = true;
+            this.buttonModel2D.Click += new System.EventHandler(this.buttonModel2D_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 105);
+            this.Controls.Add(this.buttonModel2D);
             this.Controls.Add(this.simpleModelButton);
             this.Name = "MainForm";
             this.Text = "Covid Simulator";
@@ -56,5 +68,6 @@
         #endregion
 
         private System.Windows.Forms.Button simpleModelButton;
+        private System.Windows.Forms.Button buttonModel2D;
     }
 }

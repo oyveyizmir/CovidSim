@@ -1,4 +1,5 @@
-﻿using CovidSimApp.SimpleModel;
+﻿using CovidSimApp.Model2D;
+using CovidSimApp.SimpleModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,6 +22,12 @@ namespace CovidSimApp
         private void simpleModelButton_Click(object sender, EventArgs e)
         {
             var form = new SimpleModelForm();
+            form.Show();
+        }
+
+        private void buttonModel2D_Click(object sender, EventArgs e)
+        {
+            var form = new Model2DForm();
             form.Show();
         }
     }

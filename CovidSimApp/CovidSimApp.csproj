@@ -51,6 +51,9 @@
     <Compile Include="Controls\Diagram\DiagramControl.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Controls\Population2D\PopulationControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Controls\RealTimeStats.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -62,6 +65,12 @@
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model2D\Model2DForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model2D\Model2DForm.Designer.cs">
+      <DependentUpon>Model2DForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SimpleModel\ModelParametersControl.cs">
       <SubType>UserControl</SubType>
@@ -91,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model2D\Model2DForm.resx">
+      <DependentUpon>Model2DForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SimpleModel\ModelParametersControl.resx">
       <DependentUpon>ModelParametersControl.cs</DependentUpon>

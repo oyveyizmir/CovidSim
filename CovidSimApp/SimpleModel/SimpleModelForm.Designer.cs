@@ -100,6 +100,7 @@ namespace CovidSimApp.SimpleModel
             this.modelParametersControl.Name = "modelParametersControl";
             this.modelParametersControl.Size = new System.Drawing.Size(344, 103);
             this.modelParametersControl.TabIndex = 6;
+            this.modelParametersControl.TransitionRate = 0D;
             // 
             // SimpleModelForm
             // 
