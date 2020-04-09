@@ -55,8 +55,39 @@ namespace CovidSim.Model2D
                 double moveAngle = RandomUtils.GetDouble(0, 2 * Math.PI);
                 double moveRange = RandomUtils.GetDouble(Settings.MinWalk, Settings.MaxWalk);
                 Point randomWalkVector = new Point(moveRange * Math.Cos(moveAngle), moveRange * Math.Sin(moveAngle));
-                human.Position += randomWalkVector; //TODO: wrap coordinates
+                human.Position = Limit(human.Position + randomWalkVector, Settings.WorldSize);
             }
+        }
+
+        static Point Limit(Point point, double max)
+        {
+            return new Point(Limit(point.X, max), Limit(point.Y, max));
+        }
+
+        static double Limit(double value, double max)
+        {
+            if (value < 0)
+                return 0;
+            if (value > max)
+                return max;
+            return value;
+        }
+
+        static double Wrap(double value, double max)
+        {
+            if (value < 0 || value >= max)
+            {
+                double relativeValue = value / max;
+                double fraction = relativeValue - Math.Floor(relativeValue);
+                return fraction * max;
+            }
+            else
+                return value;
+        }
+
+        static Point Wrap(Point point, double max)
+        {
+            return new Point(Wrap(point.X, max), Wrap(point.Y, max));
         }
 
         void Infect()
