@@ -46,20 +46,15 @@
   <ItemGroup>
     <Compile Include="BasicSettings.cs" />
     <Compile Include="BasicStatistics.cs" />
-    <Compile Include="Human.cs" />
     <Compile Include="Model2D\Human.cs" />
     <Compile Include="Model2D\Settings.cs" />
     <Compile Include="Model2D\Simulator.cs" />
     <Compile Include="Model2D\Statistics.cs" />
     <Compile Include="Point.cs" />
-    <Compile Include="Populace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Settings.cs" />
     <Compile Include="SimpleModel\Settings.cs" />
     <Compile Include="SimpleModel\Simulator.cs" />
     <Compile Include="SimpleModel\Statistics.cs" />
-    <Compile Include="Simulator.cs" />
-    <Compile Include="Statistics.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
