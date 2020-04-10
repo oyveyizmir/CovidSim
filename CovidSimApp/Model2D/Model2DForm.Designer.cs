@@ -35,6 +35,7 @@
             this.populationControl = new CovidSimApp.Controls.Population2D.PopulationControl();
             this.realTimeStats = new CovidSimApp.Controls.RealTimeStats();
             this.diagram = new CovidSimApp.Diagram.DiagramControl();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // settingsButton
@@ -54,6 +55,7 @@
             this.resetButton.TabIndex = 8;
             this.resetButton.Text = "Reset";
             this.resetButton.UseVisualStyleBackColor = true;
+            this.resetButton.Click += new System.EventHandler(this.resetButton_Click);
             // 
             // startStopButton
             // 
@@ -63,6 +65,7 @@
             this.startStopButton.TabIndex = 7;
             this.startStopButton.Text = "Start";
             this.startStopButton.UseVisualStyleBackColor = true;
+            this.startStopButton.Click += new System.EventHandler(this.startStopButton_Click);
             // 
             // populationControl
             // 
@@ -75,6 +78,7 @@
             this.populationControl.Size = new System.Drawing.Size(800, 394);
             this.populationControl.TabIndex = 11;
             this.populationControl.Text = "populationControl1";
+            this.populationControl.WorldSize = 1000D;
             // 
             // realTimeStats
             // 
@@ -93,6 +97,11 @@
             this.diagram.Size = new System.Drawing.Size(800, 111);
             this.diagram.TabIndex = 6;
             this.diagram.Text = "diagram";
+            // 
+            // timer
+            // 
+            this.timer.Interval = 1;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // Model2DForm
             // 
@@ -119,5 +128,6 @@
         private System.Windows.Forms.Button startStopButton;
         private Diagram.DiagramControl diagram;
         private Controls.Population2D.PopulationControl populationControl;
+        private System.Windows.Forms.Timer timer;
     }
 }

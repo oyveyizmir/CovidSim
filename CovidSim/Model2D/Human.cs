@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CovidSim.Model2D
 {
-    class Human
+    public class Human
     {
         public Point Position { get; set; }
 
