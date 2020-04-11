@@ -53,6 +53,19 @@ namespace CovidSimApp.Model2D
             ResetSimulation();
         }
 
+        private void startStopButton_Click(object sender, EventArgs e)
+        {
+            if (task != null)
+                StopSimulation();
+            else
+                StartSimulation();
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            ResetSimulation();
+        }
+
         void StartSimulation()
         {
             startStopButton.Text = "Stop";
@@ -78,12 +91,36 @@ namespace CovidSimApp.Model2D
             settingsButton.Enabled = true;
         }
 
-        private void startStopButton_Click(object sender, EventArgs e)
+        void ResetSimulation()
         {
-            if (task != null)
-                StopSimulation();
-            else
-                StartSimulation();
+            StopSimulation();
+
+            simulator = new Simulator();
+            simulator.Settings = settings;
+            simulator.Initialize();
+
+            diagram.ClearData();
+            realTimeStats.ClearValues();
+            ResetPopulation();
+
+            resetButton.Enabled = false;
+
+            UpdateUI(CancellationToken.None);
+        }
+
+        async void RunSimulation(CancellationToken token)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                simulator.Step();
+                try
+                {
+                    await Task.Factory.StartNew(() => UpdateUI(token), token, TaskCreationOptions.None, uiScheduler);
+                }
+                catch (TaskCanceledException) { }
+
+                await Task.Delay(0);
+            }
         }
 
         PersonState GetPersonState(Human human)
@@ -125,38 +162,6 @@ namespace CovidSimApp.Model2D
             populationControl.Invalidate();
         }
 
-        void ResetSimulation()
-        {
-            StopSimulation();
-
-            simulator = new Simulator();
-            simulator.Settings = settings;
-            simulator.Initialize();
-
-            diagram.ClearData();
-            realTimeStats.ClearValues();
-            ResetPopulation();
-            
-            resetButton.Enabled = false;
-
-            UpdateUI(CancellationToken.None);
-        }
-
-        async void RunSimulation(CancellationToken token)
-        {
-            while (!token.IsCancellationRequested)
-            {
-                simulator.Step();
-                try
-                {
-                    await Task.Factory.StartNew(() => UpdateUI(token), token, TaskCreationOptions.None, uiScheduler);
-                }
-                catch (TaskCanceledException) { }
-                
-                await Task.Delay(0);
-            }
-        }
-
         void UpdateDiagram()
         {
             Statistics stats = simulator.Stats;
@@ -186,11 +191,6 @@ namespace CovidSimApp.Model2D
             UpdateRealTimeStats();
 
             Application.DoEvents();
-        }
-
-        private void resetButton_Click(object sender, EventArgs e)
-        {
-            ResetSimulation();
         }
     }
 }
