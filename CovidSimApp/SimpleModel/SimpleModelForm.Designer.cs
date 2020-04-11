@@ -67,7 +67,7 @@ namespace CovidSimApp.SimpleModel
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(175, 13);
+            this.settingsButton.Location = new System.Drawing.Point(175, 12);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(75, 23);
             this.settingsButton.TabIndex = 4;

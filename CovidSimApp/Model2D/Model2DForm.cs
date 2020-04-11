@@ -37,14 +37,13 @@ namespace CovidSimApp.Model2D
             simulator.Settings.IllnessDuration = 20;
             simulator.Settings.TransmissionRange = 20;
             simulator.Settings.TransmissionProbabilityAt0 = 0.3;
-            simulator.Settings.FatalityRate = 0.9;
+            simulator.Settings.FatalityRate = 0.2;
             simulator.Settings.Population = 1000;
-            simulator.Settings.InitiallyInfected = 100;
+            simulator.Settings.InitiallyInfected = 10;
             simulator.Initialize();
             settings = simulator.Settings;
 
             resetButton.Enabled = false;
-            timer.Interval = 1;
 
             diagram.AddBar(Color.Blue, "Susceptible");
             diagram.AddBar(Color.DarkRed, "Infected");
@@ -56,7 +55,6 @@ namespace CovidSimApp.Model2D
 
         void StartSimulation()
         {
-            //timer.Start();
             startStopButton.Text = "Stop";
             settingsButton.Enabled = false;
             resetButton.Enabled = true;
@@ -67,7 +65,6 @@ namespace CovidSimApp.Model2D
 
         async void StopSimulation()
         {
-            //timer.Stop();
             if (task != null)
             {
                 cts.Cancel();
@@ -194,25 +191,6 @@ namespace CovidSimApp.Model2D
         private void resetButton_Click(object sender, EventArgs e)
         {
             ResetSimulation();
-        }
-
-        private void timer_Tick(object sender, EventArgs e)
-        {
-            simulator.Step();
-            var stats = simulator.Stats;
-
-            diagram.AddData(simulator.Time, stats.SusceptibleCount, stats.InfectedCount, stats.RecoveredCount, stats.DiedCount);
-
-            UpdatePopulation();
-
-            realTimeStats.SetTime(simulator.Time);
-            realTimeStats.SetPopulation(stats.PopulationCount);
-            realTimeStats.SetInfectedTotal(stats.InfectedTotalCount);
-            realTimeStats.SetMaxInfected(stats.MaxInfectedCount);
-            realTimeStats.SetSusceptible(stats.SusceptibleCount);
-            realTimeStats.SetInfected(stats.InfectedCount);
-            realTimeStats.SetRecovered(stats.RecoveredCount);
-            realTimeStats.SetDead(stats.DiedCount);
         }
     }
 }

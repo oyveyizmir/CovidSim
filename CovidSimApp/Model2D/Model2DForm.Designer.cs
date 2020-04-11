@@ -35,12 +35,11 @@
             this.populationControl = new CovidSimApp.Controls.Population2D.PopulationControl();
             this.realTimeStats = new CovidSimApp.Controls.RealTimeStats();
             this.diagram = new CovidSimApp.Diagram.DiagramControl();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // settingsButton
             // 
-            this.settingsButton.Location = new System.Drawing.Point(175, 13);
+            this.settingsButton.Location = new System.Drawing.Point(175, 12);
             this.settingsButton.Name = "settingsButton";
             this.settingsButton.Size = new System.Drawing.Size(75, 23);
             this.settingsButton.TabIndex = 9;
@@ -98,11 +97,6 @@
             this.diagram.TabIndex = 6;
             this.diagram.Text = "diagram";
             // 
-            // timer
-            // 
-            this.timer.Interval = 1;
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
-            // 
             // Model2DForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -128,6 +122,5 @@
         private System.Windows.Forms.Button startStopButton;
         private Diagram.DiagramControl diagram;
         private Controls.Population2D.PopulationControl populationControl;
-        private System.Windows.Forms.Timer timer;
     }
 }
