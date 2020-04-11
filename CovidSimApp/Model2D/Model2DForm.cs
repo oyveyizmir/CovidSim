@@ -39,9 +39,10 @@ namespace CovidSimApp.Model2D
             simulator.Settings.TransmissionProbabilityAt0 = 0.3;
             simulator.Settings.FatalityRate = 0.9;
             simulator.Settings.Population = 1000;
+            simulator.Settings.InitiallyInfected = 100;
             simulator.Initialize();
             settings = simulator.Settings;
-            
+
             resetButton.Enabled = false;
             timer.Interval = 1;
 
@@ -50,7 +51,7 @@ namespace CovidSimApp.Model2D
             diagram.AddBar(Color.DarkGreen, "Recovered");
             diagram.AddBar(Color.DarkGray, "Dead");
 
-            ResetPopulation();
+            ResetSimulation();
         }
 
         void StartSimulation()
@@ -140,6 +141,8 @@ namespace CovidSimApp.Model2D
             ResetPopulation();
             
             resetButton.Enabled = false;
+
+            UpdateUI(CancellationToken.None);
         }
 
         async void RunSimulation(CancellationToken token)
@@ -157,16 +160,15 @@ namespace CovidSimApp.Model2D
             }
         }
 
-        void UpdateUI(CancellationToken token)
+        void UpdateDiagram()
         {
-            if (token.IsCancellationRequested)
-                return;
-
             Statistics stats = simulator.Stats;
             diagram.AddData(simulator.Time, stats.SusceptibleCount, stats.InfectedCount, stats.RecoveredCount, stats.DiedCount);
+        }
 
-            UpdatePopulation();
-
+        void UpdateRealTimeStats()
+        {
+            Statistics stats = simulator.Stats;
             realTimeStats.SetTime(simulator.Time);
             realTimeStats.SetPopulation(stats.PopulationCount);
             realTimeStats.SetInfectedTotal(stats.InfectedTotalCount);
@@ -175,6 +177,16 @@ namespace CovidSimApp.Model2D
             realTimeStats.SetInfected(stats.InfectedCount);
             realTimeStats.SetRecovered(stats.RecoveredCount);
             realTimeStats.SetDead(stats.DiedCount);
+        }
+
+        void UpdateUI(CancellationToken token)
+        {
+            if (token.IsCancellationRequested)
+                return;
+            
+            UpdateDiagram();
+            UpdatePopulation();
+            UpdateRealTimeStats();
 
             Application.DoEvents();
         }
