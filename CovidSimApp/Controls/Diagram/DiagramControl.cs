@@ -10,7 +10,7 @@ namespace CovidSimApp.Diagram
 {
     class DiagramControl : Control
     {
-        const int MinBarWidth = 10;
+        const int MaxBarWidth = 10;
 
         List<BarDesciptor> bars = new List<BarDesciptor>();
         List<BarData> barData = new List<BarData>();
@@ -108,45 +108,65 @@ namespace CovidSimApp.Diagram
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
+        void DrawBar(Graphics g, BarData data, int barX, int barWidth, double verticalScale, List<SolidBrush> brushes)
+        {
+            double sumValues = 0;
+
+            for (int j = data.Values.Count - 1; j >= 0; j--)
+                if (bars[j].IsVisible)
+                {
+                    int barHeight = (int)(data.Values[j] * verticalScale);
+                    int barY = Height - (int)(sumValues * verticalScale) - barHeight;
+                    g.FillRectangle(brushes[j], barX, barY, barWidth, barHeight);
+                    sumValues += data.Values[j];
+                }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            //e.Graphics.DrawString($"{Width} {Height}", Font, Brushes.Black, 0, 0);
 
             if (barData.Count == 0 || MaxSum <= 0)
                 return;
 
             var brushes = bars.Select(d => new SolidBrush(d.Color)).ToList();
 
-            //TODO: different algorithms for barWidth < 1 and >= 1
             double verticalScale = Height / MaxSum;
-            double barWidth = Math.Min((double)Width / barData.Count, MinBarWidth);
+            double horizontalScale = Math.Min((double)Width / barData.Count, MaxBarWidth);
 
 
-            //if (barWidth >= 1)
-            //{
+            if (horizontalScale > 1)
+            {
                 for (int i = 0; i < barData.Count; i++)
                 {
                     BarData data = barData[i];
-                    double sumValues = 0;
-
-                    for (int j = data.Values.Count - 1; j >= 0; j--)
-                        if (bars[j].IsVisible)
-                        {
-                            float barHeight = (float)(data.Values[j] * verticalScale);
-                            float barX = (float)(i * barWidth);
-                            float barY = Height - (float)(sumValues * verticalScale) - barHeight;
-                            e.Graphics.FillRectangle(brushes[j], barX, barY, (float)barWidth, barHeight);
-                            sumValues += data.Values[j];
-                        }
+                    DrawBar(barData[i], (float)(i * horizontalScale), (float)horizontalScale);
                 }
-            //}
-            //else
-            //{
-
-            //}
+            }
+            else
+            {
+                for (int x = 0; x < Width; x++)
+                {
+                    int i = (int)(x / horizontalScale);
+                    DrawBar(barData[i], x, 1);
+                }
+            }
 
             brushes.ForEach(b => b.Dispose());
+
+            void DrawBar(BarData data, float barX, float barWidth)
+            {
+                double sumValues = 0;
+
+                for (int j = data.Values.Count - 1; j >= 0; j--)
+                    if (bars[j].IsVisible)
+                    {
+                        float barHeight = (float)(data.Values[j] * verticalScale);
+                        float barY = Height - (float)(sumValues * verticalScale) - barHeight;
+                        e.Graphics.FillRectangle(brushes[j], barX, barY, barWidth, barHeight);
+                        sumValues += data.Values[j];
+                    }
+            }
         }
     }
 }
