@@ -78,6 +78,12 @@ namespace CovidSimApp.Diagram
             Invalidate();
         }
 
+        public void AddDataAndRedraw(double x, params double[] values)
+        {
+            AddData(x, values);
+            Invalidate();
+        }
+
         public void AddData(double x, params double[] values)
         {
             var data = new BarData()
@@ -87,7 +93,6 @@ namespace CovidSimApp.Diagram
             };
             barData.Add(data);
             MaxSum = Math.Max(MaxSum, Sum(data));
-            Invalidate();
         }
 
         public void ClearData()
@@ -106,7 +111,6 @@ namespace CovidSimApp.Diagram
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-
             //e.Graphics.DrawString($"{Width} {Height}", Font, Brushes.Black, 0, 0);
 
             if (barData.Count == 0 || MaxSum <= 0)

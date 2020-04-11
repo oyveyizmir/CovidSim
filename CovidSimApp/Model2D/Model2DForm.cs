@@ -35,10 +35,10 @@ namespace CovidSimApp.Model2D
             simulator.Settings.WorldSize = 500;
             simulator.Settings.MaxWalk = 1;
             simulator.Settings.IllnessDuration = 20;
-            simulator.Settings.TransmissionRange = 10;
+            simulator.Settings.TransmissionRange = 20;
             simulator.Settings.TransmissionProbabilityAt0 = 0.2;
             simulator.Settings.FatalityRate = 0.2;
-            simulator.Settings.Population = 100000;
+            simulator.Settings.Population = 10000;
             simulator.Settings.InitiallyInfected = 10;
             simulator.SegmentCount = 50;
             simulator.Initialize();
@@ -83,9 +83,7 @@ namespace CovidSimApp.Model2D
             {
                 cts.Cancel();
                 await task;
-                task.Dispose();
                 task = null;
-                cts.Dispose();
             }
 
             startStopButton.Text = "Start";
@@ -106,17 +104,26 @@ namespace CovidSimApp.Model2D
 
             resetButton.Enabled = false;
 
+            AddDiagramData();
             UpdateUI(CancellationToken.None);
         }
 
         async void RunSimulation(CancellationToken token)
         {
+            DateTime lastUIUpdate = DateTime.MinValue;
             while (!token.IsCancellationRequested)
             {
                 simulator.Step();
+                AddDiagramData();
+
                 try
                 {
-                    await Task.Factory.StartNew(() => UpdateUI(token), token, TaskCreationOptions.None, uiScheduler);
+                    DateTime timeStamp = DateTime.Now;
+                    if ((timeStamp - lastUIUpdate).TotalMilliseconds > 20)
+                    {
+                        lastUIUpdate = timeStamp;
+                        await Task.Factory.StartNew(() => UpdateUI(token), token, TaskCreationOptions.None, uiScheduler);
+                    }
                 }
                 catch (TaskCanceledException) { }
 
@@ -165,6 +172,11 @@ namespace CovidSimApp.Model2D
 
         void UpdateDiagram()
         {
+            diagram.Invalidate();
+        }
+
+        void AddDiagramData()
+        {
             Statistics stats = simulator.Stats;
             diagram.AddData(simulator.Time, stats.SusceptibleCount, stats.InfectedCount, stats.RecoveredCount, stats.DiedCount);
         }
@@ -186,12 +198,10 @@ namespace CovidSimApp.Model2D
         {
             if (token.IsCancellationRequested)
                 return;
-            
+
             UpdateDiagram();
             UpdatePopulation();
             UpdateRealTimeStats();
-
-            Application.DoEvents();
         }
     }
 }

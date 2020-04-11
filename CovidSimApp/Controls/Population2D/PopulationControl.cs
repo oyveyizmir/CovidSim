@@ -49,12 +49,44 @@ namespace CovidSimApp.Controls.Population2D
             SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
         }
 
+        int GetDotSize()
+        {
+            int size = (int)Math.Sqrt(0.25 * Width * Height / Persons.Count);
+            if (size < 1)
+                return 1;
+            else if (size > 5)
+                return 5;
+            else
+                return size;
+        }
+
+        void DrawDot(Graphics g, Brush brush, int x, int y, int size)
+        {
+            int offset = size / 2;
+            switch (size)
+            {
+                case 1:
+                case 2:
+                case 3:
+                    g.FillRectangle(brush, x - offset, y - offset, size, size);
+                    break;
+                case 4:
+                case 5:
+                    g.FillRectangle(brush, x - offset, y - offset + 1, size, size - 2);
+                    g.FillRectangle(brush, x - offset + 1, y - offset, size - 2, size);
+                    break;
+                default:
+                    throw new ArgumentException("size");
+            }
+        }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
 
             double scaleX = Width / worldSize;
             double scaleY = Height / worldSize;
+            int dotSize = GetDotSize();
 
             foreach (var person in Persons)
             {
@@ -63,7 +95,7 @@ namespace CovidSimApp.Controls.Population2D
                 {
                     int x = (int)(person.Position.X * scaleX + 0.5);
                     int y = (int)(person.Position.Y * scaleY + 0.5);
-                    e.Graphics.FillRectangle(brush, x - 1, y - 1, 3, 3);
+                    DrawDot(e.Graphics, brush, x, y, dotSize);
                 }
             }
         }

@@ -76,7 +76,7 @@ namespace CovidSimApp.SimpleModel
         {
             simulator.Step();
             var stats = simulator.Stats;
-            diagram.AddData(simulator.Time, stats.SusceptibleCount, stats.InfectedCount, stats.RecoveredCount, stats.DiedCount);
+            diagram.AddDataAndRedraw(simulator.Time, stats.SusceptibleCount, stats.InfectedCount, stats.RecoveredCount, stats.DiedCount);
 
             realTimeStats.SetTime(simulator.Time);
             realTimeStats.SetPopulation(stats.PopulationCount);
