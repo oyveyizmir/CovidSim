@@ -16,10 +16,39 @@ namespace CovidSim.Model2D
 
         public Statistics Stats { get; private set; } = new Statistics();
 
+        public int SegmentCount
+        {
+            get => segmentCount;
+
+            set
+            {
+                if (value < 1)
+                    throw new ArgumentException("SegmentCount");
+                segmentCount = value;
+                maxSegment = value - 1;
+            }
+        }
+        
+        int segmentCount;
+        int maxSegment;
+        List<Human>[,] areas;
+        double segmentSize;
+
+        public Simulator()
+        {
+            SegmentCount = 20;
+        }
+
         public void Initialize()
         {
             if (Settings.Population < Settings.InitiallyInfected)
                 throw new InvalidOperationException("Population cannot be less than InitiallyInfected");
+
+            segmentSize = Settings.WorldSize / segmentCount;
+            areas = new List<Human>[segmentCount, segmentCount];
+            for (int i = 0; i < segmentCount; i++)
+                for (int j = 0; j < segmentCount; j++)
+                    areas[i, j] = new List<Human>();
 
             Stats.SusceptibleCount = Settings.Population;
 
@@ -27,7 +56,7 @@ namespace CovidSim.Model2D
             {
                 var human = new Human();
                 human.Position = new Point(RandomUtils.GetDouble(Settings.WorldSize), RandomUtils.GetDouble(Settings.WorldSize));
-                Humans.Add(human);
+                AddHuman(human);
             }
 
             for (var i = 0; i < Settings.InitiallyInfected;)
@@ -50,14 +79,42 @@ namespace CovidSim.Model2D
             Remove();
         }
 
+        int GetSegment(double coord)
+        {
+            int segment = (int)(coord / segmentSize);
+            if (segment == segmentCount)
+                return segment - 1;
+            else
+                return segment;
+        }
+
+        void AddHuman(Human human)
+        {
+            Humans.Add(human);
+            GetArea(human.Position).Add(human);
+        }
+
+        List<Human> GetArea(Point point)
+        {
+            return areas[GetSegment(point.X), GetSegment(point.Y)];
+        }
+
         void Move()
         {
             foreach (var human in Humans)
             {
                 double moveAngle = RandomUtils.GetDouble(0, 2 * Math.PI);
                 double moveRange = RandomUtils.GetDouble(Settings.MinWalk, Settings.MaxWalk);
-                Point randomWalkVector = new Point(moveRange * Math.Cos(moveAngle), moveRange * Math.Sin(moveAngle));
+                var randomWalkVector = new Point(moveRange * Math.Cos(moveAngle), moveRange * Math.Sin(moveAngle));
+
+                var oldArea = GetArea(human.Position);
                 human.Position = Limit(human.Position + randomWalkVector, Settings.WorldSize);
+                var newArea = GetArea(human.Position);
+                if (oldArea != newArea)
+                {
+                    oldArea.Remove(human);
+                    newArea.Add(human);
+                }
             }
         }
 
@@ -66,11 +123,11 @@ namespace CovidSim.Model2D
             return new Point(Limit(point.X, max), Limit(point.Y, max));
         }
 
-        static double Limit(double value, double max)
+        static T Limit<T>(T value, T max) where T : IComparable<T>
         {
-            if (value < 0)
-                return 0;
-            if (value > max)
+            if (value.CompareTo(default(T)) < 0)
+                return default(T);
+            if (value.CompareTo(max) > 0)
                 return max;
             return value;
         }
@@ -96,20 +153,66 @@ namespace CovidSim.Model2D
         {
             double transmissionProbabilityRange = Settings.TransmissionProbabilityAtRange - Settings.TransmissionProbabilityAt0;
 
-            foreach (var subject in Humans.Where(x => x.CanInfect(Time)))
-            {
-                foreach (var @object in Humans.Where(x => x.CanBeInfected))
+            for (int segX = 0; segX < segmentCount; segX++)
+                for (int segY = 0; segY < segmentCount; segY++)
                 {
-                    double distance = Point.Distance(subject.Position, @object.Position);
-                    if (distance <= Settings.TransmissionRange)
+                    int segRange = (int)Math.Floor(Settings.TransmissionRange / segmentSize) + 1;
+                    int segStartX = Limit(segX - segRange, maxSegment);
+                    int segStartY = Limit(segY - segRange, maxSegment);
+                    int segEndX = Limit(segX + segRange, maxSegment) + 1;
+                    int segEndY = Limit(segY + segRange, maxSegment) + 1;
+
+                    foreach (var subject in areas[segX, segY].Where(x => x.CanInfect(Time)))
                     {
-                        double transmissionProbability = Settings.TransmissionProbabilityAt0
-                            + transmissionProbabilityRange * distance / Settings.TransmissionRange;
-                        if (RandomUtils.LessThanThreshold(transmissionProbability))
-                            Infect(@object);
+                        for (int x = segStartX; x < segEndX; x++)
+                            for (int y = segStartY; y < segEndY; y++)
+                                foreach (var @object in areas[x, y].Where(o => o.CanBeInfected))
+                                {
+                                    double distance = Point.Distance(subject.Position, @object.Position);
+                                    if (distance <= Settings.TransmissionRange)
+                                    {
+                                        double transmissionProbability = Settings.TransmissionProbabilityAt0
+                                            + transmissionProbabilityRange * distance / Settings.TransmissionRange;
+                                        if (RandomUtils.LessThanThreshold(transmissionProbability))
+                                            Infect(@object);
+                                    }
+                                }
                     }
                 }
-            }
+        }
+
+        IEnumerable<Human> GetHumansWithinRange(Point point, double range)
+        {
+            int segX = GetSegment(point.X);
+            int segY = GetSegment(point.Y);
+            int segRange = (int)Math.Floor(range / segmentSize) + 1;
+            int segStartX = Limit(segX - segRange, maxSegment);
+            int segStartY = Limit(segY - segRange, maxSegment);
+            int segEndX = Limit(segX + segRange, maxSegment) + 1;
+            int segEndY = Limit(segY + segRange, maxSegment) + 1;
+
+            for (int x = segStartX; x < segEndX; x++)
+                for (int y = segStartY; y < segEndY; y++)
+                    foreach (var human in areas[x, y])
+                        yield return human;
+        }
+
+        List<List<Human>> GetAreasWithinRange(int segX, int segY, double range)
+        {
+            int segRange = (int)Math.Floor(range / segmentSize) + 1;
+            int segStartX = Limit(segX - segRange, maxSegment);
+            int segStartY = Limit(segY - segRange, maxSegment);
+            int segEndX = Limit(segX + segRange, maxSegment) + 1;
+            int segEndY = Limit(segY + segRange, maxSegment) + 1;
+
+            int squareSide = 2 * segRange + 1;
+            var result = new List<List<Human>>(squareSide * squareSide);
+
+            for (int x = segStartX; x < segEndX; x++)
+                for (int y = segStartY; y < segEndY; y++)
+                    result.Add(areas[x, y]);
+
+            return result;
         }
 
         void Infect(Human human)

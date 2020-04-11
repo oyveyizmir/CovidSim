@@ -35,11 +35,12 @@ namespace CovidSimApp.Model2D
             simulator.Settings.WorldSize = 500;
             simulator.Settings.MaxWalk = 1;
             simulator.Settings.IllnessDuration = 20;
-            simulator.Settings.TransmissionRange = 20;
-            simulator.Settings.TransmissionProbabilityAt0 = 0.3;
+            simulator.Settings.TransmissionRange = 10;
+            simulator.Settings.TransmissionProbabilityAt0 = 0.2;
             simulator.Settings.FatalityRate = 0.2;
-            simulator.Settings.Population = 1000;
+            simulator.Settings.Population = 100000;
             simulator.Settings.InitiallyInfected = 10;
+            simulator.SegmentCount = 50;
             simulator.Initialize();
             settings = simulator.Settings;
 
