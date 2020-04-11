@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,6 +17,9 @@ namespace CovidSimApp.Model2D
     {
         Simulator simulator;
         Settings settings;
+        Task task;
+        CancellationTokenSource cts;
+        TaskScheduler uiScheduler;
 
         public Model2DForm()
         {
@@ -25,15 +29,21 @@ namespace CovidSimApp.Model2D
 
         void InitForm()
         {
+            uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
+
             simulator = new Simulator();
             simulator.Settings.WorldSize = 500;
             simulator.Settings.MaxWalk = 1;
-            simulator.Settings.IllnessDuration = 100;
+            simulator.Settings.IllnessDuration = 20;
+            simulator.Settings.TransmissionRange = 20;
+            simulator.Settings.TransmissionProbabilityAt0 = 0.3;
+            simulator.Settings.FatalityRate = 0.9;
+            simulator.Settings.Population = 1000;
             simulator.Initialize();
             settings = simulator.Settings;
             
             resetButton.Enabled = false;
-            timer.Interval = 100;
+            timer.Interval = 1;
 
             diagram.AddBar(Color.Blue, "Susceptible");
             diagram.AddBar(Color.DarkRed, "Infected");
@@ -45,22 +55,34 @@ namespace CovidSimApp.Model2D
 
         void StartSimulation()
         {
-            timer.Start();
+            //timer.Start();
             startStopButton.Text = "Stop";
             settingsButton.Enabled = false;
             resetButton.Enabled = true;
+
+            cts = new CancellationTokenSource();
+            task = Task.Run(() => RunSimulation(cts.Token), cts.Token);
         }
 
-        void StopSimulation()
+        async void StopSimulation()
         {
-            timer.Stop();
+            //timer.Stop();
+            if (task != null)
+            {
+                cts.Cancel();
+                await task;
+                task.Dispose();
+                task = null;
+                cts.Dispose();
+            }
+
             startStopButton.Text = "Start";
             settingsButton.Enabled = true;
         }
 
         private void startStopButton_Click(object sender, EventArgs e)
         {
-            if (timer.Enabled)
+            if (task != null)
                 StopSimulation();
             else
                 StartSimulation();
@@ -118,6 +140,43 @@ namespace CovidSimApp.Model2D
             ResetPopulation();
             
             resetButton.Enabled = false;
+        }
+
+        async void RunSimulation(CancellationToken token)
+        {
+            while (!token.IsCancellationRequested)
+            {
+                simulator.Step();
+                try
+                {
+                    await Task.Factory.StartNew(() => UpdateUI(token), token, TaskCreationOptions.None, uiScheduler);
+                }
+                catch (TaskCanceledException) { }
+                
+                await Task.Delay(0);
+            }
+        }
+
+        void UpdateUI(CancellationToken token)
+        {
+            if (token.IsCancellationRequested)
+                return;
+
+            Statistics stats = simulator.Stats;
+            diagram.AddData(simulator.Time, stats.SusceptibleCount, stats.InfectedCount, stats.RecoveredCount, stats.DiedCount);
+
+            UpdatePopulation();
+
+            realTimeStats.SetTime(simulator.Time);
+            realTimeStats.SetPopulation(stats.PopulationCount);
+            realTimeStats.SetInfectedTotal(stats.InfectedTotalCount);
+            realTimeStats.SetMaxInfected(stats.MaxInfectedCount);
+            realTimeStats.SetSusceptible(stats.SusceptibleCount);
+            realTimeStats.SetInfected(stats.InfectedCount);
+            realTimeStats.SetRecovered(stats.RecoveredCount);
+            realTimeStats.SetDead(stats.DiedCount);
+
+            Application.DoEvents();
         }
 
         private void resetButton_Click(object sender, EventArgs e)

@@ -103,7 +103,8 @@ namespace CovidSim.Model2D
                     double distance = Point.Distance(subject.Position, @object.Position);
                     if (distance <= Settings.TransmissionRange)
                     {
-                        double transmissionProbability = Settings.TransmissionProbabilityAt0 + transmissionProbabilityRange * distance / Settings.TransmissionRange;
+                        double transmissionProbability = Settings.TransmissionProbabilityAt0
+                            + transmissionProbabilityRange * distance / Settings.TransmissionRange;
                         if (RandomUtils.LessThanThreshold(transmissionProbability))
                             Infect(@object);
                     }

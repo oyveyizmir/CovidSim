@@ -15,7 +15,7 @@ namespace CovidSim
 
         public static Point operator +(Point a, Point b) => new Point(a.X + b.X, a.Y + b.Y);
 
-        public static double Distance(Point a, Point b) => Math.Sqrt(Square(a.X - b.X) * Square(a.Y - b.Y));
+        public static double Distance(Point a, Point b) => Math.Sqrt(Square(a.X - b.X) + Square(a.Y - b.Y));
 
         static double Square(double x) => x * x;
     }
