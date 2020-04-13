@@ -20,6 +20,7 @@ namespace CovidSimApp.Model2D
         Task task;
         CancellationTokenSource cts;
         TaskScheduler uiScheduler;
+        bool stopOnZeroInfected;
 
         public Model2DForm()
         {
@@ -75,6 +76,7 @@ namespace CovidSimApp.Model2D
 
             cts = new CancellationTokenSource();
             task = Task.Run(() => RunSimulation(cts.Token), cts.Token);
+            task.ContinueWith(t => OnSimulationStopped(), CancellationToken.None, TaskContinuationOptions.OnlyOnRanToCompletion, uiScheduler);
         }
 
         async void StopSimulation()
@@ -83,9 +85,14 @@ namespace CovidSimApp.Model2D
             {
                 cts.Cancel();
                 await task;
-                task = null;
             }
 
+            OnSimulationStopped();
+        }
+
+        void OnSimulationStopped()
+        {
+            task = null;
             startStopButton.Text = "Start";
             settingsButton.Enabled = true;
         }
@@ -103,12 +110,13 @@ namespace CovidSimApp.Model2D
             ResetPopulation();
 
             resetButton.Enabled = false;
+            stopOnZeroInfected = true;
 
             AddDiagramData();
-            UpdateUI(CancellationToken.None);
+            UpdateUI();
         }
 
-        async void RunSimulation(CancellationToken token)
+        void RunSimulation(CancellationToken token)
         {
             DateTime lastUIUpdate = DateTime.MinValue;
             while (!token.IsCancellationRequested)
@@ -122,12 +130,26 @@ namespace CovidSimApp.Model2D
                     if ((timeStamp - lastUIUpdate).TotalMilliseconds > 20)
                     {
                         lastUIUpdate = timeStamp;
-                        await Task.Factory.StartNew(() => UpdateUI(token), token, TaskCreationOptions.None, uiScheduler);
+                        UpdateUIInMainThread();
                     }
                 }
                 catch (TaskCanceledException) { }
 
-                await Task.Delay(0);
+                if (stopOnZeroInfected && simulator.Stats.InfectedCount == 0)
+                {
+                    stopOnZeroInfected = false;
+                    UpdateUIInMainThread();
+                    break;
+                }
+
+                Thread.Sleep(0);
+            }
+
+            void UpdateUIInMainThread()
+            {
+                var t = new Task(() => UpdateUI());
+                t.Start(uiScheduler);
+                t.Wait();
             }
         }
 
@@ -194,11 +216,8 @@ namespace CovidSimApp.Model2D
             realTimeStats.SetDead(stats.DiedCount);
         }
 
-        void UpdateUI(CancellationToken token)
+        void UpdateUI()
         {
-            if (token.IsCancellationRequested)
-                return;
-
             UpdateDiagram();
             UpdatePopulation();
             UpdateRealTimeStats();
