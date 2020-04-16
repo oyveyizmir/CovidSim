@@ -9,13 +9,13 @@ namespace CovidSim.Model2D
     public class Settings : BasicSettings
     {
         double transmissionRange = 10;
-        double transmissionProbabilityAt0 = 0.1;
+        double transmissionProbabilityAt0 = 1;
         double transmissionProbabilityAtRange = 0;
         double minWalk = 0;
-        double maxWalk = 5;
+        double maxWalk = 0.45;
         double worldSize = 1000;
-        int illnessDuration = 21;
-        double fatalityRate = 0.21;
+        int illnessDuration = 300;
+        double fatalityRate = 0.2;
 
         public double TransmissionRange
         {
@@ -35,7 +35,7 @@ namespace CovidSim.Model2D
 
             set
             {
-                if (value < 0)
+                if (value < 0 || value > 1)
                     throw new ArgumentException("TransmissionProbabilityAt0");
                 transmissionProbabilityAt0 = value;
             }
@@ -47,7 +47,7 @@ namespace CovidSim.Model2D
 
             set
             {
-                if (value < 0)
+                if (value < 0 || value > 1)
                     throw new ArgumentException("TransmissionProbabilityAtRange");
                 transmissionProbabilityAtRange = value;
             }
@@ -113,7 +113,7 @@ namespace CovidSim.Model2D
 
         public Settings()
         {
-            Population = 1000;
+            Population = 10000;
             InitiallyInfected = 1;
         }
     }

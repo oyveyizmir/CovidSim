@@ -21,6 +21,7 @@ namespace CovidSimApp.Model2D
         CancellationTokenSource cts;
         TaskScheduler uiScheduler;
         bool stopOnZeroInfected;
+        int delay = 1;
 
         public Model2DForm()
         {
@@ -33,15 +34,6 @@ namespace CovidSimApp.Model2D
             uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
             simulator = new Simulator();
-            simulator.Settings.WorldSize = 500;
-            simulator.Settings.MaxWalk = 1;
-            simulator.Settings.IllnessDuration = 20;
-            simulator.Settings.TransmissionRange = 20;
-            simulator.Settings.TransmissionProbabilityAt0 = 0.2;
-            simulator.Settings.FatalityRate = 0.2;
-            simulator.Settings.Population = 1000;
-            simulator.Settings.InitiallyInfected = 10;
-            simulator.SegmentCount = 50;
             simulator.Initialize();
             settings = simulator.Settings;
 
@@ -79,12 +71,12 @@ namespace CovidSimApp.Model2D
             task.ContinueWith(t => OnSimulationStopped(), CancellationToken.None, TaskContinuationOptions.OnlyOnRanToCompletion, uiScheduler);
         }
 
-        async void StopSimulation()
+        void StopSimulation()
         {
             if (task != null)
             {
                 cts.Cancel();
-                await task;
+                task.Wait();
             }
 
             OnSimulationStopped();
@@ -142,14 +134,14 @@ namespace CovidSimApp.Model2D
                     break;
                 }
 
-                Thread.Sleep(0);
+                Thread.Sleep(delay);
             }
 
             void UpdateUIInMainThread()
             {
                 var t = new Task(() => UpdateUI());
                 t.Start(uiScheduler);
-                t.Wait();
+                //t.Wait();
             }
         }
 
@@ -221,6 +213,19 @@ namespace CovidSimApp.Model2D
             UpdateDiagram();
             UpdatePopulation();
             UpdateRealTimeStats();
+        }
+
+        private void settingsButton_Click(object sender, EventArgs e)
+        {
+            var form = new SettingsForm();
+            form.Settings = settings;
+            form.Delay = delay;
+
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                ResetSimulation();
+                delay = form.Delay;
+            }
         }
     }
 }

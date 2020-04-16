@@ -77,6 +77,12 @@
     <Compile Include="Model2D\Model2DForm.Designer.cs">
       <DependentUpon>Model2DForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model2D\SettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model2D\SettingsForm.Designer.cs">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="SimpleModel\ModelParametersControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,6 +103,7 @@
     <Compile Include="SimpleModel\SimpleModelSettingsForm.Designer.cs">
       <DependentUpon>SimpleModelSettingsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ValidationUtils.cs" />
     <EmbeddedResource Include="Controls\Diagram\DiagramControl.resx">
       <DependentUpon>DiagramControl.cs</DependentUpon>
     </EmbeddedResource>
@@ -108,6 +115,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Model2D\Model2DForm.resx">
       <DependentUpon>Model2DForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model2D\SettingsForm.resx">
+      <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SimpleModel\ModelParametersControl.resx">
       <DependentUpon>ModelParametersControl.cs</DependentUpon>

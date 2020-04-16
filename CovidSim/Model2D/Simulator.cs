@@ -44,6 +44,9 @@ namespace CovidSim.Model2D
             if (Settings.Population < Settings.InitiallyInfected)
                 throw new InvalidOperationException("Population cannot be less than InitiallyInfected");
 
+            if (Settings.MinWalk > Settings.MaxWalk)
+                throw new InvalidOperationException("MinWalk cannot exceed MaxWalk");
+
             segmentSize = Settings.WorldSize / segmentCount;
             areas = new List<Human>[segmentCount, segmentCount];
             for (int i = 0; i < segmentCount; i++)

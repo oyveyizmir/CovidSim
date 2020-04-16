@@ -45,6 +45,7 @@
             this.settingsButton.TabIndex = 9;
             this.settingsButton.Text = "Settings...";
             this.settingsButton.UseVisualStyleBackColor = true;
+            this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
             // resetButton
             // 
@@ -74,7 +75,7 @@
             this.populationControl.BackColor = System.Drawing.Color.White;
             this.populationControl.Location = new System.Drawing.Point(0, 268);
             this.populationControl.Name = "populationControl";
-            this.populationControl.Size = new System.Drawing.Size(800, 394);
+            this.populationControl.Size = new System.Drawing.Size(510, 503);
             this.populationControl.TabIndex = 11;
             this.populationControl.Text = "populationControl1";
             this.populationControl.WorldSize = 1000D;
@@ -93,7 +94,7 @@
             this.diagram.BackColor = System.Drawing.Color.White;
             this.diagram.Location = new System.Drawing.Point(0, 151);
             this.diagram.Name = "diagram";
-            this.diagram.Size = new System.Drawing.Size(800, 111);
+            this.diagram.Size = new System.Drawing.Size(510, 111);
             this.diagram.TabIndex = 6;
             this.diagram.Text = "diagram";
             // 
@@ -101,7 +102,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 662);
+            this.ClientSize = new System.Drawing.Size(510, 771);
             this.Controls.Add(this.populationControl);
             this.Controls.Add(this.realTimeStats);
             this.Controls.Add(this.settingsButton);
