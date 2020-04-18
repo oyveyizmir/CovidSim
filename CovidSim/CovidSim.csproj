@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="BasicSettings.cs" />
     <Compile Include="BasicStatistics.cs" />
+    <Compile Include="Model2D\Area.cs" />
     <Compile Include="Model2D\Human.cs" />
     <Compile Include="Model2D\Settings.cs" />
     <Compile Include="Model2D\Simulator.cs" />

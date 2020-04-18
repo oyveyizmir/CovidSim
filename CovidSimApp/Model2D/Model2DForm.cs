@@ -119,7 +119,7 @@ namespace CovidSimApp.Model2D
                 try
                 {
                     DateTime timeStamp = DateTime.Now;
-                    if ((timeStamp - lastUIUpdate).TotalMilliseconds > 20)
+                    if ((timeStamp - lastUIUpdate).TotalMilliseconds > 50)
                     {
                         lastUIUpdate = timeStamp;
                         UpdateUIInMainThread();

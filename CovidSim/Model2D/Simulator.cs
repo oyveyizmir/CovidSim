@@ -166,21 +166,26 @@ namespace CovidSim.Model2D
                     int segEndY = Limit(segY + segRange, maxSegment) + 1;
 
                     foreach (var subject in areas[segX, segY].Where(x => x.CanInfect(Time)))
-                    {
                         for (int x = segStartX; x < segEndX; x++)
                             for (int y = segStartY; y < segEndY; y++)
-                                foreach (var @object in areas[x, y].Where(o => o.CanBeInfected))
+                            {
+                                var area = areas[x, y];
+                                for (int i = 0; i < area.Count; i++)
                                 {
-                                    double distance = Point.Distance(subject.Position, @object.Position);
-                                    if (distance <= Settings.TransmissionRange)
+                                    var @object = area[i];
+                                    if (@object.CanBeInfected)
                                     {
-                                        double transmissionProbability = Settings.TransmissionProbabilityAt0
-                                            + transmissionProbabilityRange * distance / Settings.TransmissionRange;
-                                        if (RandomUtils.LessThanThreshold(transmissionProbability))
-                                            Infect(@object);
+                                        double distance = Point.Distance(subject.Position, @object.Position);
+                                        if (distance <= Settings.TransmissionRange)
+                                        {
+                                            double transmissionProbability = Settings.TransmissionProbabilityAt0
+                                                + transmissionProbabilityRange * distance / Settings.TransmissionRange;
+                                            if (RandomUtils.LessThanThreshold(transmissionProbability))
+                                                Infect(@object);
+                                        }
                                     }
                                 }
-                    }
+                            }
                 }
         }
 
