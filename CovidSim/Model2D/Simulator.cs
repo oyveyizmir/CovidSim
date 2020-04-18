@@ -31,7 +31,7 @@ namespace CovidSim.Model2D
         
         int segmentCount;
         int maxSegment;
-        List<Human>[,] areas;
+        Area[,] areas;
         double segmentSize;
 
         public Simulator()
@@ -48,10 +48,10 @@ namespace CovidSim.Model2D
                 throw new InvalidOperationException("MinWalk cannot exceed MaxWalk");
 
             segmentSize = Settings.WorldSize / segmentCount;
-            areas = new List<Human>[segmentCount, segmentCount];
+            areas = new Area[segmentCount, segmentCount];
             for (int i = 0; i < segmentCount; i++)
                 for (int j = 0; j < segmentCount; j++)
-                    areas[i, j] = new List<Human>();
+                    areas[i, j] = new Area();
 
             Stats.SusceptibleCount = Settings.Population;
 
@@ -68,7 +68,7 @@ namespace CovidSim.Model2D
                 var human = Humans[index];
                 if (!human.IsInfected)
                 {
-                    Infect(human);
+                    Infect(human, GetArea(human.Position));
                     i++;
                 }
             }
@@ -97,7 +97,7 @@ namespace CovidSim.Model2D
             GetArea(human.Position).Add(human);
         }
 
-        List<Human> GetArea(Point point)
+        Area GetArea(Point point)
         {
             return areas[GetSegment(point.X), GetSegment(point.Y)];
         }
@@ -165,14 +165,14 @@ namespace CovidSim.Model2D
                     int segEndX = Limit(segX + segRange, maxSegment) + 1;
                     int segEndY = Limit(segY + segRange, maxSegment) + 1;
 
-                    foreach (var subject in areas[segX, segY].Where(x => x.CanInfect(Time)))
+                    foreach (var subject in areas[segX, segY].Humans.Where(x => x.CanInfect(Time)))
                         for (int x = segStartX; x < segEndX; x++)
                             for (int y = segStartY; y < segEndY; y++)
                             {
                                 var area = areas[x, y];
-                                for (int i = 0; i < area.Count; i++)
+                                for (int i = 0; i < area.Susceptible.Count; i++)
                                 {
-                                    var @object = area[i];
+                                    var @object = area.Susceptible[i];
                                     if (@object.CanBeInfected)
                                     {
                                         double distance = Point.Distance(subject.Position, @object.Position);
@@ -181,7 +181,7 @@ namespace CovidSim.Model2D
                                             double transmissionProbability = Settings.TransmissionProbabilityAt0
                                                 + transmissionProbabilityRange * distance / Settings.TransmissionRange;
                                             if (RandomUtils.LessThanThreshold(transmissionProbability))
-                                                Infect(@object);
+                                                Infect(@object, area);
                                         }
                                     }
                                 }
@@ -201,11 +201,11 @@ namespace CovidSim.Model2D
 
             for (int x = segStartX; x < segEndX; x++)
                 for (int y = segStartY; y < segEndY; y++)
-                    foreach (var human in areas[x, y])
+                    foreach (var human in areas[x, y].Humans)
                         yield return human;
         }
 
-        List<List<Human>> GetAreasWithinRange(int segX, int segY, double range)
+        List<Area> GetAreasWithinRange(int segX, int segY, double range)
         {
             int segRange = (int)Math.Floor(range / segmentSize) + 1;
             int segStartX = Limit(segX - segRange, maxSegment);
@@ -214,7 +214,7 @@ namespace CovidSim.Model2D
             int segEndY = Limit(segY + segRange, maxSegment) + 1;
 
             int squareSide = 2 * segRange + 1;
-            var result = new List<List<Human>>(squareSide * squareSide);
+            var result = new List<Area>(squareSide * squareSide);
 
             for (int x = segStartX; x < segEndX; x++)
                 for (int y = segStartY; y < segEndY; y++)
@@ -223,7 +223,7 @@ namespace CovidSim.Model2D
             return result;
         }
 
-        void Infect(Human human)
+        void Infect(Human human, Area area)
         {
             human.IsInfected = true;
             human.InfectionTime = Time;
@@ -231,6 +231,7 @@ namespace CovidSim.Model2D
             Stats.InfectedTotalCount++;
             Stats.InfectedCount++;
             Stats.SusceptibleCount--;
+            area.Susceptible.Remove(human);
         }
 
         void Die(Human human)

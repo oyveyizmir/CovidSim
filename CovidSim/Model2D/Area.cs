@@ -11,5 +11,18 @@ namespace CovidSim.Model2D
         public List<Human> Susceptible { get; set; } = new List<Human>();
 
         public List<Human> Humans { get; set; } = new List<Human>();
+
+        public void Add(Human human)
+        {
+            Humans.Add(human);
+            if (human.CanBeInfected)
+                Susceptible.Add(human);
+        }
+
+        public void Remove(Human human)
+        {
+            Humans.Remove(human);
+            Susceptible.Remove(human);
+        }
     }
 }
