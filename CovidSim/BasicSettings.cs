@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CovidSim
 {
-    public class BasicSettings
+    public abstract class BasicSettings : IValidatable
     {
         int population;
         int initiallyInfected;
@@ -34,5 +34,7 @@ namespace CovidSim
                 initiallyInfected = value;
             }
         }
+
+        public abstract void Validate();
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CovidSim.Model2D.Walk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,8 +12,6 @@ namespace CovidSim.Model2D
         double transmissionRange = 10;
         double transmissionProbabilityAt0 = 1;
         double transmissionProbabilityAtRange = 0;
-        double minWalk = 0;
-        double maxWalk = 0.45;
         double worldSize = 1000;
         int illnessDuration = 300;
         double fatalityRate = 0.2;
@@ -53,28 +52,6 @@ namespace CovidSim.Model2D
             }
         }
 
-        public double MinWalk
-        {
-            get => minWalk;
-            set
-            {
-                if (value < 0)
-                    throw new ArgumentException("MinWalk");
-                minWalk = value;
-            }
-        }
-
-        public double MaxWalk
-        {
-            get => maxWalk;
-            set
-            {
-                if (value < 0)
-                    throw new ArgumentException("MaxWalk");
-                maxWalk = value;
-            }
-        }
-
         public double WorldSize
         {
             get => worldSize;
@@ -111,10 +88,20 @@ namespace CovidSim.Model2D
             }
         }
 
+        public WalkStrategy.SettingsBase Walk { get; set; } = new SimpleWalk.Settings();
+
         public Settings()
         {
             Population = 10000;
             InitiallyInfected = 1;
+        }
+
+        public override void Validate()
+        {
+            if (Population < InitiallyInfected)
+                throw new InvalidOperationException("Population cannot be less than InitiallyInfected");
+
+            Walk.Validate();
         }
     }
 }

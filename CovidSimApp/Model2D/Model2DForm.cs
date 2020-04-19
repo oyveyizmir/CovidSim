@@ -1,4 +1,5 @@
 ﻿using CovidSim.Model2D;
+using CovidSim.Model2D.Walk;
 using CovidSimApp.Controls.Population2D;
 using System;
 using System.Collections.Generic;
@@ -34,6 +35,11 @@ namespace CovidSimApp.Model2D
             uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
             simulator = new Simulator();
+            var walk = new ExtremeDistanceWalk.Settings();
+            simulator.Settings.Walk = walk;
+            walk.Linearity = -2;
+            walk.MinWalk = 0;
+            walk.MaxWalk = 5;
             simulator.Initialize();
             settings = simulator.Settings;
 

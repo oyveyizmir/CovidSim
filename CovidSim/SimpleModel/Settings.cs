@@ -61,5 +61,11 @@ namespace CovidSim.SimpleModel
             Population = 1000000;
             InitiallyInfected = 1;
         }
+
+        public override void Validate()
+        {
+            if (Population < InitiallyInfected)
+                throw new InvalidOperationException("Population cannot be less than InitiallyInfected");
+        }
     }
 }

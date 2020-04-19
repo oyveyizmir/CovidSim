@@ -1,4 +1,5 @@
 ﻿using CovidSim.Model2D;
+using CovidSim.Model2D.Walk;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,11 @@ namespace CovidSimApp.Model2D
     public partial class SettingsForm : Form
     {
         public Settings Settings { get; set; }
+
+        public SimpleWalk.Settings SimpleWalk { get; set; }
+
+        public ExtremeDistanceWalk.Settings ExtremeDistanceWalk { get; set; }
+
         public int Delay { get; set; }
 
         public SettingsForm()
@@ -38,8 +44,8 @@ namespace CovidSimApp.Model2D
             transmissionRangeEdit.Text = Settings.TransmissionRange.ToString();
             transmissionProbabilityAt0Edit.Text = Settings.TransmissionProbabilityAt0.ToString();
             transmissionProbabilityAtRangeEdit.Text = Settings.TransmissionProbabilityAtRange.ToString();
-            minWalkEdit.Text = Settings.MinWalk.ToString();
-            maxWalkEdit.Text = Settings.MaxWalk.ToString();
+            minWalkEdit.Text = SimpleWalk.MinWalk.ToString();
+            maxWalkEdit.Text = SimpleWalk.MaxWalk.ToString();
             worldSizeEdit.Text = Settings.WorldSize.ToString();
             delayEdit.Text = Delay.ToString();
         }
@@ -94,9 +100,11 @@ namespace CovidSimApp.Model2D
                 Settings.TransmissionRange = transmissionRange;
                 Settings.TransmissionProbabilityAt0 = transmissionProbabilityAt0;
                 Settings.TransmissionProbabilityAtRange = transmissionProbabilityAtRange;
-                Settings.MinWalk = minWalk;
-                Settings.MaxWalk = maxWalk;
                 Settings.WorldSize = worldSize;
+
+                SimpleWalk.MinWalk = minWalk;
+                SimpleWalk.MaxWalk = maxWalk;
+
                 Delay = delay;
             }
             catch (FormatException)

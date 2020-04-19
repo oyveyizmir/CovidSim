@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CovidSim.Model2D.Walk;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,7 @@ namespace CovidSim.Model2D
         int maxSegment;
         Area[,] areas;
         double segmentSize;
+        WalkStrategy walk;
 
         public Simulator()
         {
@@ -41,11 +43,10 @@ namespace CovidSim.Model2D
 
         public void Initialize()
         {
-            if (Settings.Population < Settings.InitiallyInfected)
-                throw new InvalidOperationException("Population cannot be less than InitiallyInfected");
+            Settings.Validate();
 
-            if (Settings.MinWalk > Settings.MaxWalk)
-                throw new InvalidOperationException("MinWalk cannot exceed MaxWalk");
+            walk = Settings.Walk.Create();
+            walk.Initialize();
 
             segmentSize = Settings.WorldSize / segmentCount;
             areas = new Area[segmentCount, segmentCount];
@@ -106,9 +107,7 @@ namespace CovidSim.Model2D
         {
             foreach (var human in Humans)
             {
-                double moveAngle = RandomUtils.GetDouble(0, 2 * Math.PI);
-                double moveRange = RandomUtils.GetDouble(Settings.MinWalk, Settings.MaxWalk);
-                var randomWalkVector = new Point(moveRange * Math.Cos(moveAngle), moveRange * Math.Sin(moveAngle));
+                var randomWalkVector = walk.GetMoveVector();
 
                 var oldArea = GetArea(human.Position);
                 human.Position = Limit(human.Position + randomWalkVector, Settings.WorldSize);
@@ -228,9 +227,11 @@ namespace CovidSim.Model2D
             human.IsInfected = true;
             human.InfectionTime = Time;
             human.TimeToRemoval = Settings.IllnessDuration;
+
             Stats.InfectedTotalCount++;
             Stats.InfectedCount++;
             Stats.SusceptibleCount--;
+
             area.Susceptible.Remove(human);
         }
 

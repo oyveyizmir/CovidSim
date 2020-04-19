@@ -14,8 +14,7 @@ namespace CovidSim.SimpleModel
 
         public void Initialize()
         {
-            if (Settings.Population < Settings.InitiallyInfected)
-                throw new InvalidOperationException("Population cannot be less than InitiallyInfected");
+            Settings.Validate();
 
             Stats.SusceptibleCount = Settings.Population - Settings.InitiallyInfected;
             Stats.InfectedCount = Settings.InitiallyInfected;

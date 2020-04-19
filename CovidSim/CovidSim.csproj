@@ -46,11 +46,15 @@
   <ItemGroup>
     <Compile Include="BasicSettings.cs" />
     <Compile Include="BasicStatistics.cs" />
+    <Compile Include="IValidatable.cs" />
     <Compile Include="Model2D\Area.cs" />
     <Compile Include="Model2D\Human.cs" />
     <Compile Include="Model2D\Settings.cs" />
     <Compile Include="Model2D\Simulator.cs" />
     <Compile Include="Model2D\Statistics.cs" />
+    <Compile Include="Model2D\Walk\ExtremeDistanceWalk.cs" />
+    <Compile Include="Model2D\Walk\SimpleWalk.cs" />
+    <Compile Include="Model2D\Walk\WalkStrategy.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleModel\Settings.cs" />
