@@ -88,7 +88,7 @@ namespace CovidSim.Model2D
             }
         }
 
-        public WalkStrategy.SettingsBase Walk { get; set; } = new SimpleWalk.Settings();
+        public WalkStrategy.ISettings Walk { get; set; } = new SimpleWalk.Settings();
 
         public Settings()
         {
@@ -99,7 +99,7 @@ namespace CovidSim.Model2D
         public override void Validate()
         {
             if (Population < InitiallyInfected)
-                throw new InvalidOperationException("Population cannot be less than InitiallyInfected");
+                throw new ValidationException("Population cannot be less than InitiallyInfected");
 
             Walk.Validate();
         }

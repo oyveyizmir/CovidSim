@@ -52,7 +52,8 @@
     <Compile Include="Model2D\Settings.cs" />
     <Compile Include="Model2D\Simulator.cs" />
     <Compile Include="Model2D\Statistics.cs" />
-    <Compile Include="Model2D\Walk\ExtremeDistanceWalk.cs" />
+    <Compile Include="Model2D\Walk\ComplexWalk.cs" />
+    <Compile Include="Model2D\Walk\ExtremeWalk.cs" />
     <Compile Include="Model2D\Walk\SimpleWalk.cs" />
     <Compile Include="Model2D\Walk\WalkStrategy.cs" />
     <Compile Include="Point.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="SimpleModel\Simulator.cs" />
     <Compile Include="SimpleModel\Statistics.cs" />
     <Compile Include="Utils.cs" />
+    <Compile Include="ValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -34,12 +34,18 @@ namespace CovidSimApp.Model2D
         {
             uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
+            var walk = new ComplexWalk.Settings();
+            walk.AddRange(1E-5, 0.45, 100);
+            walk.AddRange(1, 0, 0.45);
+
+            var walk2 = new SimpleWalk.Settings();
+
             simulator = new Simulator();
-            var walk = new ExtremeDistanceWalk.Settings();
+            simulator.Settings.Population = 1000;
+            simulator.Settings.IllnessDuration = 10000;
             simulator.Settings.Walk = walk;
-            walk.Linearity = -2;
-            walk.MinWalk = 0;
-            walk.MaxWalk = 5;
+            
+            delay = 0;//40;
             simulator.Initialize();
             settings = simulator.Settings;
 

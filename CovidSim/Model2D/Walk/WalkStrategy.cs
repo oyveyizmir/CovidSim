@@ -8,7 +8,12 @@ namespace CovidSim.Model2D.Walk
 {
     public abstract class WalkStrategy
     {
-        public abstract class SettingsBase : IValidatable
+        public interface ISettings : IValidatable
+        {
+            WalkStrategy CreateWalkStrategy();
+        }
+
+        public abstract class MinMaxSettings : IValidatable
         {
             double minWalk;
             double maxWalk;
@@ -38,10 +43,8 @@ namespace CovidSim.Model2D.Walk
             public void Validate()
             {
                 if (minWalk > maxWalk)
-                    throw new InvalidOperationException("MinWalk cannot exceed MaxWalk");
+                    throw new ValidationException("MinWalk cannot exceed MaxWalk");
             }
-
-            public abstract WalkStrategy Create();
         }
 
         protected abstract double GetRange();

@@ -45,7 +45,7 @@ namespace CovidSim.Model2D
         {
             Settings.Validate();
 
-            walk = Settings.Walk.Create();
+            walk = Settings.Walk.CreateWalkStrategy();
             walk.Initialize();
 
             segmentSize = Settings.WorldSize / segmentCount;
@@ -169,7 +169,7 @@ namespace CovidSim.Model2D
                             for (int y = segStartY; y < segEndY; y++)
                             {
                                 var area = areas[x, y];
-                                for (int i = 0; i < area.Susceptible.Count; i++)
+                                for (int i = 0; i < area.Susceptible.Count; i++) //TODO: count may change in Infect
                                 {
                                     var @object = area.Susceptible[i];
                                     if (@object.CanBeInfected)

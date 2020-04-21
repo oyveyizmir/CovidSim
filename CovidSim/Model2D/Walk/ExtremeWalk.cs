@@ -1,19 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CovidSim.Model2D.Walk
 {
-    public class ExtremeDistanceWalk : WalkStrategy
+    public class ExtremeWalk : WalkStrategy
     {
+        const double minLinearity = -7;
+        const double maxLinearity = 3;
+
         double range;
         double a;
 
-        public class Settings : SettingsBase
+        public class Settings : MinMaxSettings, ISettings
         {
-            double linearity;
+            double linearity = -2;
 
             public double Linearity
             {
@@ -21,18 +25,13 @@ namespace CovidSim.Model2D.Walk
 
                 set
                 {
-                    if (value < -3 || value > 3)
-                        throw new ArgumentException("Linearity should be in range from -2 to 2 (inclusive)");
+                    if (value < minLinearity || value > maxLinearity)
+                        throw new ArgumentException($"Linearity should be in range from {minLinearity} to {maxLinearity} (inclusive)");
                     linearity = value;
                 }
             }
 
-            public override WalkStrategy Create()
-            {
-                var walk = new ExtremeDistanceWalk();
-                walk.Config = this;
-                return walk;
-            }
+            public WalkStrategy CreateWalkStrategy() => new ExtremeWalk { Config = this };
         }
 
         public Settings Config { get; set; } = new Settings();
@@ -48,7 +47,8 @@ namespace CovidSim.Model2D.Walk
         protected override double GetRange()
         {
             double x = RandomUtils.Random.NextDouble();
-            return Config.MinWalk + range * (a - 1) * x / (a - x);
+            double r = Config.MinWalk + range * (a - 1) * x / (a - x);
+            return r;
         }
     }
 }
