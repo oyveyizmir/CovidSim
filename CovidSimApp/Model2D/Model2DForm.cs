@@ -43,7 +43,7 @@ namespace CovidSimApp.Model2D
             simulator = new Simulator();
             simulator.Settings.Population = 1000;
             simulator.Settings.IllnessDuration = 10000;
-            simulator.Settings.Walk = walk;
+            //simulator.Settings.Walk = walk;
             
             delay = 0;//40;
             simulator.Initialize();
@@ -231,6 +231,7 @@ namespace CovidSimApp.Model2D
         {
             var form = new SettingsForm();
             form.Settings = settings;
+            form.SimpleWalk = (SimpleWalk.Settings)settings.Walk;
             form.Delay = delay;
 
             if (form.ShowDialog() == DialogResult.OK)
