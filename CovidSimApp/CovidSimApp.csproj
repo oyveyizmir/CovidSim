@@ -71,6 +71,8 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model2D\ISavable.cs" />
+    <Compile Include="Model2D\IWalkSettingsContainer.cs" />
     <Compile Include="Model2D\Model2DForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +84,24 @@
     </Compile>
     <Compile Include="Model2D\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model2D\SimpleWalkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model2D\SimpleWalkControl.Designer.cs">
+      <DependentUpon>SimpleWalkControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model2D\TwoRangeWalkControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model2D\TwoRangeWalkControl.Designer.cs">
+      <DependentUpon>TwoRangeWalkControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model2D\WalkSettingsControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model2D\WalkSettingsControl.Designer.cs">
+      <DependentUpon>WalkSettingsControl.cs</DependentUpon>
     </Compile>
     <Compile Include="SimpleModel\ModelParametersControl.cs">
       <SubType>UserControl</SubType>
@@ -118,6 +138,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Model2D\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model2D\SimpleWalkControl.resx">
+      <DependentUpon>SimpleWalkControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model2D\TwoRangeWalkControl.resx">
+      <DependentUpon>TwoRangeWalkControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model2D\WalkSettingsControl.resx">
+      <DependentUpon>WalkSettingsControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SimpleModel\ModelParametersControl.resx">
       <DependentUpon>ModelParametersControl.cs</DependentUpon>

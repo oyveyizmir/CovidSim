@@ -18,6 +18,8 @@ namespace CovidSimApp.Model2D
     {
         Simulator simulator;
         Settings settings;
+        SimpleWalk.Settings simpleWalkSettings;
+        ComplexWalk.Settings complexWalkSettings;
         Task task;
         CancellationTokenSource cts;
         TaskScheduler uiScheduler;
@@ -34,17 +36,17 @@ namespace CovidSimApp.Model2D
         {
             uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
-            var walk = new ComplexWalk.Settings();
-            walk.AddRange(1E-5, 0.45, 100);
-            walk.AddRange(1, 0, 0.45);
+            simpleWalkSettings = new SimpleWalk.Settings();
 
-            var walk2 = new SimpleWalk.Settings();
+            complexWalkSettings = new ComplexWalk.Settings();
+            complexWalkSettings.AddRange(0.00001, 0.45, 100);
+            complexWalkSettings.AddRange(0.99999, 0, 0.45);
 
             simulator = new Simulator();
             simulator.Settings.Population = 1000;
             simulator.Settings.IllnessDuration = 10000;
-            //simulator.Settings.Walk = walk;
-            
+            simulator.Settings.Walk = simpleWalkSettings;
+
             delay = 0;//40;
             simulator.Initialize();
             settings = simulator.Settings;
@@ -231,7 +233,8 @@ namespace CovidSimApp.Model2D
         {
             var form = new SettingsForm();
             form.Settings = settings;
-            form.SimpleWalk = (SimpleWalk.Settings)settings.Walk;
+            form.SimpleWalk = simpleWalkSettings;
+            form.ComplexWalk = complexWalkSettings;
             form.Delay = delay;
 
             if (form.ShowDialog() == DialogResult.OK)

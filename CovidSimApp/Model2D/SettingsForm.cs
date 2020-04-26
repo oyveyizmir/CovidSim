@@ -20,7 +20,7 @@ namespace CovidSimApp.Model2D
 
         public SimpleWalk.Settings SimpleWalk { get; set; }
 
-        public ExtremeWalk.Settings ExtremeDistanceWalk { get; set; }
+        public ComplexWalk.Settings ComplexWalk { get; set; }
 
         public int Delay { get; set; }
 
@@ -44,10 +44,12 @@ namespace CovidSimApp.Model2D
             transmissionRangeEdit.Text = Settings.TransmissionRange.ToString();
             transmissionProbabilityAt0Edit.Text = Settings.TransmissionProbabilityAt0.ToString();
             transmissionProbabilityAtRangeEdit.Text = Settings.TransmissionProbabilityAtRange.ToString();
-            minWalkEdit.Text = SimpleWalk.MinWalk.ToString();
-            maxWalkEdit.Text = SimpleWalk.MaxWalk.ToString();
             worldSizeEdit.Text = Settings.WorldSize.ToString();
             delayEdit.Text = Delay.ToString();
+
+            walkSettingsControl.SimpleWalk = SimpleWalk;
+            walkSettingsControl.ComplexWalk = ComplexWalk;
+            walkSettingsControl.SelectedWalk = Settings.Walk;
         }
 
         bool ValidateAndSaveData()
@@ -78,20 +80,13 @@ namespace CovidSimApp.Model2D
                 var transmissionProbabilityAtRange = ValidateAndGet<double>(transmissionProbabilityAtRangeEdit, x => x >= 0 && x <= 1,
                     "Transmission Probability at Range should be between 0 and 1 (including 0 and 1)");
 
-                var minWalk = ValidateAndGet<double>(minWalkEdit, x => x >= 0,
-                    "Minimum Walk cannot be less than 0");
-
-                var maxWalk = ValidateAndGet<double>(maxWalkEdit, x => x >= 0,
-                    "Maximum Walk cannot be less than 0");
-
-                ValidateAndGet<double>(minWalkEdit, x => x <= maxWalk,
-                    "Minimum Walk cannot exceed Maximum Walk");
-
                 var worldSize = ValidateAndGet<double>(worldSizeEdit, x => x > 0,
                     "World Size should be greater than 0");
 
                 var delay = ValidateAndGet<int>(delayEdit, x => x >= 0,
                     "Delay should be greater or equal to 0");
+
+                walkSettingsControl.ValidateAndSave(false);
 
                 Settings.Population = population;
                 Settings.InitiallyInfected = infected;
@@ -102,10 +97,10 @@ namespace CovidSimApp.Model2D
                 Settings.TransmissionProbabilityAtRange = transmissionProbabilityAtRange;
                 Settings.WorldSize = worldSize;
 
-                SimpleWalk.MinWalk = minWalk;
-                SimpleWalk.MaxWalk = maxWalk;
-
                 Delay = delay;
+
+                walkSettingsControl.ValidateAndSave();
+                Settings.Walk = walkSettingsControl.SelectedWalk;
             }
             catch (FormatException)
             {
