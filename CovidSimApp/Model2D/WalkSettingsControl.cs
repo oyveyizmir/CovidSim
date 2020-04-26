@@ -19,7 +19,12 @@ namespace CovidSimApp.Model2D
         public SimpleWalk.Settings SimpleWalk
         {
             get => (SimpleWalk.Settings)walks[0];
-            set => walks[0] = value;
+
+            set
+            {
+                walks[0] = value;
+                ((IWalkSettingsContainer)walkControls[0]).Walk = value;
+            }
         }
 
         [Browsable(false)]
@@ -27,7 +32,12 @@ namespace CovidSimApp.Model2D
         public ComplexWalk.Settings ComplexWalk
         {
             get => (ComplexWalk.Settings)walks[1];
-            set => walks[1] = value;
+
+            set
+            {
+                walks[1] = value;
+                ((IWalkSettingsContainer)walkControls[1]).Walk = value;
+            }
         }
 
         public WalkStrategy.ISettings SelectedWalk
@@ -84,7 +94,6 @@ namespace CovidSimApp.Model2D
             if (control == null)
                 return;
 
-            ((IWalkSettingsContainer)control).Walk = SelectedWalk;
             control.Dock = DockStyle.Fill;
             control.Visible = true;
         }
