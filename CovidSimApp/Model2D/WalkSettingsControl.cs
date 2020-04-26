@@ -18,35 +18,25 @@ namespace CovidSimApp.Model2D
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SimpleWalk.Settings SimpleWalk
         {
-            get => (SimpleWalk.Settings)walks[0];
-
-            set
-            {
-                walks[0] = value;
-                ((IWalkSettingsContainer)walkControls[0]).Walk = value;
-            }
+            get => (SimpleWalk.Settings)GetContainer(0).Walk;
+            set => GetContainer(0).Walk = value;
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ComplexWalk.Settings ComplexWalk
         {
-            get => (ComplexWalk.Settings)walks[1];
-
-            set
-            {
-                walks[1] = value;
-                ((IWalkSettingsContainer)walkControls[1]).Walk = value;
-            }
+            get => (ComplexWalk.Settings)GetContainer(1).Walk;
+            set => GetContainer(1).Walk = value;
         }
 
         public WalkStrategy.ISettings SelectedWalk
         {
-            get => walks[walkCombo.SelectedIndex];
+            get => GetContainer(walkCombo.SelectedIndex).Walk;
 
             set
             {
-                int index = walks.FindIndex(x => x == value);
+                int index = walkControls.FindIndex(x => ((IWalkSettingsContainer)x).Walk == value);
                 walkCombo.SelectedIndex = index;
             }
         }
@@ -56,14 +46,13 @@ namespace CovidSimApp.Model2D
             get
             {
                 int walkIndex = walkCombo.SelectedIndex;
-                if (walkIndex < 0 || walkIndex >= walks.Count)
+                if (walkIndex < 0 || walkIndex >= walkControls.Count)
                     return null;
 
                 return walkControls[walkIndex];
             }
         }
 
-        List<WalkStrategy.ISettings> walks = new List<WalkStrategy.ISettings> { null, null };
         List<Control> walkControls = new List<Control>();
 
         public WalkSettingsControl()
@@ -73,6 +62,8 @@ namespace CovidSimApp.Model2D
             walkControls.Add(simpleWalkControl);
             walkControls.Add(twoRangeWalkControl);
         }
+
+        IWalkSettingsContainer GetContainer(int index) => (IWalkSettingsContainer)walkControls[index];
 
         private void walkCombo_SelectedIndexChanged(object sender, EventArgs e)
         {
