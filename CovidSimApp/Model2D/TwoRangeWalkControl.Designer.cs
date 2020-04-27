@@ -46,14 +46,14 @@
             // 
             // maxWalk2Edit
             // 
-            this.maxWalk2Edit.Location = new System.Drawing.Point(111, 250);
+            this.maxWalk2Edit.Location = new System.Drawing.Point(113, 254);
             this.maxWalk2Edit.Name = "maxWalk2Edit";
             this.maxWalk2Edit.Size = new System.Drawing.Size(100, 20);
             this.maxWalk2Edit.TabIndex = 65;
             // 
             // maxWalk1Edit
             // 
-            this.maxWalk1Edit.Location = new System.Drawing.Point(111, 110);
+            this.maxWalk1Edit.Location = new System.Drawing.Point(113, 114);
             this.maxWalk1Edit.Name = "maxWalk1Edit";
             this.maxWalk1Edit.Size = new System.Drawing.Size(100, 20);
             this.maxWalk1Edit.TabIndex = 66;
@@ -61,7 +61,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 253);
+            this.label4.Location = new System.Drawing.Point(26, 257);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(79, 13);
             this.label4.TabIndex = 63;
@@ -70,7 +70,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(26, 113);
+            this.label6.Location = new System.Drawing.Point(26, 117);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 64;
@@ -78,7 +78,7 @@
             // 
             // probability1Edit
             // 
-            this.probability1Edit.Location = new System.Drawing.Point(111, 39);
+            this.probability1Edit.Location = new System.Drawing.Point(113, 43);
             this.probability1Edit.Name = "probability1Edit";
             this.probability1Edit.Size = new System.Drawing.Size(100, 20);
             this.probability1Edit.TabIndex = 59;
@@ -87,14 +87,14 @@
             // probability2Edit
             // 
             this.probability2Edit.Enabled = false;
-            this.probability2Edit.Location = new System.Drawing.Point(111, 179);
+            this.probability2Edit.Location = new System.Drawing.Point(113, 183);
             this.probability2Edit.Name = "probability2Edit";
             this.probability2Edit.Size = new System.Drawing.Size(100, 20);
             this.probability2Edit.TabIndex = 60;
             // 
             // minWalk2Edit
             // 
-            this.minWalk2Edit.Location = new System.Drawing.Point(111, 215);
+            this.minWalk2Edit.Location = new System.Drawing.Point(113, 219);
             this.minWalk2Edit.Name = "minWalk2Edit";
             this.minWalk2Edit.Size = new System.Drawing.Size(100, 20);
             this.minWalk2Edit.TabIndex = 61;
@@ -102,7 +102,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(26, 42);
+            this.label8.Location = new System.Drawing.Point(26, 46);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(55, 13);
             this.label8.TabIndex = 53;
@@ -110,7 +110,7 @@
             // 
             // minWalk1Edit
             // 
-            this.minWalk1Edit.Location = new System.Drawing.Point(111, 75);
+            this.minWalk1Edit.Location = new System.Drawing.Point(113, 79);
             this.minWalk1Edit.Name = "minWalk1Edit";
             this.minWalk1Edit.Size = new System.Drawing.Size(100, 20);
             this.minWalk1Edit.TabIndex = 62;
@@ -118,7 +118,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(26, 182);
+            this.label7.Location = new System.Drawing.Point(26, 186);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(55, 13);
             this.label7.TabIndex = 54;
@@ -127,7 +127,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(15, 154);
+            this.label3.Location = new System.Drawing.Point(16, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 13);
             this.label3.TabIndex = 55;
@@ -136,7 +136,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 218);
+            this.label2.Location = new System.Drawing.Point(26, 222);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 13);
             this.label2.TabIndex = 56;
@@ -145,7 +145,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 15);
+            this.label1.Location = new System.Drawing.Point(16, 15);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 13);
             this.label1.TabIndex = 57;
@@ -154,7 +154,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 78);
+            this.label5.Location = new System.Drawing.Point(26, 82);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 13);
             this.label5.TabIndex = 58;
@@ -178,6 +178,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label5);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "TwoRangeWalkControl";
             this.Size = new System.Drawing.Size(246, 302);
             this.ResumeLayout(false);

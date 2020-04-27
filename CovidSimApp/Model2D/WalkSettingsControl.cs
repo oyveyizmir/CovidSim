@@ -30,6 +30,8 @@ namespace CovidSimApp.Model2D
             set => GetContainer(1).Walk = value;
         }
 
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public WalkStrategy.ISettings SelectedWalk
         {
             get => GetContainer(walkCombo.SelectedIndex).Walk;

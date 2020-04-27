@@ -36,7 +36,7 @@
             // 
             // maxWalkEdit
             // 
-            this.maxWalkEdit.Location = new System.Drawing.Point(102, 54);
+            this.maxWalkEdit.Location = new System.Drawing.Point(113, 54);
             this.maxWalkEdit.Name = "maxWalkEdit";
             this.maxWalkEdit.Size = new System.Drawing.Size(100, 20);
             this.maxWalkEdit.TabIndex = 52;
@@ -44,7 +44,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 57);
+            this.label6.Location = new System.Drawing.Point(16, 57);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(79, 13);
             this.label6.TabIndex = 51;
@@ -52,7 +52,7 @@
             // 
             // minWalkEdit
             // 
-            this.minWalkEdit.Location = new System.Drawing.Point(102, 19);
+            this.minWalkEdit.Location = new System.Drawing.Point(113, 19);
             this.minWalkEdit.Name = "minWalkEdit";
             this.minWalkEdit.Size = new System.Drawing.Size(100, 20);
             this.minWalkEdit.TabIndex = 49;
@@ -60,7 +60,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(17, 22);
+            this.label5.Location = new System.Drawing.Point(16, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 13);
             this.label5.TabIndex = 48;
@@ -74,6 +74,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.minWalkEdit);
             this.Controls.Add(this.label5);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "SimpleWalkControl";
             this.Size = new System.Drawing.Size(247, 108);
             this.ResumeLayout(false);

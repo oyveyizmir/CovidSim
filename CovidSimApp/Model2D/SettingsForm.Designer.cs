@@ -223,28 +223,28 @@
             this.tabTransmission.Controls.Add(this.label2);
             this.tabTransmission.Location = new System.Drawing.Point(4, 22);
             this.tabTransmission.Name = "tabTransmission";
-            this.tabTransmission.Size = new System.Drawing.Size(312, 339);
+            this.tabTransmission.Size = new System.Drawing.Size(312, 358);
             this.tabTransmission.TabIndex = 2;
             this.tabTransmission.Text = "Transmission";
             this.tabTransmission.UseVisualStyleBackColor = true;
             // 
             // transmissionProbabilityAtRangeEdit
             // 
-            this.transmissionProbabilityAtRangeEdit.Location = new System.Drawing.Point(188, 91);
+            this.transmissionProbabilityAtRangeEdit.Location = new System.Drawing.Point(190, 91);
             this.transmissionProbabilityAtRangeEdit.Name = "transmissionProbabilityAtRangeEdit";
             this.transmissionProbabilityAtRangeEdit.Size = new System.Drawing.Size(100, 20);
             this.transmissionProbabilityAtRangeEdit.TabIndex = 44;
             // 
             // transmissionProbabilityAt0Edit
             // 
-            this.transmissionProbabilityAt0Edit.Location = new System.Drawing.Point(188, 56);
+            this.transmissionProbabilityAt0Edit.Location = new System.Drawing.Point(190, 56);
             this.transmissionProbabilityAt0Edit.Name = "transmissionProbabilityAt0Edit";
             this.transmissionProbabilityAt0Edit.Size = new System.Drawing.Size(100, 20);
             this.transmissionProbabilityAt0Edit.TabIndex = 42;
             // 
             // transmissionRangeEdit
             // 
-            this.transmissionRangeEdit.Location = new System.Drawing.Point(188, 19);
+            this.transmissionRangeEdit.Location = new System.Drawing.Point(190, 19);
             this.transmissionRangeEdit.Name = "transmissionRangeEdit";
             this.transmissionRangeEdit.Size = new System.Drawing.Size(100, 20);
             this.transmissionRangeEdit.TabIndex = 40;
@@ -252,7 +252,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(14, 94);
+            this.label4.Location = new System.Drawing.Point(16, 94);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(166, 13);
             this.label4.TabIndex = 43;
@@ -261,7 +261,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(14, 59);
+            this.label3.Location = new System.Drawing.Point(16, 59);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(140, 13);
             this.label3.TabIndex = 41;
@@ -270,7 +270,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 22);
+            this.label2.Location = new System.Drawing.Point(16, 22);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(103, 13);
             this.label2.TabIndex = 39;
@@ -282,7 +282,7 @@
             this.tabWalk.Location = new System.Drawing.Point(4, 22);
             this.tabWalk.Name = "tabWalk";
             this.tabWalk.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWalk.Size = new System.Drawing.Size(312, 339);
+            this.tabWalk.Size = new System.Drawing.Size(312, 358);
             this.tabWalk.TabIndex = 1;
             this.tabWalk.Text = "Walk";
             this.tabWalk.UseVisualStyleBackColor = true;
@@ -292,7 +292,7 @@
             this.walkSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.walkSettingsControl.Location = new System.Drawing.Point(3, 3);
             this.walkSettingsControl.Name = "walkSettingsControl";
-            this.walkSettingsControl.Size = new System.Drawing.Size(306, 333);
+            this.walkSettingsControl.Size = new System.Drawing.Size(306, 352);
             this.walkSettingsControl.TabIndex = 0;
             // 
             // SettingsForm

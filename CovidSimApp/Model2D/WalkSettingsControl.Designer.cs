@@ -33,6 +33,7 @@
             this.panel = new System.Windows.Forms.Panel();
             this.twoRangeWalkControl = new CovidSimApp.Model2D.TwoRangeWalkControl();
             this.simpleWalkControl = new CovidSimApp.Model2D.SimpleWalkControl();
+            this.separator = new System.Windows.Forms.Panel();
             this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -43,7 +44,7 @@
             this.walkCombo.Items.AddRange(new object[] {
             "Simple",
             "2 Ranges"});
-            this.walkCombo.Location = new System.Drawing.Point(117, 21);
+            this.walkCombo.Location = new System.Drawing.Point(113, 19);
             this.walkCombo.Name = "walkCombo";
             this.walkCombo.Size = new System.Drawing.Size(100, 21);
             this.walkCombo.TabIndex = 51;
@@ -52,7 +53,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(20, 24);
+            this.label8.Location = new System.Drawing.Point(16, 22);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(74, 13);
             this.label8.TabIndex = 50;
@@ -83,10 +84,19 @@
             this.simpleWalkControl.TabIndex = 53;
             this.simpleWalkControl.Visible = false;
             // 
+            // separator
+            // 
+            this.separator.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.separator.Location = new System.Drawing.Point(0, 57);
+            this.separator.Name = "separator";
+            this.separator.Size = new System.Drawing.Size(452, 1);
+            this.separator.TabIndex = 55;
+            // 
             // WalkSettingsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.separator);
             this.Controls.Add(this.walkCombo);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.panel);
@@ -104,5 +114,6 @@
         private System.Windows.Forms.Panel panel;
         private TwoRangeWalkControl twoRangeWalkControl;
         private SimpleWalkControl simpleWalkControl;
+        private System.Windows.Forms.Panel separator;
     }
 }
