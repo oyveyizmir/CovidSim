@@ -51,7 +51,7 @@ namespace CovidSim.Model2D.Walk
 
         public abstract void Initialize();
 
-        public Point GetMoveVector()
+        public virtual Point GetMoveVector()
         {
             double moveAngle = RandomUtils.GetDouble(0, 2 * Math.PI);
             double moveRange = GetRange();

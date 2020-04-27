@@ -18,6 +18,7 @@ namespace CovidSimApp.Model2D
     {
         Simulator simulator;
         Settings settings;
+        SquareWalk.Settings squareWalkSettings;
         SimpleWalk.Settings simpleWalkSettings;
         ComplexWalk.Settings complexWalkSettings;
         Task task;
@@ -37,6 +38,7 @@ namespace CovidSimApp.Model2D
             uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
             simpleWalkSettings = new SimpleWalk.Settings();
+            squareWalkSettings = new SquareWalk.Settings();
 
             complexWalkSettings = new ComplexWalk.Settings();
             complexWalkSettings.AddRange(0.0001, 0.2, 100);
@@ -45,7 +47,7 @@ namespace CovidSimApp.Model2D
             simulator = new Simulator();
             simulator.Settings.Walk = simpleWalkSettings;
 
-            delay = 0;//40;
+            delay = 0;
             simulator.Initialize();
             settings = simulator.Settings;
 

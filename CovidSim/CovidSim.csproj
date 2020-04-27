@@ -54,7 +54,9 @@
     <Compile Include="Model2D\Statistics.cs" />
     <Compile Include="Model2D\Walk\ComplexWalk.cs" />
     <Compile Include="Model2D\Walk\ExtremeWalk.cs" />
+    <Compile Include="Model2D\Walk\RoundWalk.cs" />
     <Compile Include="Model2D\Walk\SimpleWalk.cs" />
+    <Compile Include="Model2D\Walk\SquareWalk.cs" />
     <Compile Include="Model2D\Walk\WalkStrategy.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

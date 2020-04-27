@@ -14,6 +14,18 @@ namespace CovidSimCon
     {
         static void Main(string[] args)
         {
+            WalkStrategy w;
+            //w = new SimpleWalk.Settings().CreateWalkStrategy();
+            w = new SquareWalk.Settings().CreateWalkStrategy();
+            var sw2 = new Stopwatch();
+            sw2.Start();
+            Point p;
+            for (int i = 0; i < 10000000; i++)
+                p = w.GetMoveVector();
+            sw2.Stop();
+            Console.WriteLine(sw2.ElapsedMilliseconds);
+            return;
+            
             var settings = new ExtremeWalk.Settings();
             settings.MinWalk = 0;
             settings.MaxWalk = 100;
