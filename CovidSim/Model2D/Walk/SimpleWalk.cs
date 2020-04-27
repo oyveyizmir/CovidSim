@@ -10,7 +10,7 @@ namespace CovidSim.Model2D.Walk
     {
         public class Settings : MinMaxSettings, ISettings
         {
-            public Settings() => (MinWalk, MaxWalk) = (0, 0.45);
+            public Settings() => (MinWalk, MaxWalk) = (0, 0.2);
 
             public WalkStrategy CreateWalkStrategy() => new SimpleWalk { Config = this };
         }

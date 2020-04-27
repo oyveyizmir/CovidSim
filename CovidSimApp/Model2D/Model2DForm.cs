@@ -39,12 +39,10 @@ namespace CovidSimApp.Model2D
             simpleWalkSettings = new SimpleWalk.Settings();
 
             complexWalkSettings = new ComplexWalk.Settings();
-            complexWalkSettings.AddRange(0.00001, 0.45, 100);
-            complexWalkSettings.AddRange(0.99999, 0, 0.45);
+            complexWalkSettings.AddRange(0.00001, 0.2, 100);
+            complexWalkSettings.AddRange(0.99999, 0, 0.2);
 
             simulator = new Simulator();
-            simulator.Settings.Population = 1000;
-            simulator.Settings.IllnessDuration = 10000;
             simulator.Settings.Walk = simpleWalkSettings;
 
             delay = 0;//40;

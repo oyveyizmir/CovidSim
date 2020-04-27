@@ -10,10 +10,10 @@ namespace CovidSim.Model2D
     public class Settings : BasicSettings
     {
         double transmissionRange = 10;
-        double transmissionProbabilityAt0 = 1;
+        double transmissionProbabilityAt0 = 0.3;
         double transmissionProbabilityAtRange = 0;
         double worldSize = 1000;
-        int illnessDuration = 300;
+        int illnessDuration = 1000;
         double fatalityRate = 0.2;
 
         public double TransmissionRange
@@ -93,7 +93,7 @@ namespace CovidSim.Model2D
         public Settings()
         {
             Population = 10000;
-            InitiallyInfected = 1;
+            InitiallyInfected = 10;
         }
 
         public override void Validate()
