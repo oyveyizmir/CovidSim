@@ -46,7 +46,7 @@ namespace CovidSim.Model2D.Walk
 
         protected override double GetRange()
         {
-            double x = RandomUtils.Random.NextDouble();
+            double x = RandomUtils.NextDouble();
             double r = Config.MinWalk + range * (a - 1) * x / (a - x);
             return r;
         }

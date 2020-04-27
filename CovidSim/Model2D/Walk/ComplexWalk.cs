@@ -72,7 +72,7 @@ namespace CovidSim.Model2D.Walk
 
         protected override double GetRange()
         {
-            double random = RandomUtils.Random.NextDouble();
+            double random = RandomUtils.NextDouble();
 
             for (int i = 0; i < Config.Ranges.Count; i++)
                 if (random < Config.Ranges[i].Probability)

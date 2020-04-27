@@ -61,7 +61,7 @@
     <Compile Include="SimpleModel\Settings.cs" />
     <Compile Include="SimpleModel\Simulator.cs" />
     <Compile Include="SimpleModel\Statistics.cs" />
-    <Compile Include="Utils.cs" />
+    <Compile Include="RandomUtils.cs" />
     <Compile Include="ValidationException.cs" />
   </ItemGroup>
   <ItemGroup>
