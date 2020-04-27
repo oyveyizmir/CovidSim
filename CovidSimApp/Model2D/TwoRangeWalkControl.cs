@@ -54,12 +54,12 @@ namespace CovidSimApp.Model2D
             InitializeComponent();
         }
 
-        protected override void OnVisibleChanged(EventArgs e)
+        /*protected override void OnVisibleChanged(EventArgs e)
         {
             base.OnVisibleChanged(e);
             if (Visible)
                 DisplayData();
-        }
+        }*/
 
         void DisplayRange(ComplexWalk.RangeSettings range, TextBox probability, TextBox minWalk, TextBox maxWalk)
         {

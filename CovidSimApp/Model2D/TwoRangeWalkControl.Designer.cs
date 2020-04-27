@@ -49,14 +49,14 @@
             this.maxWalk2Edit.Location = new System.Drawing.Point(113, 254);
             this.maxWalk2Edit.Name = "maxWalk2Edit";
             this.maxWalk2Edit.Size = new System.Drawing.Size(100, 20);
-            this.maxWalk2Edit.TabIndex = 65;
+            this.maxWalk2Edit.TabIndex = 5;
             // 
             // maxWalk1Edit
             // 
             this.maxWalk1Edit.Location = new System.Drawing.Point(113, 114);
             this.maxWalk1Edit.Name = "maxWalk1Edit";
             this.maxWalk1Edit.Size = new System.Drawing.Size(100, 20);
-            this.maxWalk1Edit.TabIndex = 66;
+            this.maxWalk1Edit.TabIndex = 2;
             // 
             // label4
             // 
@@ -81,7 +81,7 @@
             this.probability1Edit.Location = new System.Drawing.Point(113, 43);
             this.probability1Edit.Name = "probability1Edit";
             this.probability1Edit.Size = new System.Drawing.Size(100, 20);
-            this.probability1Edit.TabIndex = 59;
+            this.probability1Edit.TabIndex = 0;
             this.probability1Edit.TextChanged += new System.EventHandler(this.probability1Edit_TextChanged);
             // 
             // probability2Edit
@@ -90,14 +90,14 @@
             this.probability2Edit.Location = new System.Drawing.Point(113, 183);
             this.probability2Edit.Name = "probability2Edit";
             this.probability2Edit.Size = new System.Drawing.Size(100, 20);
-            this.probability2Edit.TabIndex = 60;
+            this.probability2Edit.TabIndex = 3;
             // 
             // minWalk2Edit
             // 
             this.minWalk2Edit.Location = new System.Drawing.Point(113, 219);
             this.minWalk2Edit.Name = "minWalk2Edit";
             this.minWalk2Edit.Size = new System.Drawing.Size(100, 20);
-            this.minWalk2Edit.TabIndex = 61;
+            this.minWalk2Edit.TabIndex = 4;
             // 
             // label8
             // 
@@ -113,7 +113,7 @@
             this.minWalk1Edit.Location = new System.Drawing.Point(113, 79);
             this.minWalk1Edit.Name = "minWalk1Edit";
             this.minWalk1Edit.Size = new System.Drawing.Size(100, 20);
-            this.minWalk1Edit.TabIndex = 62;
+            this.minWalk1Edit.TabIndex = 1;
             // 
             // label7
             // 

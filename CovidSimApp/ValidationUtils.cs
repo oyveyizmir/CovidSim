@@ -20,8 +20,24 @@ namespace CovidSimApp
             }
             catch (FormatException)
             {
-                MessageBox.Show(message, "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                Control control = edit;
+
+                while (true)
+                {
+                    control = control.Parent;
+                    if (control is Form)
+                        break;
+                    if (control is TabPage tabPage)
+                    {
+                        var tabControl = (TabControl)tabPage.Parent;
+                        tabControl.SelectedTab = tabPage;
+                        break;
+                    }
+                }
+
                 edit.Focus();
+                MessageBox.Show(message, "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                
                 throw;
             }
         }

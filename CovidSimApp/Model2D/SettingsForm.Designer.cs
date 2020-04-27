@@ -108,7 +108,7 @@
             this.worldSizeEdit.Location = new System.Drawing.Point(105, 161);
             this.worldSizeEdit.Name = "worldSizeEdit";
             this.worldSizeEdit.Size = new System.Drawing.Size(100, 20);
-            this.worldSizeEdit.TabIndex = 44;
+            this.worldSizeEdit.TabIndex = 4;
             // 
             // label7
             // 
@@ -124,7 +124,7 @@
             this.delayEdit.Location = new System.Drawing.Point(105, 196);
             this.delayEdit.Name = "delayEdit";
             this.delayEdit.Size = new System.Drawing.Size(100, 20);
-            this.delayEdit.TabIndex = 34;
+            this.delayEdit.TabIndex = 5;
             // 
             // label1
             // 
@@ -140,28 +140,28 @@
             this.fatalityRateEdit.Location = new System.Drawing.Point(105, 124);
             this.fatalityRateEdit.Name = "fatalityRateEdit";
             this.fatalityRateEdit.Size = new System.Drawing.Size(100, 20);
-            this.fatalityRateEdit.TabIndex = 30;
+            this.fatalityRateEdit.TabIndex = 3;
             // 
             // illnessDurationEdit
             // 
             this.illnessDurationEdit.Location = new System.Drawing.Point(105, 89);
             this.illnessDurationEdit.Name = "illnessDurationEdit";
             this.illnessDurationEdit.Size = new System.Drawing.Size(100, 20);
-            this.illnessDurationEdit.TabIndex = 29;
+            this.illnessDurationEdit.TabIndex = 2;
             // 
             // infectedEdit
             // 
             this.infectedEdit.Location = new System.Drawing.Point(105, 54);
             this.infectedEdit.Name = "infectedEdit";
             this.infectedEdit.Size = new System.Drawing.Size(100, 20);
-            this.infectedEdit.TabIndex = 28;
+            this.infectedEdit.TabIndex = 1;
             // 
             // populationEdit
             // 
             this.populationEdit.Location = new System.Drawing.Point(105, 19);
             this.populationEdit.Name = "populationEdit";
             this.populationEdit.Size = new System.Drawing.Size(100, 20);
-            this.populationEdit.TabIndex = 23;
+            this.populationEdit.TabIndex = 0;
             // 
             // fatalityRateLabel
             // 
