@@ -14,9 +14,9 @@ namespace CovidSimCon
     {
         static void Main(string[] args)
         {
-            WalkStrategy w;
+            IWalkStrategy w;
             //w = new SimpleWalk.Settings().CreateWalkStrategy();
-            w = new SquareWalk.Settings().CreateWalkStrategy();
+            w = (new WalkSettings() { Type = WalkArea.Square }).CreateWalkStrategy();
             var sw2 = new Stopwatch();
             sw2.Start();
             Point p;

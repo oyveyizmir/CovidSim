@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace CovidSim.Model2D.Walk
 {
-    class RoundWalk
+    public interface IWalkStrategy
     {
+        void Initialize();
+
+        Point GetMoveVector();
     }
 }
