@@ -8,7 +8,7 @@ namespace CovidSim.Model2D.Walk
 {
     public class CircleWalk : WalkStrategy
     {
-        public CircleWalk(MinMaxSettings config) : base(config) { }
+        public CircleWalk(RangeSettings config) : base(config) { }
 
         protected virtual double GetRange() => RandomUtils.GetDouble(Config.MinWalk, Config.MaxWalk);
 

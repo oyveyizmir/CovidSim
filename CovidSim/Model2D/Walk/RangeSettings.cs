@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CovidSim.Model2D.Walk
 {
-    public abstract class MinMaxSettings : IWalkSettings
+    public abstract class RangeSettings : IWalkSettings
     {
         double minWalk;
         double maxWalk;
@@ -33,9 +33,9 @@ namespace CovidSim.Model2D.Walk
             }
         }
 
-        public MinMaxSettings() { }
+        public RangeSettings() { }
 
-        public MinMaxSettings(double minWalk, double maxWalk) => (MinWalk, MaxWalk) = (minWalk, maxWalk);
+        public RangeSettings(double minWalk, double maxWalk) => (MinWalk, MaxWalk) = (minWalk, maxWalk);
 
         public abstract IWalkStrategy CreateWalkStrategy();
 

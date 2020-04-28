@@ -24,9 +24,13 @@ namespace CovidSim.Model2D.Walk
                 }
             }
 
-            public WalkSettings Range1 { get; set; }
+            public double Probability2 => 1 - probability;
 
-            public WalkSettings Range2 { get; set; }
+            public WalkArea Type { get; set; }
+
+            public RangeSettings Range1 { get; set; }
+
+            public RangeSettings Range2 { get; set; }
 
             public void Validate()
             {
@@ -50,8 +54,17 @@ namespace CovidSim.Model2D.Walk
         public void Initialize()
         {
             Config.Validate();
-            walk1 = Config.Range1.CreateWalkStrategy();
-            walk2 = Config.Range2.CreateWalkStrategy();
+
+            walk1 = CreateWalk(Config.Range1);
+            walk2 = CreateWalk(Config.Range2);
+        }
+
+        IWalkStrategy CreateWalk(RangeSettings range)
+        {
+            var settings = new WalkSettings(Config.Type, range.MinWalk, range.MaxWalk);
+            var walk = settings.CreateWalkStrategy();
+            walk.Initialize();
+            return walk;
         }
 
         public Point GetMoveVector() => (RandomUtils.GetDouble() < Config.Probability1 ? walk1 : walk2).GetMoveVector();

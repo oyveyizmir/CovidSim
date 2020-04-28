@@ -14,7 +14,7 @@ namespace CovidSim.Model2D.Walk
         double range;
         double a;
 
-        public class Settings : MinMaxSettings
+        public class Settings : RangeSettings
         {
             double linearity = -2;
 

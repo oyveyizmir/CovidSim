@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CovidSim.Model2D.Walk
 {
-    public class WalkSettings : MinMaxSettings
+    public class WalkSettings : RangeSettings
     {
         public WalkArea Type { get; set; } = WalkArea.Circle;
 
