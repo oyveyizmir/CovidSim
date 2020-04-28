@@ -57,7 +57,7 @@
     <Compile Include="Model2D\Walk\HyperbolicWalk.cs" />
     <Compile Include="Model2D\Walk\IWalkSettings.cs" />
     <Compile Include="Model2D\Walk\MinMaxSettings.cs" />
-    <Compile Include="Model2D\Walk\SimpleWalk2.cs" />
+    <Compile Include="Model2D\Walk\WalkStrategy.cs" />
     <Compile Include="Model2D\Walk\SquareWalk.cs" />
     <Compile Include="Model2D\Walk\TwoRangeWalk.cs" />
     <Compile Include="Model2D\Walk\WalkArea.cs" />

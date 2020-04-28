@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CovidSim.Model2D.Walk
 {
-    public class CircleWalk : SimpleWalk2
+    public class CircleWalk : WalkStrategy
     {
         public CircleWalk(MinMaxSettings config) : base(config) { }
 
