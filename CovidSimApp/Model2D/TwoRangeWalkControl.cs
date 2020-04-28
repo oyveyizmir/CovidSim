@@ -16,11 +16,11 @@ namespace CovidSimApp.Model2D
 {
     public partial class TwoRangeWalkControl : UserControl, IWalkSettingsContainer
     {
-        private ComplexWalk.Settings walk;
+        private TwoRangeWalk.Settings walk;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ComplexWalk.Settings Walk
+        public TwoRangeWalk.Settings Walk
         {
             get => walk;
 
@@ -29,7 +29,7 @@ namespace CovidSimApp.Model2D
                 if (value == null)
                     throw new ArgumentNullException("Walk cannot be null");
 
-                if (value.Ranges.Count != 2)
+                if (value.Range1 == null || value.Range2 == null)
                     throw new ArgumentException("The walk should contain 2 ranges");
 
                 walk = value;
@@ -37,29 +37,29 @@ namespace CovidSimApp.Model2D
             }
         }
 
-        WalkStrategy.ISettings IWalkSettingsContainer.Walk
+        IWalkSettings IWalkSettingsContainer.Walk
         {
             get => Walk;
-            set => Walk = (ComplexWalk.Settings)value;
+            set => Walk = (TwoRangeWalk.Settings)value;
         }
 
-        ComplexWalk.RangeSettings Range1 => walk?.Ranges[0];
+        WalkSettings Range1 => walk?.Range1;
 
-        ComplexWalk.RangeSettings Range2 => walk?.Ranges[1];
+        WalkSettings Range2 => walk?.Range2;
 
-        double Probability2 => 1 - Range1.Probability;
+        double Probability2 => 1 - Walk.Probability1;
 
         public TwoRangeWalkControl()
         {
             InitializeComponent();
         }
 
-        void DisplayRange(ComplexWalk.RangeSettings range, TextBox probability, TextBox minWalk, TextBox maxWalk)
+        void DisplayRange(WalkSettings range, TextBox probability, TextBox minWalk, TextBox maxWalk)
         {
             if (range == null)
                 return;
 
-            probability.Text = (range == Range2 ? Probability2 : range.Probability).ToString();
+            probability.Text = (range == Range2 ? Probability2 : Walk.Probability1).ToString();
             minWalk.Text = range.MinWalk.ToString();
             maxWalk.Text = range.MaxWalk.ToString();
         }
@@ -70,7 +70,7 @@ namespace CovidSimApp.Model2D
             DisplayRange(Range2, probability2Edit, minWalk2Edit, maxWalk2Edit);
         }
 
-        void ValidateAndSaveRange(ComplexWalk.RangeSettings range, TextBox probabilityEdit, TextBox minWalkEdit, TextBox maxWalkEdit, bool save)
+        void ValidateAndSaveRange(WalkSettings range, TextBox probabilityEdit, TextBox minWalkEdit, TextBox maxWalkEdit, bool save)
         {
             var probability = ValidateAndGet<double>(probabilityEdit, x => x >= 0 && x <= 1, "Probability should be in range [0..1] (inclusive)");
             var minWalk = ValidateAndGet<double>(minWalkEdit, x => x >= 0, "Minimum Walk cannot be less than 0");
@@ -80,7 +80,7 @@ namespace CovidSimApp.Model2D
             if (save)
             {
                 if (range == Range1)
-                    range.Probability = probability;
+                    Walk.Probability1 = probability;
                 range.MinWalk = minWalk;
                 range.MaxWalk = maxWalk;
             }

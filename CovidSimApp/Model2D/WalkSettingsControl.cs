@@ -16,23 +16,23 @@ namespace CovidSimApp.Model2D
     {
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public SimpleWalk.Settings SimpleWalk
+        public WalkSettings SimpleWalk
         {
-            get => (SimpleWalk.Settings)GetContainer(0).Walk;
+            get => (WalkSettings)GetContainer(0).Walk;
             set => GetContainer(0).Walk = value;
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ComplexWalk.Settings ComplexWalk
+        public TwoRangeWalk.Settings ComplexWalk
         {
-            get => (ComplexWalk.Settings)GetContainer(1).Walk;
+            get => (TwoRangeWalk.Settings)GetContainer(1).Walk;
             set => GetContainer(1).Walk = value;
         }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public WalkStrategy.ISettings SelectedWalk
+        public IWalkSettings SelectedWalk
         {
             get => GetContainer(walkCombo.SelectedIndex).Walk;
 

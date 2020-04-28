@@ -26,7 +26,7 @@ namespace CovidSimCon
             Console.WriteLine(sw2.ElapsedMilliseconds);
             return;
             
-            var settings = new ExtremeWalk.Settings();
+            var settings = new HyperbolicWalk.Settings();
             settings.MinWalk = 0;
             settings.MaxWalk = 100;
             settings.Linearity = -7;

@@ -8,7 +8,11 @@ namespace CovidSim.Model2D.Walk
 {
     public class WalkSettings : MinMaxSettings
     {
-        public WalkArea Type { get; set; }
+        public WalkArea Type { get; set; } = WalkArea.Circle;
+
+        public WalkSettings() : base(0, 0.2) { }
+
+        public WalkSettings(WalkArea type, double minWalk, double maxWalk) : base(minWalk, maxWalk) => Type = type;
 
         public override IWalkStrategy CreateWalkStrategy()
         {

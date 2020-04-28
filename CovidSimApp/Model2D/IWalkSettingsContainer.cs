@@ -10,6 +10,6 @@ namespace CovidSimApp.Model2D
 {
     interface IWalkSettingsContainer : ISavable
     {
-        WalkStrategy.ISettings Walk { get; set; }
+        IWalkSettings Walk { get; set; }
     }
 }

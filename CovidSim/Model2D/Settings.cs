@@ -88,7 +88,7 @@ namespace CovidSim.Model2D
             }
         }
 
-        public WalkStrategy.ISettings Walk { get; set; } = new SimpleWalk.Settings();
+        public IWalkSettings Walk { get; set; } = new WalkSettings();
 
         public Settings()
         {

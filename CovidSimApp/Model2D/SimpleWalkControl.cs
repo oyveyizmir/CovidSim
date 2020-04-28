@@ -16,11 +16,11 @@ namespace CovidSimApp.Model2D
 {
     public partial class SimpleWalkControl : UserControl, IWalkSettingsContainer
     {
-        SimpleWalk.Settings walk;
+        WalkSettings walk;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public SimpleWalk.Settings Walk
+        public WalkSettings Walk
         {
             get => walk;
 
@@ -31,10 +31,10 @@ namespace CovidSimApp.Model2D
             }
         }
 
-        WalkStrategy.ISettings IWalkSettingsContainer.Walk
+        IWalkSettings IWalkSettingsContainer.Walk
         {
             get => Walk;
-            set => Walk = (SimpleWalk.Settings)value;
+            set => Walk = (WalkSettings)value;
         }
 
         public SimpleWalkControl()

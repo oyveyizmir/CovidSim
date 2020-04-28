@@ -34,7 +34,7 @@ namespace CovidSim.Model2D
         int maxSegment;
         Area[,] areas;
         double segmentSize;
-        WalkStrategy walk;
+        IWalkStrategy walk;
 
         public Simulator()
         {

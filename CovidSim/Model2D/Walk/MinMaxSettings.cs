@@ -33,6 +33,10 @@ namespace CovidSim.Model2D.Walk
             }
         }
 
+        public MinMaxSettings() { }
+
+        public MinMaxSettings(double minWalk, double maxWalk) => (MinWalk, MaxWalk) = (minWalk, maxWalk);
+
         public abstract IWalkStrategy CreateWalkStrategy();
 
         public void Validate()

@@ -18,9 +18,9 @@ namespace CovidSimApp.Model2D
     {
         public Settings Settings { get; set; }
 
-        public SimpleWalk.Settings SimpleWalk { get; set; }
+        public WalkSettings SimpleWalk { get; set; }
 
-        public ComplexWalk.Settings ComplexWalk { get; set; }
+        public TwoRangeWalk.Settings ComplexWalk { get; set; }
 
         public int Delay { get; set; }
 
