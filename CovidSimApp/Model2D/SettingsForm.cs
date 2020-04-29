@@ -1,4 +1,5 @@
-﻿using CovidSim.Model2D;
+﻿using CovidSim;
+using CovidSim.Model2D;
 using CovidSim.Model2D.Walk;
 using System;
 using System.Collections.Generic;
@@ -102,7 +103,7 @@ namespace CovidSimApp.Model2D
                 walkSettingsControl.ValidateAndSave();
                 Settings.Walk = walkSettingsControl.SelectedWalk;
             }
-            catch (FormatException)
+            catch (ValidationException)
             {
                 return false;
             }

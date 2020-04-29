@@ -95,7 +95,7 @@ namespace CovidSimApp.Model2D
         {
             var control = (IWalkSettingsContainer)SelectedControl;
             if (control == null)
-                throw new FormatException("No walk strategy selected");
+                throw new ValidationException("No walk strategy selected");
 
             control.ValidateAndSave(save);
         }

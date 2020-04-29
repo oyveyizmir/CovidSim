@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CovidSim;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +12,25 @@ namespace CovidSimApp
     {
         public static T ValidateAndGet<T>(TextBox edit, Func<T, bool> validationFunc, string message)
         {
+            T value;
+
             try
             {
-                T value = (T)Convert.ChangeType(edit.Text, typeof(T));
+                try
+                {
+                    value = (T)Convert.ChangeType(edit.Text, typeof(T));
+                }
+                catch (FormatException)
+                {
+                    throw new ValidationException(message);
+                }
+
                 if (validationFunc(value))
                     return value;
-                throw new FormatException(message);
+
+                throw new ValidationException(message);
             }
-            catch (FormatException)
+            catch (ValidationException)
             {
                 Control control = edit;
 
@@ -37,7 +49,7 @@ namespace CovidSimApp
 
                 edit.Focus();
                 MessageBox.Show(message, "Invalid Value", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                
+
                 throw;
             }
         }

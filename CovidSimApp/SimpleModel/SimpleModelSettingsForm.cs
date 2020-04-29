@@ -1,4 +1,5 @@
-﻿using CovidSim.SimpleModel;
+﻿using CovidSim;
+using CovidSim.SimpleModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -71,7 +72,7 @@ namespace CovidSimApp.SimpleModel
                 Settings.FatalityRate = fatalityRate;
                 Delay = delay;
             }
-            catch (FormatException)
+            catch (ValidationException)
             {
                 return false;
             }
