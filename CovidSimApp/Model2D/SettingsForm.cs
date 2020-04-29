@@ -18,9 +18,9 @@ namespace CovidSimApp.Model2D
     {
         public Settings Settings { get; set; }
 
-        public WalkSettings SimpleWalk { get; set; }
+        public ShapeWalkSettings ShapeWalk { get; set; }
 
-        public TwoRangeWalk.Settings ComplexWalk { get; set; }
+        public TwoRangeWalk.Settings TwoRangeWalk { get; set; }
 
         public int Delay { get; set; }
 
@@ -47,8 +47,8 @@ namespace CovidSimApp.Model2D
             worldSizeEdit.Text = Settings.WorldSize.ToString();
             delayEdit.Text = Delay.ToString();
 
-            walkSettingsControl.SimpleWalk = SimpleWalk;
-            walkSettingsControl.ComplexWalk = ComplexWalk;
+            walkSettingsControl.ShapeWalk = ShapeWalk;
+            walkSettingsControl.TwoRangeWalk = TwoRangeWalk;
             walkSettingsControl.SelectedWalk = Settings.Walk;
         }
 

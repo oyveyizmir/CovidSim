@@ -1,6 +1,6 @@
 ﻿namespace CovidSimApp.Model2D
 {
-    partial class SimpleWalkControl
+    partial class ShapeWalkControl
     {
         /// <summary> 
         /// Required designer variable.

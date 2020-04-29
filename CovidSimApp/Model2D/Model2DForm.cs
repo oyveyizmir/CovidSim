@@ -18,9 +18,8 @@ namespace CovidSimApp.Model2D
     {
         Simulator simulator;
         Settings settings;
-        WalkSettings squareWalkSettings;
-        WalkSettings simpleWalkSettings;
-        TwoRangeWalk.Settings complexWalkSettings;
+        ShapeWalkSettings shapeWalkSettings;
+        TwoRangeWalk.Settings twoRangeWalkSettings;
         Task task;
         CancellationTokenSource cts;
         TaskScheduler uiScheduler;
@@ -37,16 +36,15 @@ namespace CovidSimApp.Model2D
         {
             uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
-            simpleWalkSettings = new WalkSettings();
-            squareWalkSettings = new WalkSettings();
+            shapeWalkSettings = new ShapeWalkSettings();
 
-            complexWalkSettings = new TwoRangeWalk.Settings();
-            complexWalkSettings.Probability1 = 0.0001;
-            complexWalkSettings.Range1 = new WalkSettings(WalkArea.Circle, 0.2, 100);
-            complexWalkSettings.Range2 = new WalkSettings(WalkArea.Circle, 0, 0.2);
+            twoRangeWalkSettings = new TwoRangeWalk.Settings();
+            twoRangeWalkSettings.Probability1 = 0.0001;
+            twoRangeWalkSettings.Range1 = new ShapeWalkSettings(Shape.Circle, 0.2, 100);
+            twoRangeWalkSettings.Range2 = new ShapeWalkSettings(Shape.Circle, 0, 0.2);
 
             simulator = new Simulator();
-            simulator.Settings.Walk = simpleWalkSettings;
+            simulator.Settings.Walk = shapeWalkSettings;
 
             delay = 0;
             simulator.Initialize();
@@ -234,8 +232,8 @@ namespace CovidSimApp.Model2D
         {
             var form = new SettingsForm();
             form.Settings = settings;
-            form.SimpleWalk = simpleWalkSettings;
-            form.ComplexWalk = complexWalkSettings;
+            form.ShapeWalk = shapeWalkSettings;
+            form.TwoRangeWalk = twoRangeWalkSettings;
             form.Delay = delay;
 
             if (form.ShowDialog() == DialogResult.OK)

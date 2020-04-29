@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CovidSim.Model2D.Walk
 {
-    public enum WalkArea
+    public enum Shape
     {
         Circle,
         Square

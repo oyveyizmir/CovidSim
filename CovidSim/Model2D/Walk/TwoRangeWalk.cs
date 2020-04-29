@@ -26,7 +26,7 @@ namespace CovidSim.Model2D.Walk
 
             public double Probability2 => 1 - probability;
 
-            public WalkArea Type { get; set; }
+            public Shape Type { get; set; }
 
             public RangeSettings Range1 { get; set; }
 
@@ -61,7 +61,7 @@ namespace CovidSim.Model2D.Walk
 
         IWalkStrategy CreateWalk(RangeSettings range)
         {
-            var settings = new WalkSettings(Config.Type, range.MinWalk, range.MaxWalk);
+            var settings = new ShapeWalkSettings(Config.Type, range.MinWalk, range.MaxWalk);
             var walk = settings.CreateWalkStrategy();
             walk.Initialize();
             return walk;

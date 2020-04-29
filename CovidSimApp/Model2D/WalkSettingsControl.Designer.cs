@@ -32,7 +32,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
             this.twoRangeWalkControl = new CovidSimApp.Model2D.TwoRangeWalkControl();
-            this.simpleWalkControl = new CovidSimApp.Model2D.SimpleWalkControl();
+            this.shapeWalkControl = new CovidSimApp.Model2D.ShapeWalkControl();
             this.separator = new System.Windows.Forms.Panel();
             this.panel.SuspendLayout();
             this.SuspendLayout();
@@ -42,7 +42,7 @@
             this.walkCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.walkCombo.FormattingEnabled = true;
             this.walkCombo.Items.AddRange(new object[] {
-            "Simple",
+            "1 Range",
             "2 Ranges"});
             this.walkCombo.Location = new System.Drawing.Point(113, 19);
             this.walkCombo.Name = "walkCombo";
@@ -62,7 +62,7 @@
             // panel
             // 
             this.panel.Controls.Add(this.twoRangeWalkControl);
-            this.panel.Controls.Add(this.simpleWalkControl);
+            this.panel.Controls.Add(this.shapeWalkControl);
             this.panel.Location = new System.Drawing.Point(0, 57);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(486, 426);
@@ -71,18 +71,20 @@
             // twoRangeWalkControl
             // 
             this.twoRangeWalkControl.Location = new System.Drawing.Point(23, 104);
+            this.twoRangeWalkControl.Margin = new System.Windows.Forms.Padding(0);
             this.twoRangeWalkControl.Name = "twoRangeWalkControl";
             this.twoRangeWalkControl.Size = new System.Drawing.Size(246, 302);
             this.twoRangeWalkControl.TabIndex = 54;
             this.twoRangeWalkControl.Visible = false;
             // 
-            // simpleWalkControl
+            // shapeWalkControl
             // 
-            this.simpleWalkControl.Location = new System.Drawing.Point(34, 12);
-            this.simpleWalkControl.Name = "simpleWalkControl";
-            this.simpleWalkControl.Size = new System.Drawing.Size(247, 108);
-            this.simpleWalkControl.TabIndex = 53;
-            this.simpleWalkControl.Visible = false;
+            this.shapeWalkControl.Location = new System.Drawing.Point(34, 12);
+            this.shapeWalkControl.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeWalkControl.Name = "shapeWalkControl";
+            this.shapeWalkControl.Size = new System.Drawing.Size(247, 108);
+            this.shapeWalkControl.TabIndex = 53;
+            this.shapeWalkControl.Visible = false;
             // 
             // separator
             // 
@@ -113,7 +115,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel;
         private TwoRangeWalkControl twoRangeWalkControl;
-        private SimpleWalkControl simpleWalkControl;
+        private ShapeWalkControl shapeWalkControl;
         private System.Windows.Forms.Panel separator;
     }
 }

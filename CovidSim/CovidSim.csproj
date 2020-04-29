@@ -57,11 +57,11 @@
     <Compile Include="Model2D\Walk\HyperbolicWalk.cs" />
     <Compile Include="Model2D\Walk\IWalkSettings.cs" />
     <Compile Include="Model2D\Walk\RangeSettings.cs" />
-    <Compile Include="Model2D\Walk\WalkStrategy.cs" />
+    <Compile Include="Model2D\Walk\RangeWalk.cs" />
     <Compile Include="Model2D\Walk\SquareWalk.cs" />
     <Compile Include="Model2D\Walk\TwoRangeWalk.cs" />
-    <Compile Include="Model2D\Walk\WalkArea.cs" />
-    <Compile Include="Model2D\Walk\WalkSettings.cs" />
+    <Compile Include="Model2D\Walk\Shape.cs" />
+    <Compile Include="Model2D\Walk\ShapeWalkSettings.cs" />
     <Compile Include="Model2D\Walk\IWalkStrategy.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

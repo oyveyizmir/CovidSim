@@ -10,17 +10,16 @@ using System.Windows.Forms;
 using CovidSim.Model2D.Walk;
 
 using static CovidSimApp.ValidationUtils;
-using CovidSim;
 
 namespace CovidSimApp.Model2D
 {
-    public partial class SimpleWalkControl : UserControl, IWalkSettingsContainer
+    public partial class ShapeWalkControl : UserControl, IWalkSettingsContainer
     {
-        WalkSettings walk;
+        ShapeWalkSettings walk;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public WalkSettings Walk
+        public ShapeWalkSettings Walk
         {
             get => walk;
 
@@ -34,10 +33,10 @@ namespace CovidSimApp.Model2D
         IWalkSettings IWalkSettingsContainer.Walk
         {
             get => Walk;
-            set => Walk = (WalkSettings)value;
+            set => Walk = (ShapeWalkSettings)value;
         }
 
-        public SimpleWalkControl()
+        public ShapeWalkControl()
         {
             InitializeComponent();
         }
