@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -28,7 +29,7 @@ namespace CovidSim
             Random r = random.Value;
 
             int sign = r.Next(4);
-            double signX = (sign & 1 << 1) - 1;
+            double signX = ((sign & 1) << 1) - 1;
             double signY = (sign & 2) - 1;
 
             double d = max - min;
