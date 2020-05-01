@@ -64,7 +64,7 @@ namespace CovidSimApp.Model2D
 
         void DisplayData()
         {
-            //areaCombo.SelectedIndex = (int)Walk.;
+            areaCombo.SelectedIndex = (int)Walk.Shape;
             DisplayRange(Range1, probability1Edit, minWalk1Edit, maxWalk1Edit);
             DisplayRange(Range2, probability2Edit, minWalk2Edit, maxWalk2Edit);
         }
@@ -95,7 +95,7 @@ namespace CovidSimApp.Model2D
 
         public void ValidateAndSave(bool save = true)
         {
-            var shape = (Shape)areaCombo.SelectedIndex;
+            Walk.Shape = (Shape)areaCombo.SelectedIndex;
             ValidateAndSaveRange(Range1, probability1Edit, minWalk1Edit, maxWalk1Edit, save);
             ValidateAndSaveRange(Range2, probability2Edit, minWalk2Edit, maxWalk2Edit, save);
         }
