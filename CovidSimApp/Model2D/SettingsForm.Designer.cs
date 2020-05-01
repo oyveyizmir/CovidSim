@@ -63,7 +63,7 @@
             // 
             this.cancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(253, 411);
+            this.cancelButton.Location = new System.Drawing.Point(253, 452);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 20;
@@ -74,7 +74,7 @@
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(172, 411);
+            this.okButton.Location = new System.Drawing.Point(172, 452);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 19;
@@ -98,7 +98,7 @@
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
             this.tabGeneral.Name = "tabGeneral";
             this.tabGeneral.Padding = new System.Windows.Forms.Padding(3);
-            this.tabGeneral.Size = new System.Drawing.Size(312, 358);
+            this.tabGeneral.Size = new System.Drawing.Size(312, 399);
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
@@ -210,7 +210,7 @@
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(320, 384);
+            this.tabControl.Size = new System.Drawing.Size(320, 425);
             this.tabControl.TabIndex = 33;
             // 
             // tabTransmission
@@ -223,7 +223,7 @@
             this.tabTransmission.Controls.Add(this.label2);
             this.tabTransmission.Location = new System.Drawing.Point(4, 22);
             this.tabTransmission.Name = "tabTransmission";
-            this.tabTransmission.Size = new System.Drawing.Size(312, 358);
+            this.tabTransmission.Size = new System.Drawing.Size(312, 389);
             this.tabTransmission.TabIndex = 2;
             this.tabTransmission.Text = "Transmission";
             this.tabTransmission.UseVisualStyleBackColor = true;
@@ -282,7 +282,7 @@
             this.tabWalk.Location = new System.Drawing.Point(4, 22);
             this.tabWalk.Name = "tabWalk";
             this.tabWalk.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWalk.Size = new System.Drawing.Size(312, 358);
+            this.tabWalk.Size = new System.Drawing.Size(312, 389);
             this.tabWalk.TabIndex = 1;
             this.tabWalk.Text = "Walk";
             this.tabWalk.UseVisualStyleBackColor = true;
@@ -292,7 +292,7 @@
             this.walkSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.walkSettingsControl.Location = new System.Drawing.Point(3, 3);
             this.walkSettingsControl.Name = "walkSettingsControl";
-            this.walkSettingsControl.Size = new System.Drawing.Size(306, 352);
+            this.walkSettingsControl.Size = new System.Drawing.Size(306, 383);
             this.walkSettingsControl.TabIndex = 0;
             // 
             // SettingsForm
@@ -301,7 +301,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
-            this.ClientSize = new System.Drawing.Size(344, 451);
+            this.ClientSize = new System.Drawing.Size(344, 492);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
