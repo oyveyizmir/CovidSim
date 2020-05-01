@@ -16,9 +16,9 @@ namespace CovidSimApp.Model2D
     {
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ShapeWalkSettings ShapeWalk
+        public OneRangeWalkSettings OneRangeWalk
         {
-            get => (ShapeWalkSettings)GetContainer(0).Walk;
+            get => (OneRangeWalkSettings)GetContainer(0).Walk;
             set => GetContainer(0).Walk = value;
         }
 
@@ -61,7 +61,7 @@ namespace CovidSimApp.Model2D
         {
             InitializeComponent();
 
-            walkControls.Add(shapeWalkControl);
+            walkControls.Add(oneRangeWalkControl);
             walkControls.Add(twoRangeWalkControl);
         }
 

@@ -16,7 +16,7 @@ namespace CovidSimCon
         {
             IWalkStrategy w;
             //w = new SimpleWalk.Settings().CreateWalkStrategy();
-            w = (new ShapeWalkSettings() { Shape = Shape.Square }).CreateWalkStrategy();
+            w = (new OneRangeWalkSettings() { Shape = Shape.Square }).CreateWalkStrategy();
             var sw2 = new Stopwatch();
             sw2.Start();
             Point p;

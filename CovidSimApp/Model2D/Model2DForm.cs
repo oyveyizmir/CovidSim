@@ -18,7 +18,7 @@ namespace CovidSimApp.Model2D
     {
         Simulator simulator;
         Settings settings;
-        ShapeWalkSettings shapeWalkSettings;
+        OneRangeWalkSettings oneRangeWalkSettings;
         TwoRangeWalk.Settings twoRangeWalkSettings;
         Task task;
         CancellationTokenSource cts;
@@ -36,15 +36,15 @@ namespace CovidSimApp.Model2D
         {
             uiScheduler = TaskScheduler.FromCurrentSynchronizationContext();
 
-            shapeWalkSettings = new ShapeWalkSettings();
+            oneRangeWalkSettings = new OneRangeWalkSettings();
 
             twoRangeWalkSettings = new TwoRangeWalk.Settings();
             twoRangeWalkSettings.Probability1 = 0.0001;
-            twoRangeWalkSettings.Range1 = new ShapeWalkSettings(Shape.Circle, 0.2, 100);
-            twoRangeWalkSettings.Range2 = new ShapeWalkSettings(Shape.Circle, 0, 0.2);
+            twoRangeWalkSettings.Range1 = new OneRangeWalkSettings(Shape.Circle, 0.2, 100);
+            twoRangeWalkSettings.Range2 = new OneRangeWalkSettings(Shape.Circle, 0, 0.2);
 
             simulator = new Simulator();
-            simulator.Settings.Walk = shapeWalkSettings;
+            simulator.Settings.Walk = oneRangeWalkSettings;
 
             delay = 0;
             simulator.Initialize();
@@ -232,7 +232,7 @@ namespace CovidSimApp.Model2D
         {
             var form = new SettingsForm();
             form.Settings = settings;
-            form.ShapeWalk = shapeWalkSettings;
+            form.OneRangeWalk = oneRangeWalkSettings;
             form.TwoRangeWalk = twoRangeWalkSettings;
             form.Delay = delay;
 

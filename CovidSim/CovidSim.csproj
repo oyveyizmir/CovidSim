@@ -63,7 +63,7 @@
     <Compile Include="Model2D\Walk\SquareWalk.cs" />
     <Compile Include="Model2D\Walk\TwoRangeWalk.cs" />
     <Compile Include="Model2D\Walk\Shape.cs" />
-    <Compile Include="Model2D\Walk\ShapeWalkSettings.cs" />
+    <Compile Include="Model2D\Walk\OneRangeWalkSettings.cs" />
     <Compile Include="Model2D\Walk\IWalkStrategy.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

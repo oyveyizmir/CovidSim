@@ -32,7 +32,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.panel = new System.Windows.Forms.Panel();
             this.twoRangeWalkControl = new CovidSimApp.Model2D.TwoRangeWalkControl();
-            this.shapeWalkControl = new CovidSimApp.Model2D.ShapeWalkControl();
+            this.oneRangeWalkControl = new CovidSimApp.Model2D.OneRangeWalkControl();
             this.separator = new System.Windows.Forms.Panel();
             this.panel.SuspendLayout();
             this.SuspendLayout();
@@ -62,7 +62,7 @@
             // panel
             // 
             this.panel.Controls.Add(this.twoRangeWalkControl);
-            this.panel.Controls.Add(this.shapeWalkControl);
+            this.panel.Controls.Add(this.oneRangeWalkControl);
             this.panel.Location = new System.Drawing.Point(0, 57);
             this.panel.Name = "panel";
             this.panel.Size = new System.Drawing.Size(486, 426);
@@ -79,12 +79,12 @@
             // 
             // shapeWalkControl
             // 
-            this.shapeWalkControl.Location = new System.Drawing.Point(34, 12);
-            this.shapeWalkControl.Margin = new System.Windows.Forms.Padding(0);
-            this.shapeWalkControl.Name = "shapeWalkControl";
-            this.shapeWalkControl.Size = new System.Drawing.Size(247, 108);
-            this.shapeWalkControl.TabIndex = 53;
-            this.shapeWalkControl.Visible = false;
+            this.oneRangeWalkControl.Location = new System.Drawing.Point(34, 12);
+            this.oneRangeWalkControl.Margin = new System.Windows.Forms.Padding(0);
+            this.oneRangeWalkControl.Name = "shapeWalkControl";
+            this.oneRangeWalkControl.Size = new System.Drawing.Size(247, 108);
+            this.oneRangeWalkControl.TabIndex = 53;
+            this.oneRangeWalkControl.Visible = false;
             // 
             // separator
             // 
@@ -115,7 +115,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel;
         private TwoRangeWalkControl twoRangeWalkControl;
-        private ShapeWalkControl shapeWalkControl;
+        private OneRangeWalkControl oneRangeWalkControl;
         private System.Windows.Forms.Panel separator;
     }
 }

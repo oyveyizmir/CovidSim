@@ -87,11 +87,11 @@
     <Compile Include="Model2D\SettingsForm.Designer.cs">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model2D\ShapeWalkControl.cs">
+    <Compile Include="Model2D\OneRangeWalkControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Model2D\ShapeWalkControl.Designer.cs">
-      <DependentUpon>ShapeWalkControl.cs</DependentUpon>
+    <Compile Include="Model2D\OneRangeWalkControl.Designer.cs">
+      <DependentUpon>OneRangeWalkControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Model2D\TwoRangeWalkControl.cs">
       <SubType>UserControl</SubType>
@@ -141,8 +141,8 @@
     <EmbeddedResource Include="Model2D\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Model2D\ShapeWalkControl.resx">
-      <DependentUpon>ShapeWalkControl.cs</DependentUpon>
+    <EmbeddedResource Include="Model2D\OneRangeWalkControl.resx">
+      <DependentUpon>OneRangeWalkControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model2D\TwoRangeWalkControl.resx">
       <DependentUpon>TwoRangeWalkControl.cs</DependentUpon>

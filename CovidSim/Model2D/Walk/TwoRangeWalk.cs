@@ -61,7 +61,7 @@ namespace CovidSim.Model2D.Walk
 
         IWalkStrategy CreateWalk(RangeSettings range)
         {
-            var settings = new ShapeWalkSettings(Config.Type, range.MinWalk, range.MaxWalk);
+            var settings = new OneRangeWalkSettings(Config.Type, range.MinWalk, range.MaxWalk);
             var walk = settings.CreateWalkStrategy();
             walk.Initialize();
             return walk;

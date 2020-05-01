@@ -14,13 +14,13 @@ using CovidSim;
 
 namespace CovidSimApp.Model2D
 {
-    public partial class ShapeWalkControl : UserControl, IWalkSettingsContainer
+    public partial class OneRangeWalkControl : UserControl, IWalkSettingsContainer
     {
-        ShapeWalkSettings walk;
+        OneRangeWalkSettings walk;
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public ShapeWalkSettings Walk
+        public OneRangeWalkSettings Walk
         {
             get => walk;
 
@@ -34,10 +34,10 @@ namespace CovidSimApp.Model2D
         IWalkSettings IWalkSettingsContainer.Walk
         {
             get => Walk;
-            set => Walk = (ShapeWalkSettings)value;
+            set => Walk = (OneRangeWalkSettings)value;
         }
 
-        public ShapeWalkControl()
+        public OneRangeWalkControl()
         {
             InitializeComponent();
         }
