@@ -2,6 +2,7 @@
 using CovidSim.Model2D.Walk;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +38,7 @@ namespace CovidSim.Model2D
         double segmentSize;
         IWalkStrategy walk;
         AvoidanceStrategy avoidance;
+        Point[] newPositions;
 
         public Simulator()
         {
@@ -51,6 +53,7 @@ namespace CovidSim.Model2D
             walk.Initialize();
 
             Settings.Avoidance.Enabled = true;
+            Settings.Avoidance.Range = 500;
             avoidance = Settings.Avoidance.CreateStrategy();
 
             segmentSize = Settings.WorldSize / segmentCount;
@@ -58,6 +61,8 @@ namespace CovidSim.Model2D
             for (int i = 0; i < segmentCount; i++)
                 for (int j = 0; j < segmentCount; j++)
                     areas[i, j] = new Area();
+
+            newPositions = new Point[Settings.Population];
 
             Stats.SusceptibleCount = Settings.Population;
 
@@ -90,9 +95,9 @@ namespace CovidSim.Model2D
 
         int GetSegment(double coord)
         {
-            int segment = (int)(coord / segmentSize);
+            int segment = (int)Math.Floor(coord / segmentSize);
             if (segment == segmentCount)
-                return segment - 1;
+                return segment - 1; //TODO: change in toroidal world
             else
                 return segment;
         }
@@ -108,15 +113,164 @@ namespace CovidSim.Model2D
             return areas[GetSegment(point.X), GetSegment(point.Y)];
         }
 
+        Area GetArea(AreaPosition position)
+        {
+            return areas[position.X, position.Y];
+        }
+
+        void Move1()
+        {
+            for (int i = 0; i < Humans.Count; i++)
+            {
+                var human = Humans[i];
+                if (!human.IsAlive)
+                    continue;
+
+                var moveVector = walk.GetMoveVector();
+
+                if (avoidance != null)
+                {
+                    //Own area
+                    var position = human.Position;
+                    int segX = GetSegment(position.X);
+                    int segY = GetSegment(position.Y);
+                    moveVector += AvoidOwnArea(areas[segX, segY], human);
+
+                    //Left
+                    int startX = LimitSegment(GetSegment(position.X - avoidance.Config.Range));
+                    /*for (int x = startX; x < segX; x++)
+                        moveVector += AvoidArea(areas[x, segY], position);*/
+
+                    //Right
+                    int endX = LimitSegment(GetSegment(position.X + avoidance.Config.Range));
+                    /*for (int x = endX; x > segX; x--)
+                        moveVector += AvoidArea(areas[x, segY], position);*/
+
+                    //Top
+                    int startY = LimitSegment(GetSegment(position.Y - avoidance.Config.Range));
+                    /*for (int y = startY; y < segY; y++)
+                        moveVector += AvoidArea(areas[segX, y], position);*/
+
+                    //Bottom
+                    int endY = LimitSegment(GetSegment(position.Y + avoidance.Config.Range));
+                    /*for (int y = endY; y > segY; y--)
+                        moveVector += AvoidArea(areas[segX, y], position);*/
+
+                    //Top left
+                    /*for (int y = startY; y < segY; y++)
+                    {
+                        bool skipCheck = false;
+                        for (int x = startX; x < segX; x++)
+                            if (skipCheck || position.DistanceTo(new Point((x + 1) * segmentSize, (y + 1) * segmentSize)) < avoidance.Config.Range)
+                            {
+                                moveVector += AvoidArea(areas[x, y], position);
+                                skipCheck = true;
+                            }
+                    }*/
+
+                    /*AreaPosition ap = new AreaPosition(segmentSize);
+                    for (ap.Y = startY; ap.Y < segY; ap.Y++)
+                    {
+                        for (ap.X = startX; ap.X < segX; ap.X++)
+                            if (position.DistanceTo(ap.BottomRight) < avoidance.Config.Range)
+                            {
+                                moveVector += AvoidArea(ap, position);
+                                break;
+                            }
+
+                        for (; ap.X < segX; ap.X++)
+                            moveVector += AvoidArea(ap, position);
+                    }*/
+
+                    //Top right
+                    /*for (int y = startY; y < segY; y++)
+                    {
+                        bool skipCheck = false;
+                        for (int x = endX; x > segX; x--)
+                            if (skipCheck || position.DistanceTo(new Point(x * segmentSize, (y + 1) * segmentSize)) < avoidance.Config.Range)
+                            {
+                                moveVector += AvoidArea(areas[x, y], position);
+                                skipCheck = true;
+                            }
+                    }*/
+
+                    //Bottom left
+                    /*for (int y = endY; y > segY; y--)
+                    {
+                        bool skipCheck = false;
+                        for (int x = startX; x < segX; x++)
+                            if (skipCheck || position.DistanceTo(new Point((x + 1) * segmentSize, y * segmentSize)) < avoidance.Config.Range)
+                            {
+                                moveVector += AvoidArea(areas[x, y], position);
+                                skipCheck = true;
+                            }
+                    }*/
+
+                    //Bottom left
+                    /*for (int y = endY; y > segY; y--)
+                    {
+                        bool skipCheck = false;
+                        for (int x = endX; x > segX; x--)
+                            if (skipCheck || position.DistanceTo(new Point(x * segmentSize, y * segmentSize)) < avoidance.Config.Range)
+                            {
+                                moveVector += AvoidArea(areas[x, y], position);
+                                skipCheck = true;
+                            }
+                    }*/
+                }
+
+                newPositions[i] = LimitPosition(human.Position + moveVector);
+            }
+
+            for (int i = 0; i < Humans.Count; i++)
+            {
+                var human = Humans[i];
+                var oldArea = GetArea(human.Position);
+                human.Position = newPositions[i];
+                var newArea = GetArea(human.Position);
+                if (oldArea != newArea)
+                {
+                    oldArea.Remove(human);
+                    newArea.Add(human);
+                }
+            }
+        }
+
+        Point AvoidArea(AreaPosition areaPosition, Point humanPosition) => AvoidArea(GetArea(areaPosition), humanPosition);
+
+        Point AvoidArea(Area area, Point position)
+        {
+            Point moveVector = Point.Null;
+            for (int i = 0; i < area.Humans.Count; i++)
+            {
+                var @object = area.Humans[i];
+                if (@object.IsAlive)
+                    moveVector += avoidance.GetMoveVector(position, @object.Position);
+            }
+            return moveVector;
+        }
+
+        Point AvoidOwnArea(Area area, Human human)
+        {
+            Point moveVector = Point.Null;
+            for (int i = 0; i < area.Humans.Count; i++)
+            {
+                var @object = area.Humans[i];
+                if (@object != human && @object.IsAlive)
+                    moveVector += avoidance.GetMoveVector(human.Position, @object.Position);
+            }
+            return moveVector;
+        }
+
         void Move()
         {
-            foreach (var human in Humans)
+            for (int i = 0; i < Humans.Count; i++)
             {
+                var human = Humans[i];
                 var randomWalkVector = walk.GetMoveVector();
 
                 int segX = GetSegment(human.Position.X);
                 int segY = GetSegment(human.Position.Y);
-                var oldArea = areas[segX, segY];
 
                 if (avoidance != null)
                 {
@@ -126,22 +280,46 @@ namespace CovidSim.Model2D
                     int segEndX = Limit(segX + segRange, maxSegment) + 1;
                     int segEndY = Limit(segY + segRange, maxSegment) + 1;
 
-                    foreach (var @object in areas[segX, segY].Humans.Where(x => x != human))
-                    {
-                        var vector = avoidance.GetMoveVector(human.Position, @object.Position);
-                        randomWalkVector += vector;
-                    }
+                    for (int x = segStartX; x < segEndX; x++)
+                        for (int y = segStartY; y < segEndY; y++)
+                            for (int j = 0; j < areas[x, y].Humans.Count; j++)
+                            {
+                                var @object = areas[x, y].Humans[j];
+                                if (@object != human)
+                                {
+                                    var vector = avoidance.GetMoveVector(human.Position, @object.Position);
+                                    randomWalkVector += vector;
+                                }
+                            }
                 }
 
-                human.Position = Limit(human.Position + randomWalkVector, Settings.WorldSize);
+                if (randomWalkVector.DistanceTo(Point.Null) > 10)
+                    Debug.WriteLine("stop");
+                newPositions[i] = Limit(human.Position + randomWalkVector, Settings.WorldSize);
+            }
+
+            for (int i = 0; i < Humans.Count; i++)
+            {
+                var human = Humans[i];
+                var oldPos = human.Position;
+                var oldArea = GetArea(human.Position);
+                human.Position = newPositions[i];
                 var newArea = GetArea(human.Position);
                 if (oldArea != newArea)
                 {
+                    if (Time >= 300 && newArea == areas[0, 0])
+                        Debug.WriteLine("stop");
                     oldArea.Remove(human);
                     newArea.Add(human);
                 }
             }
+
+            Debug.WriteLine(areas[0, 0].Humans.Count);
         }
+
+        int LimitSegment(int segment) => Limit(segment, maxSegment);
+
+        Point LimitPosition(Point point) => Limit(point, Settings.WorldSize);
 
         static Point Limit(Point point, double max)
         {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace CovidSim.Model2D.Avoidance
     {
         public class Settings
         {
-            double range = 100;
+            double range = 20;
             double factorAt0 = 0.03;
             double factorAtRange = 0;
             
@@ -76,7 +77,13 @@ namespace CovidSim.Model2D.Avoidance
                 return Point.Null;
 
             double k = (Config.FactorAt0 + Config.FactorRange * distance / Config.Range) / distance;
-            return new Point(k * (subject.X - @object.X), k * (subject.Y - @object.Y));
+            if (double.IsInfinity(k))
+            {
+                double moveAngle = RandomUtils.GetDouble(0, 2 * Math.PI);
+                return new Point(Config.FactorAt0 * Math.Cos(moveAngle), Config.FactorAt0 * Math.Sin(moveAngle));
+            }
+            else
+                return new Point(k * (subject.X - @object.X), k * (subject.Y - @object.Y));
         }
     }
 }

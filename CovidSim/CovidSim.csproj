@@ -50,6 +50,7 @@
     <Compile Include="BasicStatistics.cs" />
     <Compile Include="IValidatable.cs" />
     <Compile Include="Model2D\Area.cs" />
+    <Compile Include="Model2D\AreaPosition.cs" />
     <Compile Include="Model2D\Avoidance\AvoidanceStrategy.cs" />
     <Compile Include="Model2D\Human.cs" />
     <Compile Include="Model2D\Settings.cs" />
