@@ -1,4 +1,5 @@
-﻿using CovidSim.Model2D.Walk;
+﻿using CovidSim.Model2D.Avoidance;
+using CovidSim.Model2D.Walk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,7 @@ namespace CovidSim.Model2D
         Area[,] areas;
         double segmentSize;
         IWalkStrategy walk;
+        AvoidanceStrategy avoidance;
 
         public Simulator()
         {
@@ -47,6 +49,9 @@ namespace CovidSim.Model2D
 
             walk = Settings.Walk.CreateWalkStrategy();
             walk.Initialize();
+
+            Settings.Avoidance.Enabled = true;
+            avoidance = Settings.Avoidance.CreateStrategy();
 
             segmentSize = Settings.WorldSize / segmentCount;
             areas = new Area[segmentCount, segmentCount];
@@ -109,7 +114,25 @@ namespace CovidSim.Model2D
             {
                 var randomWalkVector = walk.GetMoveVector();
 
-                var oldArea = GetArea(human.Position);
+                int segX = GetSegment(human.Position.X);
+                int segY = GetSegment(human.Position.Y);
+                var oldArea = areas[segX, segY];
+
+                if (avoidance != null)
+                {
+                    int segRange = (int)Math.Floor(avoidance.Config.Range / segmentSize) + 1;
+                    int segStartX = Limit(segX - segRange, maxSegment);
+                    int segStartY = Limit(segY - segRange, maxSegment);
+                    int segEndX = Limit(segX + segRange, maxSegment) + 1;
+                    int segEndY = Limit(segY + segRange, maxSegment) + 1;
+
+                    foreach (var @object in areas[segX, segY].Humans.Where(x => x != human))
+                    {
+                        var vector = avoidance.GetMoveVector(human.Position, @object.Position);
+                        randomWalkVector += vector;
+                    }
+                }
+
                 human.Position = Limit(human.Position + randomWalkVector, Settings.WorldSize);
                 var newArea = GetArea(human.Position);
                 if (oldArea != newArea)

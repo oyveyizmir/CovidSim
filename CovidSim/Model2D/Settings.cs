@@ -1,4 +1,5 @@
-﻿using CovidSim.Model2D.Walk;
+﻿using CovidSim.Model2D.Avoidance;
+using CovidSim.Model2D.Walk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -89,6 +90,8 @@ namespace CovidSim.Model2D
         }
 
         public IWalkSettings Walk { get; set; } = new OneRangeWalkSettings();
+
+        public AvoidanceStrategy.Settings Avoidance { get; set; } = new AvoidanceStrategy.Settings();
 
         public Settings()
         {

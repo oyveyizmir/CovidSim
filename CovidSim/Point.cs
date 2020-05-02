@@ -8,6 +8,8 @@ namespace CovidSim
 {
     public struct Point
     {
+        public static Point Null = new Point();
+
         public double X { get; set; }
         public double Y { get; set; }
 
