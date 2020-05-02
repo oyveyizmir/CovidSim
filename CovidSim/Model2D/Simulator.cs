@@ -167,25 +167,30 @@ namespace CovidSim.Model2D
                     foreach (var subject in areas[segX, segY].Humans.Where(x => x.CanInfect(Time)))
                         for (int x = segStartX; x < segEndX; x++)
                             for (int y = segStartY; y < segEndY; y++)
-                            {
-                                var area = areas[x, y];
-                                for (int i = 0; i < area.Susceptible.Count; i++) //TODO: count may change in Infect
-                                {
-                                    var @object = area.Susceptible[i];
-                                    if (@object.CanBeInfected)
-                                    {
-                                        double distance = Point.Distance(subject.Position, @object.Position);
-                                        if (distance <= Settings.TransmissionRange)
-                                        {
-                                            double transmissionProbability = Settings.TransmissionProbabilityAt0
-                                                + transmissionProbabilityRange * distance / Settings.TransmissionRange;
-                                            if (RandomUtils.LessThanThreshold(transmissionProbability))
-                                                Infect(@object, area);
-                                        }
-                                    }
-                                }
-                            }
+                                InfectArea(areas[x, y], subject, transmissionProbabilityRange);
                 }
+        }
+
+        void InfectArea(Area area, Human subject, double transmissionProbabilityRange)
+        {
+            for (int i = 0; i < area.Susceptible.Count; i++)
+            {
+                var @object = area.Susceptible[i];
+                if (@object.CanBeInfected)
+                {
+                    double distance = Point.Distance(subject.Position, @object.Position);
+                    if (distance <= Settings.TransmissionRange)
+                    {
+                        double transmissionProbability = Settings.TransmissionProbabilityAt0
+                            + transmissionProbabilityRange * distance / Settings.TransmissionRange;
+                        if (RandomUtils.LessThanThreshold(transmissionProbability))
+                        {
+                            Infect(@object, area);
+                            i--;
+                        }
+                    }
+                }
+            }
         }
 
         IEnumerable<Human> GetHumansWithinRange(Point point, double range)
