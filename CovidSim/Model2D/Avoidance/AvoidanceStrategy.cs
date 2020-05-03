@@ -9,7 +9,7 @@ namespace CovidSim.Model2D.Avoidance
 {
     public class AvoidanceStrategy
     {
-        public class Settings
+        public class Settings : IValidatable
         {
             double range = 20;
             double factorAt0 = 0.03;
@@ -23,7 +23,7 @@ namespace CovidSim.Model2D.Avoidance
 
                 set
                 {
-                    if (value < 0)
+                    if (value <= 0)
                         throw new ArgumentException("AvoidanceRange");
                     range = value;
                 }
@@ -38,7 +38,7 @@ namespace CovidSim.Model2D.Avoidance
                     if (value < 0 || value > 1)
                         throw new ArgumentException("AvoidanceFactorAt0");
                     factorAt0 = value;
-                    UpdateFactorRange();
+                    CalcConst();
                 }
             }
 
@@ -51,15 +51,20 @@ namespace CovidSim.Model2D.Avoidance
                     if (value < 0 || value > 1)
                         throw new ArgumentException("AvoidanceFactorAtRange");
                     factorAtRange = value;
-                    UpdateFactorRange();
+                    CalcConst();
                 }
             }
 
             public AvoidanceStrategy CreateStrategy() => Enabled ? new AvoidanceStrategy(this) : null;
 
-            internal double FactorRange { get; private set; }
+            internal double FactorRangeDivRange { get; private set; }
 
-            internal void UpdateFactorRange() => FactorRange = factorAtRange - factorAt0;
+            internal void CalcConst() => FactorRangeDivRange = (factorAtRange - factorAt0) / Range;
+
+            public void Validate()
+            {
+                //TODO: check inf/nan
+            }
         }
 
         public Settings Config { get; private set; }
@@ -67,7 +72,7 @@ namespace CovidSim.Model2D.Avoidance
         public AvoidanceStrategy(Settings config)
         {
             Config = config;
-            Config.UpdateFactorRange();
+            Config.CalcConst();
         }
 
         public Point GetMoveVector(Point subject, Point @object)
@@ -76,12 +81,14 @@ namespace CovidSim.Model2D.Avoidance
             if (distance > Config.Range)
                 return Point.Null;
 
-            double k = (Config.FactorAt0 + Config.FactorRange * distance / Config.Range) / distance;
+            double k = (Config.FactorAt0 / distance + Config.FactorRangeDivRange);
             if (double.IsInfinity(k))
             {
                 double moveAngle = RandomUtils.GetDouble(0, 2 * Math.PI);
                 return new Point(Config.FactorAt0 * Math.Cos(moveAngle), Config.FactorAt0 * Math.Sin(moveAngle));
             }
+            else if (double.IsNaN(k))
+                return Point.Null;
             else
                 return new Point(k * (subject.X - @object.X), k * (subject.Y - @object.Y));
         }
