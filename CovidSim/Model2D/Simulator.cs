@@ -42,7 +42,7 @@ namespace CovidSim.Model2D
 
         public Simulator()
         {
-            SegmentCount = 20;
+            SegmentCount = 50;
         }
 
         public void Initialize()
@@ -52,7 +52,6 @@ namespace CovidSim.Model2D
             walk = Settings.Walk.CreateWalkStrategy();
             walk.Initialize();
 
-            Settings.Avoidance.Enabled = true;
             avoidance = Settings.Avoidance.CreateStrategy();
 
             segmentSize = Settings.WorldSize / segmentCount;
@@ -133,27 +132,27 @@ namespace CovidSim.Model2D
                     var position = human.Position;
                     int segX = GetSegment(position.X);
                     int segY = GetSegment(position.Y);
-                    moveVector += AvoidOwnArea(areas[segX, segY], human);
+                    Point avoidanceVector = AvoidOwnArea(areas[segX, segY], human);
 
                     //Left
                     int startX = LimitSegment(GetSegment(position.X - avoidance.Config.Range));
                     for (int x = startX; x < segX; x++)
-                        moveVector += AvoidArea(areas[x, segY], position);
+                        avoidanceVector += AvoidArea(areas[x, segY], position);
 
                     //Right
                     int endX = LimitSegment(GetSegment(position.X + avoidance.Config.Range));
                     for (int x = endX; x > segX; x--)
-                        moveVector += AvoidArea(areas[x, segY], position);
+                        avoidanceVector += AvoidArea(areas[x, segY], position);
 
                     //Top
                     int startY = LimitSegment(GetSegment(position.Y - avoidance.Config.Range));
                     for (int y = startY; y < segY; y++)
-                        moveVector += AvoidArea(areas[segX, y], position);
+                        avoidanceVector += AvoidArea(areas[segX, y], position);
 
                     //Bottom
                     int endY = LimitSegment(GetSegment(position.Y + avoidance.Config.Range));
                     for (int y = endY; y > segY; y--)
-                        moveVector += AvoidArea(areas[segX, y], position);
+                        avoidanceVector += AvoidArea(areas[segX, y], position);
 
                     //Top left
                     for (int y = startY; y < segY; y++)
@@ -162,7 +161,7 @@ namespace CovidSim.Model2D
                         for (int x = startX; x < segX; x++)
                             if (skipCheck || position.DistanceTo(new Point((x + 1) * segmentSize, (y + 1) * segmentSize)) < avoidance.Config.Range)
                             {
-                                moveVector += AvoidArea(areas[x, y], position);
+                                avoidanceVector += AvoidArea(areas[x, y], position);
                                 skipCheck = true;
                             }
                     }
@@ -188,7 +187,7 @@ namespace CovidSim.Model2D
                         for (int x = endX; x > segX; x--)
                             if (skipCheck || position.DistanceTo(new Point(x * segmentSize, (y + 1) * segmentSize)) < avoidance.Config.Range)
                             {
-                                moveVector += AvoidArea(areas[x, y], position);
+                                avoidanceVector += AvoidArea(areas[x, y], position);
                                 skipCheck = true;
                             }
                     }
@@ -200,7 +199,7 @@ namespace CovidSim.Model2D
                         for (int x = startX; x < segX; x++)
                             if (skipCheck || position.DistanceTo(new Point((x + 1) * segmentSize, y * segmentSize)) < avoidance.Config.Range)
                             {
-                                moveVector += AvoidArea(areas[x, y], position);
+                                avoidanceVector += AvoidArea(areas[x, y], position);
                                 skipCheck = true;
                             }
                     }
@@ -212,10 +211,23 @@ namespace CovidSim.Model2D
                         for (int x = endX; x > segX; x--)
                             if (skipCheck || position.DistanceTo(new Point(x * segmentSize, y * segmentSize)) < avoidance.Config.Range)
                             {
-                                moveVector += AvoidArea(areas[x, y], position);
+                                avoidanceVector += AvoidArea(areas[x, y], position);
                                 skipCheck = true;
                             }
                     }
+
+                    if (avoidance.Config.MaxStep != null)
+                    {
+                        double lengthSquared = moveVector.LengthSquared;
+                        if (lengthSquared > avoidance.MaxStepSquared)
+                        {
+                            double length = Math.Sqrt(lengthSquared);
+                            double scaleFactor = avoidance.MaxStep / length;
+                            avoidanceVector = avoidanceVector.Scale(scaleFactor);
+                        }
+                    }
+
+                    moveVector += avoidanceVector;
                 }
 
                 newPositions[i] = LimitPosition(human.Position + moveVector);

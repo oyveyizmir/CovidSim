@@ -16,6 +16,9 @@ namespace CovidSim.Model2D.Walk
 
         public override IWalkStrategy CreateWalkStrategy()
         {
+            if (MinWalk == 0 && MaxWalk == 0)
+                return new NullWalk();
+
             switch (Shape)
             {
                 case Shape.Circle:

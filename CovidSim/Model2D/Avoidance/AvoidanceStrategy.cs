@@ -11,9 +11,8 @@ namespace CovidSim.Model2D.Avoidance
     {
         public class Settings : IValidatable
         {
-            double range = 20;
-            double factorAt0 = 0.03;
-            double factorAtRange = 0;
+            double range = 50;
+            double? maxStep;
             
             public bool Enabled { get; set; }
 
@@ -24,42 +23,28 @@ namespace CovidSim.Model2D.Avoidance
                 set
                 {
                     if (value <= 0)
-                        throw new ArgumentException("AvoidanceRange");
+                        throw new ArgumentException("Range");
                     range = value;
                 }
             }
 
-            public double FactorAt0
+            public double StepAt0 { get; set; } = 0.02;
+
+            public double StepAtRange { get; set; } = -0.01;
+
+            public double? MaxStep
             {
-                get => factorAt0;
+                get => maxStep;
 
                 set
                 {
-                    if (value < 0 || value > 1)
-                        throw new ArgumentException("AvoidanceFactorAt0");
-                    factorAt0 = value;
-                    CalcConst();
-                }
-            }
-
-            public double FactorAtRange
-            {
-                get => factorAtRange;
-
-                set
-                {
-                    if (value < 0 || value > 1)
-                        throw new ArgumentException("AvoidanceFactorAtRange");
-                    factorAtRange = value;
-                    CalcConst();
+                    if (value != null && value <= 0)
+                        throw new ArgumentException("MaxStep");
+                    maxStep = value;
                 }
             }
 
             public AvoidanceStrategy CreateStrategy() => Enabled ? new AvoidanceStrategy(this) : null;
-
-            internal double FactorRangeDivRange { get; private set; }
-
-            internal void CalcConst() => FactorRangeDivRange = (factorAtRange - factorAt0) / Range;
 
             public void Validate()
             {
@@ -67,12 +52,20 @@ namespace CovidSim.Model2D.Avoidance
             }
         }
 
+        internal double MaxStep { get; private set; }
+
+        internal double MaxStepSquared { get; private set; }
+
+        internal double FactorRangeDivRange { get; private set; }
+
         public Settings Config { get; private set; }
 
         public AvoidanceStrategy(Settings config)
         {
             Config = config;
-            Config.CalcConst();
+            FactorRangeDivRange = (Config.StepAtRange - Config.StepAt0) / Config.Range;
+            MaxStep = Config.MaxStep ?? 0;
+            MaxStepSquared = Config.MaxStep != null ? Config.MaxStep.Value * Config.MaxStep.Value : 0;
         }
 
         public Point GetMoveVector(Point subject, Point @object)
@@ -81,11 +74,11 @@ namespace CovidSim.Model2D.Avoidance
             if (distance > Config.Range)
                 return Point.Null;
 
-            double k = (Config.FactorAt0 / distance + Config.FactorRangeDivRange);
+            double k = (Config.StepAt0 / distance + FactorRangeDivRange);
             if (double.IsInfinity(k))
             {
                 double moveAngle = RandomUtils.GetDouble(0, 2 * Math.PI);
-                return new Point(Config.FactorAt0 * Math.Cos(moveAngle), Config.FactorAt0 * Math.Sin(moveAngle));
+                return new Point(Config.StepAt0 * Math.Cos(moveAngle), Config.StepAt0 * Math.Sin(moveAngle));
             }
             else if (double.IsNaN(k))
                 return Point.Null;

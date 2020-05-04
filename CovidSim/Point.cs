@@ -22,6 +22,10 @@ namespace CovidSim
 
         public double DistanceTo(Point p) => Math.Sqrt(Square(X - p.X) + Square(Y - p.Y));
 
+        public double LengthSquared => X * X + Y * Y;
+
+        public Point Scale(double factor) => new Point(factor * X, factor * Y);
+
         static double Square(double x) => x * x;
     }
 }

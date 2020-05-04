@@ -60,6 +60,7 @@
     <Compile Include="Model2D\Walk\CircleWalk.cs" />
     <Compile Include="Model2D\Walk\HyperbolicWalk.cs" />
     <Compile Include="Model2D\Walk\IWalkSettings.cs" />
+    <Compile Include="Model2D\Walk\NullWalk.cs" />
     <Compile Include="Model2D\Walk\RangeSettings.cs" />
     <Compile Include="Model2D\Walk\RangeWalk.cs" />
     <Compile Include="Model2D\Walk\SquareWalk.cs" />

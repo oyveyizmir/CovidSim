@@ -10,6 +10,16 @@ namespace CovidSimApp
 {
     class ValidationUtils
     {
+        public static T ValidateAndGet<T>(TextBox edit, string message) => ValidateAndGet<T>(edit, null, message);
+
+        public static T? ValidateAndGetNullable<T>(TextBox edit, Func<T, bool> validationFunc, string message) where T : struct
+        {
+            if (edit.Text.Trim().Length == 0)
+                return null;
+
+            return ValidateAndGet(edit, validationFunc, message);
+        }
+
         public static T ValidateAndGet<T>(TextBox edit, Func<T, bool> validationFunc, string message)
         {
             T value;
@@ -25,7 +35,7 @@ namespace CovidSimApp
                     throw new ValidationException(message);
                 }
 
-                if (validationFunc(value))
+                if (validationFunc != null && validationFunc(value))
                     return value;
 
                 throw new ValidationException(message);

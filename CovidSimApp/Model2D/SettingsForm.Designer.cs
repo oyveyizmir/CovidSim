@@ -52,11 +52,22 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabWalk = new System.Windows.Forms.TabPage();
+            this.tabAvoidance = new System.Windows.Forms.TabPage();
+            this.avoidanceMaxStepEdit = new System.Windows.Forms.TextBox();
+            this.maxStepLabel = new System.Windows.Forms.Label();
+            this.avoidanceStepAtRangeEdit = new System.Windows.Forms.TextBox();
+            this.avoidanceStepAt0Edit = new System.Windows.Forms.TextBox();
+            this.avoidanceRangeEdit = new System.Windows.Forms.TextBox();
+            this.stepAtRangeLabel = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.rangeLabel = new System.Windows.Forms.Label();
+            this.avoidanceEnabledCombo = new System.Windows.Forms.CheckBox();
             this.walkSettingsControl = new CovidSimApp.Model2D.WalkSettingsControl();
             this.tabGeneral.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabTransmission.SuspendLayout();
             this.tabWalk.SuspendLayout();
+            this.tabAvoidance.SuspendLayout();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -207,6 +218,7 @@
             this.tabControl.Controls.Add(this.tabGeneral);
             this.tabControl.Controls.Add(this.tabTransmission);
             this.tabControl.Controls.Add(this.tabWalk);
+            this.tabControl.Controls.Add(this.tabAvoidance);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -223,7 +235,7 @@
             this.tabTransmission.Controls.Add(this.label2);
             this.tabTransmission.Location = new System.Drawing.Point(4, 22);
             this.tabTransmission.Name = "tabTransmission";
-            this.tabTransmission.Size = new System.Drawing.Size(312, 389);
+            this.tabTransmission.Size = new System.Drawing.Size(312, 399);
             this.tabTransmission.TabIndex = 2;
             this.tabTransmission.Text = "Transmission";
             this.tabTransmission.UseVisualStyleBackColor = true;
@@ -282,17 +294,109 @@
             this.tabWalk.Location = new System.Drawing.Point(4, 22);
             this.tabWalk.Name = "tabWalk";
             this.tabWalk.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWalk.Size = new System.Drawing.Size(312, 389);
+            this.tabWalk.Size = new System.Drawing.Size(312, 399);
             this.tabWalk.TabIndex = 1;
             this.tabWalk.Text = "Walk";
             this.tabWalk.UseVisualStyleBackColor = true;
+            // 
+            // tabAvoidance
+            // 
+            this.tabAvoidance.Controls.Add(this.avoidanceEnabledCombo);
+            this.tabAvoidance.Controls.Add(this.avoidanceMaxStepEdit);
+            this.tabAvoidance.Controls.Add(this.maxStepLabel);
+            this.tabAvoidance.Controls.Add(this.avoidanceStepAtRangeEdit);
+            this.tabAvoidance.Controls.Add(this.avoidanceStepAt0Edit);
+            this.tabAvoidance.Controls.Add(this.avoidanceRangeEdit);
+            this.tabAvoidance.Controls.Add(this.stepAtRangeLabel);
+            this.tabAvoidance.Controls.Add(this.label9);
+            this.tabAvoidance.Controls.Add(this.rangeLabel);
+            this.tabAvoidance.Location = new System.Drawing.Point(4, 22);
+            this.tabAvoidance.Name = "tabAvoidance";
+            this.tabAvoidance.Size = new System.Drawing.Size(312, 399);
+            this.tabAvoidance.TabIndex = 3;
+            this.tabAvoidance.Text = "Avoidance";
+            this.tabAvoidance.UseVisualStyleBackColor = true;
+            // 
+            // avoidanceMaxStepEdit
+            // 
+            this.avoidanceMaxStepEdit.Location = new System.Drawing.Point(102, 155);
+            this.avoidanceMaxStepEdit.Name = "avoidanceMaxStepEdit";
+            this.avoidanceMaxStepEdit.Size = new System.Drawing.Size(100, 20);
+            this.avoidanceMaxStepEdit.TabIndex = 48;
+            // 
+            // maxStepLabel
+            // 
+            this.maxStepLabel.AutoSize = true;
+            this.maxStepLabel.Location = new System.Drawing.Point(16, 158);
+            this.maxStepLabel.Name = "maxStepLabel";
+            this.maxStepLabel.Size = new System.Drawing.Size(52, 13);
+            this.maxStepLabel.TabIndex = 55;
+            this.maxStepLabel.Text = "Max Step";
+            // 
+            // avoidanceStepAtRangeEdit
+            // 
+            this.avoidanceStepAtRangeEdit.Location = new System.Drawing.Point(102, 118);
+            this.avoidanceStepAtRangeEdit.Name = "avoidanceStepAtRangeEdit";
+            this.avoidanceStepAtRangeEdit.Size = new System.Drawing.Size(100, 20);
+            this.avoidanceStepAtRangeEdit.TabIndex = 47;
+            // 
+            // avoidanceStepAt0Edit
+            // 
+            this.avoidanceStepAt0Edit.Location = new System.Drawing.Point(102, 83);
+            this.avoidanceStepAt0Edit.Name = "avoidanceStepAt0Edit";
+            this.avoidanceStepAt0Edit.Size = new System.Drawing.Size(100, 20);
+            this.avoidanceStepAt0Edit.TabIndex = 46;
+            // 
+            // avoidanceRangeEdit
+            // 
+            this.avoidanceRangeEdit.Location = new System.Drawing.Point(102, 48);
+            this.avoidanceRangeEdit.Name = "avoidanceRangeEdit";
+            this.avoidanceRangeEdit.Size = new System.Drawing.Size(100, 20);
+            this.avoidanceRangeEdit.TabIndex = 45;
+            // 
+            // stepAtRangeLabel
+            // 
+            this.stepAtRangeLabel.AutoSize = true;
+            this.stepAtRangeLabel.Location = new System.Drawing.Point(16, 121);
+            this.stepAtRangeLabel.Name = "stepAtRangeLabel";
+            this.stepAtRangeLabel.Size = new System.Drawing.Size(76, 13);
+            this.stepAtRangeLabel.TabIndex = 50;
+            this.stepAtRangeLabel.Text = "Step at Range";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(16, 86);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(50, 13);
+            this.label9.TabIndex = 51;
+            this.label9.Text = "Step at 0";
+            // 
+            // rangeLabel
+            // 
+            this.rangeLabel.AutoSize = true;
+            this.rangeLabel.Location = new System.Drawing.Point(16, 51);
+            this.rangeLabel.Name = "rangeLabel";
+            this.rangeLabel.Size = new System.Drawing.Size(39, 13);
+            this.rangeLabel.TabIndex = 52;
+            this.rangeLabel.Text = "Range";
+            // 
+            // avoidanceEnabledCombo
+            // 
+            this.avoidanceEnabledCombo.AutoSize = true;
+            this.avoidanceEnabledCombo.Location = new System.Drawing.Point(102, 17);
+            this.avoidanceEnabledCombo.Name = "avoidanceEnabledCombo";
+            this.avoidanceEnabledCombo.Size = new System.Drawing.Size(65, 17);
+            this.avoidanceEnabledCombo.TabIndex = 56;
+            this.avoidanceEnabledCombo.Text = "Enabled";
+            this.avoidanceEnabledCombo.UseVisualStyleBackColor = true;
             // 
             // walkSettingsControl
             // 
             this.walkSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.walkSettingsControl.Location = new System.Drawing.Point(3, 3);
             this.walkSettingsControl.Name = "walkSettingsControl";
-            this.walkSettingsControl.Size = new System.Drawing.Size(306, 383);
+            this.walkSettingsControl.Size = new System.Drawing.Size(306, 393);
             this.walkSettingsControl.TabIndex = 0;
             // 
             // SettingsForm
@@ -319,6 +423,8 @@
             this.tabTransmission.ResumeLayout(false);
             this.tabTransmission.PerformLayout();
             this.tabWalk.ResumeLayout(false);
+            this.tabAvoidance.ResumeLayout(false);
+            this.tabAvoidance.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -350,5 +456,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TabPage tabWalk;
         private WalkSettingsControl walkSettingsControl;
+        private System.Windows.Forms.TabPage tabAvoidance;
+        private System.Windows.Forms.CheckBox avoidanceEnabledCombo;
+        private System.Windows.Forms.TextBox avoidanceMaxStepEdit;
+        private System.Windows.Forms.Label maxStepLabel;
+        private System.Windows.Forms.TextBox avoidanceStepAtRangeEdit;
+        private System.Windows.Forms.TextBox avoidanceStepAt0Edit;
+        private System.Windows.Forms.TextBox avoidanceRangeEdit;
+        private System.Windows.Forms.Label stepAtRangeLabel;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label rangeLabel;
     }
 }
