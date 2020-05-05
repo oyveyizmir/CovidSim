@@ -390,6 +390,7 @@
             this.avoidanceEnabledCombo.TabIndex = 56;
             this.avoidanceEnabledCombo.Text = "Enabled";
             this.avoidanceEnabledCombo.UseVisualStyleBackColor = true;
+            this.avoidanceEnabledCombo.CheckedChanged += new System.EventHandler(this.avoidanceEnabledCombo_CheckedChanged);
             // 
             // walkSettingsControl
             // 

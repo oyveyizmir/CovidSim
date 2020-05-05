@@ -35,7 +35,7 @@ namespace CovidSimApp
                     throw new ValidationException(message);
                 }
 
-                if (validationFunc != null && validationFunc(value))
+                if (validationFunc == null || validationFunc(value))
                     return value;
 
                 throw new ValidationException(message);

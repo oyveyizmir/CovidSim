@@ -218,7 +218,7 @@ namespace CovidSim.Model2D
 
                     if (avoidance.Config.MaxStep != null)
                     {
-                        double lengthSquared = moveVector.LengthSquared;
+                        double lengthSquared = avoidanceVector.LengthSquared;
                         if (lengthSquared > avoidance.MaxStepSquared)
                         {
                             double length = Math.Sqrt(lengthSquared);

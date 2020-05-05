@@ -60,6 +60,7 @@ namespace CovidSimApp.Model2D
             avoidanceStepAt0Edit.Text = Avoidance.StepAt0.ToString();
             avoidanceStepAtRangeEdit.Text = Avoidance.StepAtRange.ToString();
             avoidanceMaxStepEdit.Text = Avoidance.MaxStep != null ? Avoidance.MaxStep.ToString() : "";
+            EnabledFlagChanged();
 
             //Walk
             walkSettingsControl.OneRangeWalk = OneRangeWalk;
@@ -142,6 +143,20 @@ namespace CovidSimApp.Model2D
                 e.Cancel = !ValidateAndSaveData();
 
             base.OnClosing(e);
+        }
+
+        private void avoidanceEnabledCombo_CheckedChanged(object sender, EventArgs e)
+        {
+            EnabledFlagChanged();
+        }
+
+        void EnabledFlagChanged()
+        {
+            bool enabled = avoidanceEnabledCombo.Checked;
+            avoidanceRangeEdit.Enabled = enabled;
+            avoidanceStepAt0Edit.Enabled = enabled;
+            avoidanceStepAtRangeEdit.Enabled = enabled;
+            avoidanceMaxStepEdit.Enabled = enabled;
         }
     }
 }
