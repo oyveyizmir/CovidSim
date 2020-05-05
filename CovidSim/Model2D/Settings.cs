@@ -93,6 +93,8 @@ namespace CovidSim.Model2D
 
         public AvoidanceStrategy.Settings Avoidance { get; set; } = new AvoidanceStrategy.Settings();
 
+        public QuarantineSettings Quarantine { get; private set; } = new QuarantineSettings();
+
         public Settings()
         {
             Population = 10000;
@@ -103,6 +105,9 @@ namespace CovidSim.Model2D
         {
             if (Population < InitiallyInfected)
                 throw new ValidationException("Population cannot be less than InitiallyInfected");
+
+            if (Quarantine.StartTime >= IllnessDuration)
+                throw new ValidationException("Quarantine start time should be less than IllnessDuration");
 
             Walk.Validate();
         }

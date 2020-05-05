@@ -45,6 +45,8 @@ namespace CovidSimApp.Model2D
 
             simulator = new Simulator();
             simulator.Settings.Walk = oneRangeWalkSettings;
+            simulator.Settings.Quarantine.Probability = 0.0005;
+            simulator.Settings.Quarantine.StartTime = 200;
 
             delay = 0;
             simulator.Initialize();
@@ -158,10 +160,12 @@ namespace CovidSimApp.Model2D
             }
         }
 
-        PersonState GetPersonState(Human human)
+        static PersonState GetPersonState(Human human)
         {
             if (!human.IsAlive)
                 return PersonState.Dead;
+            else if (human.IsQuarantined)
+                return PersonState.Quarantined;
             else if (human.IsInfected)
                 return PersonState.Infected;
             else if (human.IsImmune)

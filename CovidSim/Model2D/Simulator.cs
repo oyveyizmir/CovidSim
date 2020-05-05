@@ -89,6 +89,7 @@ namespace CovidSim.Model2D
             Move();
             Infect();
             Remove();
+            Quarantine();
         }
 
         int GetSegment(double coord)
@@ -121,7 +122,7 @@ namespace CovidSim.Model2D
             for (int i = 0; i < Humans.Count; i++)
             {
                 var human = Humans[i];
-                if (!human.IsAlive)
+                if (!human.IsAlive || human.IsQuarantined)
                     continue;
 
                 var moveVector = walk.GetMoveVector();
@@ -236,7 +237,7 @@ namespace CovidSim.Model2D
             for (int i = 0; i < Humans.Count; i++)
             {
                 var human = Humans[i];
-                if (!human.IsAlive)
+                if (!human.IsAlive || human.IsQuarantined)
                     continue;
 
                 var oldArea = GetArea(human.Position);
@@ -403,21 +404,32 @@ namespace CovidSim.Model2D
         void Die(Human human)
         {
             human.IsAlive = false;
+
             Stats.InfectedCount--;
             Stats.DiedCount++;
+
+            if (human.IsQuarantined)
+                Stats.Quarantined--;
         }
 
         void Recover(Human human)
         {
             human.IsImmune = true;
             human.IsInfected = false;
+            
             Stats.InfectedCount--;
             Stats.RecoveredCount++;
+
+            if (human.IsQuarantined)
+            {
+                human.IsQuarantined = false;
+                Stats.Quarantined--;
+            }
         }
 
         void Remove()
         {
-            foreach (var human in Humans.Where(x => x.CanInfect(Time)))
+            foreach (var human in Humans.Where(x => x.CanBeRemoved(Time)))
             {
                 if (--human.TimeToRemoval <= 0)
                 {
@@ -425,6 +437,28 @@ namespace CovidSim.Model2D
                         Die(human);
                     else
                         Recover(human);
+                }
+            }
+        }
+
+        void Quarantine()
+        {
+            if (!Settings.Quarantine.Enabled)
+                return;
+
+            for (int i = 0; i < Humans.Count; i++)
+            {
+                var human = Humans[i];
+                if (!human.IsAlive || !human.IsInfected || human.IsQuarantined)
+                    continue;
+
+                if (Time - human.InfectionTime < Settings.Quarantine.StartTime)
+                    continue;
+
+                if (RandomUtils.LessThanThreshold(Settings.Quarantine.Probability))
+                {
+                    human.IsQuarantined = true;
+                    Stats.Quarantined++;
                 }
             }
         }

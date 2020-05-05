@@ -8,9 +8,10 @@ namespace CovidSimApp.Controls.Population2D
 {
     public enum PersonState
     {
-        Susceptible,
-        Infected,
-        Recovered,
-        Dead
+        Susceptible = 0,
+        Infected = 1,
+        Recovered = 2,
+        Dead = 3,
+        Quarantined = 4
     }
 }

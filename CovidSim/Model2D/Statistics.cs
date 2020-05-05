@@ -9,5 +9,7 @@ namespace CovidSim.Model2D
     public class Statistics : BasicStatistics<int>
     {
         public override int PopulationCount => SusceptibleCount + InfectedCount + RecoveredCount;
+
+        public int Quarantined { get; set; }
     }
 }
