@@ -443,7 +443,9 @@ namespace CovidSim.Model2D
 
         void Quarantine()
         {
-            if (!Settings.Quarantine.Enabled)
+            bool MaxCapacityReached() => Settings.Quarantine.MaxCapacity != null && Stats.Quarantined == Settings.Quarantine.MaxCapacity;
+
+            if (!Settings.Quarantine.Enabled || MaxCapacityReached())
                 return;
 
             for (int i = 0; i < Humans.Count; i++)
@@ -459,6 +461,9 @@ namespace CovidSim.Model2D
                 {
                     human.IsQuarantined = true;
                     Stats.Quarantined++;
+
+                    if (MaxCapacityReached())
+                        break;
                 }
             }
         }
