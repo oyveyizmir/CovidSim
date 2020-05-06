@@ -46,9 +46,9 @@ namespace CovidSimApp.Model2D
             simulator = new Simulator();
             simulator.Settings.Walk = oneRangeWalkSettings;
             simulator.Settings.Quarantine.Enabled = true;
-            simulator.Settings.Quarantine.Probability = 0.0005;
+            simulator.Settings.Quarantine.MaxCapacity = 500;
+            simulator.Settings.Quarantine.Probability = 0.01;
             simulator.Settings.Quarantine.StartTime = 200;
-            //simulator.Settings.Quarantine.MaxCapacity = 200;
 
             delay = 0;
             simulator.Initialize();
@@ -58,6 +58,7 @@ namespace CovidSimApp.Model2D
 
             diagram.AddBar(Color.Blue, "Susceptible");
             diagram.AddBar(Color.DarkRed, "Infected");
+            diagram.AddBar(Color.FromArgb(0x50, 0x00, 0x00), "Quarantined");
             diagram.AddBar(Color.DarkGreen, "Recovered");
             diagram.AddBar(Color.DarkGray, "Dead");
 
@@ -211,7 +212,8 @@ namespace CovidSimApp.Model2D
         void AddDiagramData()
         {
             Statistics stats = simulator.Stats;
-            diagram.AddData(simulator.Time, stats.SusceptibleCount, stats.InfectedCount, stats.RecoveredCount, stats.DiedCount);
+            diagram.AddData(simulator.Time, stats.SusceptibleCount, stats.InfectedCount - stats.Quarantined,
+                stats.Quarantined, stats.RecoveredCount, stats.DiedCount);
         }
 
         void UpdateRealTimeStats()

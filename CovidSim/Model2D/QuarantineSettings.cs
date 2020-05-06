@@ -9,9 +9,9 @@ namespace CovidSim.Model2D
     public class QuarantineSettings
     {
         bool enabled;
-        int startTime = 0;
-        double probability = 0.01;
-        int? maxCapacity = 100;
+        int startTime = 200;
+        double probability = 0.001;
+        int? maxCapacity = 200;
 
         public bool Enabled
         {

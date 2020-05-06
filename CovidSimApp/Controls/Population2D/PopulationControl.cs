@@ -12,7 +12,7 @@ namespace CovidSimApp.Controls.Population2D
     public class PopulationControl : Control
     {
         double worldSize = 1000;
-        Brush[] brushes = new Brush[] { Brushes.Blue, Brushes.Red, Brushes.Green, null, Brushes.DarkRed };
+        Brush[] brushes = new Brush[] { Brushes.Blue, Brushes.Red, Brushes.Green, null, new SolidBrush(Color.FromArgb(0x70, 0x00, 0x00)) };
 
         public List<Person> Persons { get; private set; } = new List<Person>();
 
