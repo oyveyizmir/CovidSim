@@ -81,6 +81,12 @@
     <Compile Include="Model2D\Model2DForm.Designer.cs">
       <DependentUpon>Model2DForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Model2D\QuarantineControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Model2D\QuarantineControl.Designer.cs">
+      <DependentUpon>QuarantineControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Model2D\SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Model2D\Model2DForm.resx">
       <DependentUpon>Model2DForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model2D\QuarantineControl.resx">
+      <DependentUpon>QuarantineControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Model2D\SettingsForm.resx">
       <DependentUpon>SettingsForm.cs</DependentUpon>

@@ -52,7 +52,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabWalk = new System.Windows.Forms.TabPage();
+            this.walkSettingsControl = new CovidSimApp.Model2D.WalkSettingsControl();
             this.tabAvoidance = new System.Windows.Forms.TabPage();
+            this.avoidanceEnabledCheck = new System.Windows.Forms.CheckBox();
             this.avoidanceMaxStepEdit = new System.Windows.Forms.TextBox();
             this.maxStepLabel = new System.Windows.Forms.Label();
             this.avoidanceStepAtRangeEdit = new System.Windows.Forms.TextBox();
@@ -61,13 +63,14 @@
             this.stepAtRangeLabel = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.rangeLabel = new System.Windows.Forms.Label();
-            this.avoidanceEnabledCombo = new System.Windows.Forms.CheckBox();
-            this.walkSettingsControl = new CovidSimApp.Model2D.WalkSettingsControl();
+            this.tabQuarantine = new System.Windows.Forms.TabPage();
+            this.quarantineControl = new CovidSimApp.Model2D.QuarantineControl();
             this.tabGeneral.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabTransmission.SuspendLayout();
             this.tabWalk.SuspendLayout();
             this.tabAvoidance.SuspendLayout();
+            this.tabQuarantine.SuspendLayout();
             this.SuspendLayout();
             // 
             // cancelButton
@@ -219,6 +222,7 @@
             this.tabControl.Controls.Add(this.tabTransmission);
             this.tabControl.Controls.Add(this.tabWalk);
             this.tabControl.Controls.Add(this.tabAvoidance);
+            this.tabControl.Controls.Add(this.tabQuarantine);
             this.tabControl.Location = new System.Drawing.Point(12, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -299,9 +303,17 @@
             this.tabWalk.Text = "Walk";
             this.tabWalk.UseVisualStyleBackColor = true;
             // 
+            // walkSettingsControl
+            // 
+            this.walkSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.walkSettingsControl.Location = new System.Drawing.Point(3, 3);
+            this.walkSettingsControl.Name = "walkSettingsControl";
+            this.walkSettingsControl.Size = new System.Drawing.Size(306, 393);
+            this.walkSettingsControl.TabIndex = 0;
+            // 
             // tabAvoidance
             // 
-            this.tabAvoidance.Controls.Add(this.avoidanceEnabledCombo);
+            this.tabAvoidance.Controls.Add(this.avoidanceEnabledCheck);
             this.tabAvoidance.Controls.Add(this.avoidanceMaxStepEdit);
             this.tabAvoidance.Controls.Add(this.maxStepLabel);
             this.tabAvoidance.Controls.Add(this.avoidanceStepAtRangeEdit);
@@ -317,9 +329,20 @@
             this.tabAvoidance.Text = "Avoidance";
             this.tabAvoidance.UseVisualStyleBackColor = true;
             // 
+            // avoidanceEnabledCheck
+            // 
+            this.avoidanceEnabledCheck.AutoSize = true;
+            this.avoidanceEnabledCheck.Location = new System.Drawing.Point(102, 19);
+            this.avoidanceEnabledCheck.Name = "avoidanceEnabledCheck";
+            this.avoidanceEnabledCheck.Size = new System.Drawing.Size(65, 17);
+            this.avoidanceEnabledCheck.TabIndex = 56;
+            this.avoidanceEnabledCheck.Text = "Enabled";
+            this.avoidanceEnabledCheck.UseVisualStyleBackColor = true;
+            this.avoidanceEnabledCheck.CheckedChanged += new System.EventHandler(this.avoidanceEnabledCombo_CheckedChanged);
+            // 
             // avoidanceMaxStepEdit
             // 
-            this.avoidanceMaxStepEdit.Location = new System.Drawing.Point(102, 155);
+            this.avoidanceMaxStepEdit.Location = new System.Drawing.Point(102, 157);
             this.avoidanceMaxStepEdit.Name = "avoidanceMaxStepEdit";
             this.avoidanceMaxStepEdit.Size = new System.Drawing.Size(100, 20);
             this.avoidanceMaxStepEdit.TabIndex = 48;
@@ -327,7 +350,7 @@
             // maxStepLabel
             // 
             this.maxStepLabel.AutoSize = true;
-            this.maxStepLabel.Location = new System.Drawing.Point(16, 158);
+            this.maxStepLabel.Location = new System.Drawing.Point(16, 160);
             this.maxStepLabel.Name = "maxStepLabel";
             this.maxStepLabel.Size = new System.Drawing.Size(52, 13);
             this.maxStepLabel.TabIndex = 55;
@@ -335,21 +358,21 @@
             // 
             // avoidanceStepAtRangeEdit
             // 
-            this.avoidanceStepAtRangeEdit.Location = new System.Drawing.Point(102, 118);
+            this.avoidanceStepAtRangeEdit.Location = new System.Drawing.Point(102, 120);
             this.avoidanceStepAtRangeEdit.Name = "avoidanceStepAtRangeEdit";
             this.avoidanceStepAtRangeEdit.Size = new System.Drawing.Size(100, 20);
             this.avoidanceStepAtRangeEdit.TabIndex = 47;
             // 
             // avoidanceStepAt0Edit
             // 
-            this.avoidanceStepAt0Edit.Location = new System.Drawing.Point(102, 83);
+            this.avoidanceStepAt0Edit.Location = new System.Drawing.Point(102, 85);
             this.avoidanceStepAt0Edit.Name = "avoidanceStepAt0Edit";
             this.avoidanceStepAt0Edit.Size = new System.Drawing.Size(100, 20);
             this.avoidanceStepAt0Edit.TabIndex = 46;
             // 
             // avoidanceRangeEdit
             // 
-            this.avoidanceRangeEdit.Location = new System.Drawing.Point(102, 48);
+            this.avoidanceRangeEdit.Location = new System.Drawing.Point(102, 50);
             this.avoidanceRangeEdit.Name = "avoidanceRangeEdit";
             this.avoidanceRangeEdit.Size = new System.Drawing.Size(100, 20);
             this.avoidanceRangeEdit.TabIndex = 45;
@@ -357,7 +380,7 @@
             // stepAtRangeLabel
             // 
             this.stepAtRangeLabel.AutoSize = true;
-            this.stepAtRangeLabel.Location = new System.Drawing.Point(16, 121);
+            this.stepAtRangeLabel.Location = new System.Drawing.Point(16, 123);
             this.stepAtRangeLabel.Name = "stepAtRangeLabel";
             this.stepAtRangeLabel.Size = new System.Drawing.Size(76, 13);
             this.stepAtRangeLabel.TabIndex = 50;
@@ -366,7 +389,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(16, 86);
+            this.label9.Location = new System.Drawing.Point(16, 88);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(50, 13);
             this.label9.TabIndex = 51;
@@ -375,30 +398,28 @@
             // rangeLabel
             // 
             this.rangeLabel.AutoSize = true;
-            this.rangeLabel.Location = new System.Drawing.Point(16, 51);
+            this.rangeLabel.Location = new System.Drawing.Point(16, 53);
             this.rangeLabel.Name = "rangeLabel";
             this.rangeLabel.Size = new System.Drawing.Size(39, 13);
             this.rangeLabel.TabIndex = 52;
             this.rangeLabel.Text = "Range";
             // 
-            // avoidanceEnabledCombo
+            // tabQuarantine
             // 
-            this.avoidanceEnabledCombo.AutoSize = true;
-            this.avoidanceEnabledCombo.Location = new System.Drawing.Point(102, 17);
-            this.avoidanceEnabledCombo.Name = "avoidanceEnabledCombo";
-            this.avoidanceEnabledCombo.Size = new System.Drawing.Size(65, 17);
-            this.avoidanceEnabledCombo.TabIndex = 56;
-            this.avoidanceEnabledCombo.Text = "Enabled";
-            this.avoidanceEnabledCombo.UseVisualStyleBackColor = true;
-            this.avoidanceEnabledCombo.CheckedChanged += new System.EventHandler(this.avoidanceEnabledCombo_CheckedChanged);
+            this.tabQuarantine.Controls.Add(this.quarantineControl);
+            this.tabQuarantine.Location = new System.Drawing.Point(4, 22);
+            this.tabQuarantine.Name = "tabQuarantine";
+            this.tabQuarantine.Size = new System.Drawing.Size(312, 399);
+            this.tabQuarantine.TabIndex = 4;
+            this.tabQuarantine.Text = "Quarantine";
+            this.tabQuarantine.UseVisualStyleBackColor = true;
             // 
-            // walkSettingsControl
+            // quarantineControl
             // 
-            this.walkSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.walkSettingsControl.Location = new System.Drawing.Point(3, 3);
-            this.walkSettingsControl.Name = "walkSettingsControl";
-            this.walkSettingsControl.Size = new System.Drawing.Size(306, 393);
-            this.walkSettingsControl.TabIndex = 0;
+            this.quarantineControl.Location = new System.Drawing.Point(3, 3);
+            this.quarantineControl.Name = "quarantineControl";
+            this.quarantineControl.Size = new System.Drawing.Size(286, 279);
+            this.quarantineControl.TabIndex = 0;
             // 
             // SettingsForm
             // 
@@ -426,6 +447,7 @@
             this.tabWalk.ResumeLayout(false);
             this.tabAvoidance.ResumeLayout(false);
             this.tabAvoidance.PerformLayout();
+            this.tabQuarantine.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -458,7 +480,7 @@
         private System.Windows.Forms.TabPage tabWalk;
         private WalkSettingsControl walkSettingsControl;
         private System.Windows.Forms.TabPage tabAvoidance;
-        private System.Windows.Forms.CheckBox avoidanceEnabledCombo;
+        private System.Windows.Forms.CheckBox avoidanceEnabledCheck;
         private System.Windows.Forms.TextBox avoidanceMaxStepEdit;
         private System.Windows.Forms.Label maxStepLabel;
         private System.Windows.Forms.TextBox avoidanceStepAtRangeEdit;
@@ -467,5 +489,7 @@
         private System.Windows.Forms.Label stepAtRangeLabel;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label rangeLabel;
+        private System.Windows.Forms.TabPage tabQuarantine;
+        private QuarantineControl quarantineControl;
     }
 }

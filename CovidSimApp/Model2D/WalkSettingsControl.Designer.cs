@@ -77,11 +77,11 @@
             this.twoRangeWalkControl.TabIndex = 54;
             this.twoRangeWalkControl.Visible = false;
             // 
-            // shapeWalkControl
+            // oneRangeWalkControl
             // 
             this.oneRangeWalkControl.Location = new System.Drawing.Point(34, 12);
             this.oneRangeWalkControl.Margin = new System.Windows.Forms.Padding(0);
-            this.oneRangeWalkControl.Name = "shapeWalkControl";
+            this.oneRangeWalkControl.Name = "oneRangeWalkControl";
             this.oneRangeWalkControl.Size = new System.Drawing.Size(247, 108);
             this.oneRangeWalkControl.TabIndex = 53;
             this.oneRangeWalkControl.Visible = false;

@@ -45,10 +45,6 @@ namespace CovidSimApp.Model2D
 
             simulator = new Simulator();
             simulator.Settings.Walk = oneRangeWalkSettings;
-            simulator.Settings.Quarantine.Enabled = true;
-            simulator.Settings.Quarantine.MaxCapacity = 500;
-            simulator.Settings.Quarantine.Probability = 0.01;
-            simulator.Settings.Quarantine.StartTime = 200;
 
             delay = 0;
             simulator.Initialize();

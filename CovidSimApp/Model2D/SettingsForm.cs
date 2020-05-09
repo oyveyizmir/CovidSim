@@ -55,7 +55,7 @@ namespace CovidSimApp.Model2D
             transmissionProbabilityAtRangeEdit.Text = Settings.TransmissionProbabilityAtRange.ToString();
 
             //Avoidance
-            avoidanceEnabledCombo.Checked = Avoidance.Enabled;
+            avoidanceEnabledCheck.Checked = Avoidance.Enabled;
             avoidanceRangeEdit.Text = Avoidance.Range.ToString();
             avoidanceStepAt0Edit.Text = Avoidance.StepAt0.ToString();
             avoidanceStepAtRangeEdit.Text = Avoidance.StepAtRange.ToString();
@@ -66,6 +66,9 @@ namespace CovidSimApp.Model2D
             walkSettingsControl.OneRangeWalk = OneRangeWalk;
             walkSettingsControl.TwoRangeWalk = TwoRangeWalk;
             walkSettingsControl.SelectedWalk = Settings.Walk;
+
+            //Quarantine
+            quarantineControl.Quarantine = Settings.Quarantine;
         }
 
         bool ValidateAndSaveData()
@@ -101,7 +104,7 @@ namespace CovidSimApp.Model2D
                     "Transmission Probability at Range should be between 0 and 1 (including 0 and 1)");
 
                 //Avoidance
-                var avoidanceEnabled = avoidanceEnabledCombo.Checked;
+                var avoidanceEnabled = avoidanceEnabledCheck.Checked;
                 var avoidanceRange = ValidateAndGet<double>(avoidanceRangeEdit, x => x > 0, "Avoidance Range should be greater than 0");
                 var avoidanceStepAt0 = ValidateAndGet<double>(avoidanceStepAt0Edit, "Avoidance Step at 0 is required");
                 var avoidanceStepAtRange = ValidateAndGet<double>(avoidanceStepAtRangeEdit, "Avoidance Step at Range is required");
@@ -110,6 +113,7 @@ namespace CovidSimApp.Model2D
                 //Walk
                 walkSettingsControl.ValidateAndSave(false);
 
+                //Save data
                 Settings.Population = population;
                 Settings.InitiallyInfected = infected;
                 Settings.IllnessDuration = illnessDuration;
@@ -128,6 +132,8 @@ namespace CovidSimApp.Model2D
 
                 walkSettingsControl.ValidateAndSave();
                 Settings.Walk = walkSettingsControl.SelectedWalk;
+
+                quarantineControl.ValidateAndSave();
             }
             catch (ValidationException)
             {
@@ -152,7 +158,7 @@ namespace CovidSimApp.Model2D
 
         void EnabledFlagChanged()
         {
-            bool enabled = avoidanceEnabledCombo.Checked;
+            bool enabled = avoidanceEnabledCheck.Checked;
             avoidanceRangeEdit.Enabled = enabled;
             avoidanceStepAt0Edit.Enabled = enabled;
             avoidanceStepAtRangeEdit.Enabled = enabled;
