@@ -35,9 +35,9 @@ namespace CovidSimApp.SimpleModel
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.resetButton = new System.Windows.Forms.Button();
             this.settingsButton = new System.Windows.Forms.Button();
+            this.modelParametersControl = new CovidSimApp.SimpleModel.ModelParametersControl();
             this.realTimeStats = new CovidSimApp.Controls.RealTimeStats();
             this.diagram = new CovidSimApp.Diagram.DiagramControl();
-            this.modelParametersControl = new CovidSimApp.SimpleModel.ModelParametersControl();
             this.SuspendLayout();
             // 
             // startStopButton
@@ -75,11 +75,20 @@ namespace CovidSimApp.SimpleModel
             this.settingsButton.UseVisualStyleBackColor = true;
             this.settingsButton.Click += new System.EventHandler(this.settingsButton_Click);
             // 
+            // modelParametersControl
+            // 
+            this.modelParametersControl.Location = new System.Drawing.Point(374, 42);
+            this.modelParametersControl.Name = "modelParametersControl";
+            this.modelParametersControl.Size = new System.Drawing.Size(344, 103);
+            this.modelParametersControl.TabIndex = 6;
+            this.modelParametersControl.TransitionRate = 0D;
+            // 
             // realTimeStats
             // 
             this.realTimeStats.Location = new System.Drawing.Point(13, 42);
             this.realTimeStats.Name = "realTimeStats";
-            this.realTimeStats.Size = new System.Drawing.Size(367, 103);
+            this.realTimeStats.ShowExtraStats = false;
+            this.realTimeStats.Size = new System.Drawing.Size(325, 103);
             this.realTimeStats.TabIndex = 5;
             // 
             // diagram
@@ -90,23 +99,15 @@ namespace CovidSimApp.SimpleModel
             this.diagram.BackColor = System.Drawing.Color.White;
             this.diagram.Location = new System.Drawing.Point(0, 151);
             this.diagram.Name = "diagram";
-            this.diagram.Size = new System.Drawing.Size(800, 299);
+            this.diagram.Size = new System.Drawing.Size(730, 299);
             this.diagram.TabIndex = 0;
             this.diagram.Text = "diagram";
-            // 
-            // modelParametersControl
-            // 
-            this.modelParametersControl.Location = new System.Drawing.Point(386, 42);
-            this.modelParametersControl.Name = "modelParametersControl";
-            this.modelParametersControl.Size = new System.Drawing.Size(344, 103);
-            this.modelParametersControl.TabIndex = 6;
-            this.modelParametersControl.TransitionRate = 0D;
             // 
             // SimpleModelForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(730, 450);
             this.Controls.Add(this.modelParametersControl);
             this.Controls.Add(this.realTimeStats);
             this.Controls.Add(this.settingsButton);

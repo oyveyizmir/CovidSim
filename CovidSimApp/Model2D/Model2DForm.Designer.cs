@@ -84,7 +84,8 @@
             // 
             this.realTimeStats.Location = new System.Drawing.Point(13, 42);
             this.realTimeStats.Name = "realTimeStats";
-            this.realTimeStats.Size = new System.Drawing.Size(367, 103);
+            this.realTimeStats.ShowExtraStats = true;
+            this.realTimeStats.Size = new System.Drawing.Size(485, 103);
             this.realTimeStats.TabIndex = 10;
             // 
             // diagram

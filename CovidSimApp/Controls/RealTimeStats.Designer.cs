@@ -44,6 +44,8 @@
             this.deadLabel = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.maxInfectedLabel = new System.Windows.Forms.Label();
+            this.quarantinedValue = new System.Windows.Forms.Label();
+            this.quarantinedLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -103,7 +105,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(196, 4);
+            this.label4.Location = new System.Drawing.Point(166, 4);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(65, 13);
             this.label4.TabIndex = 0;
@@ -112,7 +114,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(196, 30);
+            this.label5.Location = new System.Drawing.Point(166, 30);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(49, 13);
             this.label5.TabIndex = 0;
@@ -121,7 +123,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(196, 56);
+            this.label6.Location = new System.Drawing.Point(166, 56);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 13);
             this.label6.TabIndex = 0;
@@ -130,7 +132,7 @@
             // susceptibleLabel
             // 
             this.susceptibleLabel.AutoSize = true;
-            this.susceptibleLabel.Location = new System.Drawing.Point(262, 4);
+            this.susceptibleLabel.Location = new System.Drawing.Point(232, 4);
             this.susceptibleLabel.Name = "susceptibleLabel";
             this.susceptibleLabel.Size = new System.Drawing.Size(60, 13);
             this.susceptibleLabel.TabIndex = 1;
@@ -139,7 +141,7 @@
             // infectedLabel
             // 
             this.infectedLabel.AutoSize = true;
-            this.infectedLabel.Location = new System.Drawing.Point(262, 30);
+            this.infectedLabel.Location = new System.Drawing.Point(232, 30);
             this.infectedLabel.Name = "infectedLabel";
             this.infectedLabel.Size = new System.Drawing.Size(45, 13);
             this.infectedLabel.TabIndex = 1;
@@ -148,7 +150,7 @@
             // recoveredLabel
             // 
             this.recoveredLabel.AutoSize = true;
-            this.recoveredLabel.Location = new System.Drawing.Point(262, 56);
+            this.recoveredLabel.Location = new System.Drawing.Point(232, 56);
             this.recoveredLabel.Name = "recoveredLabel";
             this.recoveredLabel.Size = new System.Drawing.Size(55, 13);
             this.recoveredLabel.TabIndex = 1;
@@ -157,7 +159,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(196, 82);
+            this.label7.Location = new System.Drawing.Point(166, 82);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 13);
             this.label7.TabIndex = 0;
@@ -166,7 +168,7 @@
             // deadLabel
             // 
             this.deadLabel.AutoSize = true;
-            this.deadLabel.Location = new System.Drawing.Point(262, 82);
+            this.deadLabel.Location = new System.Drawing.Point(232, 82);
             this.deadLabel.Name = "deadLabel";
             this.deadLabel.Size = new System.Drawing.Size(31, 13);
             this.deadLabel.TabIndex = 1;
@@ -190,10 +192,30 @@
             this.maxInfectedLabel.TabIndex = 1;
             this.maxInfectedLabel.Text = "maxInfected";
             // 
+            // quarantinedValue
+            // 
+            this.quarantinedValue.AutoSize = true;
+            this.quarantinedValue.Location = new System.Drawing.Point(380, 4);
+            this.quarantinedValue.Name = "quarantinedValue";
+            this.quarantinedValue.Size = new System.Drawing.Size(63, 13);
+            this.quarantinedValue.TabIndex = 3;
+            this.quarantinedValue.Text = "quarantined";
+            // 
+            // quarantinedLabel
+            // 
+            this.quarantinedLabel.AutoSize = true;
+            this.quarantinedLabel.Location = new System.Drawing.Point(314, 4);
+            this.quarantinedLabel.Name = "quarantinedLabel";
+            this.quarantinedLabel.Size = new System.Drawing.Size(68, 13);
+            this.quarantinedLabel.TabIndex = 2;
+            this.quarantinedLabel.Text = "Quarantined:";
+            // 
             // RealTimeStats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.quarantinedValue);
+            this.Controls.Add(this.quarantinedLabel);
             this.Controls.Add(this.deadLabel);
             this.Controls.Add(this.recoveredLabel);
             this.Controls.Add(this.maxInfectedLabel);
@@ -211,7 +233,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "RealTimeStats";
-            this.Size = new System.Drawing.Size(367, 103);
+            this.Size = new System.Drawing.Size(474, 103);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -235,5 +257,7 @@
         private System.Windows.Forms.Label deadLabel;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label maxInfectedLabel;
+        private System.Windows.Forms.Label quarantinedValue;
+        private System.Windows.Forms.Label quarantinedLabel;
     }
 }

@@ -223,6 +223,7 @@ namespace CovidSimApp.Model2D
             realTimeStats.SetInfected(stats.InfectedCount);
             realTimeStats.SetRecovered(stats.RecoveredCount);
             realTimeStats.SetDead(stats.DiedCount);
+            realTimeStats.SetQuarantined(stats.Quarantined);
         }
 
         void UpdateUI()

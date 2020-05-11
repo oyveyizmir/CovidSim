@@ -13,6 +13,18 @@ namespace CovidSimApp.Controls
     public partial class RealTimeStats : UserControl
     {
         const string EmptyValue = "--";
+        bool showExtraStats;
+
+        public bool ShowExtraStats
+        {
+            get => showExtraStats;
+
+            set
+            {
+                showExtraStats = value;
+                OnShowExtraStatsChanged();
+            }
+        }
 
         public RealTimeStats()
         {
@@ -35,6 +47,7 @@ namespace CovidSimApp.Controls
             infectedLabel.Text = EmptyValue;
             recoveredLabel.Text = EmptyValue;
             deadLabel.Text = EmptyValue;
+            quarantinedValue.Text = EmptyValue;
         }
 
         public void SetTime(int time)
@@ -75,6 +88,17 @@ namespace CovidSimApp.Controls
         public void SetDead(double dead)
         {
             SetValue(deadLabel, (int)Math.Round(dead));
+        }
+
+        public void SetQuarantined(int quarantined)
+        {
+            SetValue(quarantinedValue, quarantined);
+        }
+
+        void OnShowExtraStatsChanged()
+        {
+            quarantinedLabel.Visible = showExtraStats;
+            quarantinedValue.Visible = showExtraStats;
         }
     }
 }
