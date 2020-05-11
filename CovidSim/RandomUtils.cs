@@ -18,9 +18,11 @@ namespace CovidSim
 
         public static double GetDouble(double max) => max * GetDouble();
 
+        public static double GetDouble() => random.Value.NextDouble();
+
         public static int GetInt(int max) => random.Value.Next(max);
 
-        public static double GetDouble() => random.Value.NextDouble();
+        public static int GetInt(int from, int to) => random.Value.Next(from, to + 1);
 
         public static int Sign() => (GetInt(2) << 1) - 1;
 

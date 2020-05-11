@@ -41,7 +41,7 @@
             this.maxWalkEdit.Location = new System.Drawing.Point(113, 90);
             this.maxWalkEdit.Name = "maxWalkEdit";
             this.maxWalkEdit.Size = new System.Drawing.Size(100, 20);
-            this.maxWalkEdit.TabIndex = 52;
+            this.maxWalkEdit.TabIndex = 2;
             // 
             // label6
             // 
@@ -57,7 +57,7 @@
             this.minWalkEdit.Location = new System.Drawing.Point(113, 55);
             this.minWalkEdit.Name = "minWalkEdit";
             this.minWalkEdit.Size = new System.Drawing.Size(100, 20);
-            this.minWalkEdit.TabIndex = 49;
+            this.minWalkEdit.TabIndex = 1;
             // 
             // label5
             // 
@@ -87,9 +87,9 @@
             this.areaCombo.Location = new System.Drawing.Point(113, 18);
             this.areaCombo.Name = "areaCombo";
             this.areaCombo.Size = new System.Drawing.Size(100, 21);
-            this.areaCombo.TabIndex = 54;
+            this.areaCombo.TabIndex = 0;
             // 
-            // ShapeWalkControl
+            // OneRangeWalkControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -100,7 +100,7 @@
             this.Controls.Add(this.minWalkEdit);
             this.Controls.Add(this.label5);
             this.Margin = new System.Windows.Forms.Padding(0);
-            this.Name = "ShapeWalkControl";
+            this.Name = "OneRangeWalkControl";
             this.Size = new System.Drawing.Size(247, 156);
             this.ResumeLayout(false);
             this.PerformLayout();

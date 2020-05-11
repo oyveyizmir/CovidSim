@@ -65,15 +65,15 @@
             this.panel.Controls.Add(this.oneRangeWalkControl);
             this.panel.Location = new System.Drawing.Point(0, 57);
             this.panel.Name = "panel";
-            this.panel.Size = new System.Drawing.Size(486, 426);
+            this.panel.Size = new System.Drawing.Size(486, 522);
             this.panel.TabIndex = 54;
             // 
             // twoRangeWalkControl
             // 
-            this.twoRangeWalkControl.Location = new System.Drawing.Point(23, 104);
+            this.twoRangeWalkControl.Location = new System.Drawing.Point(23, 151);
             this.twoRangeWalkControl.Margin = new System.Windows.Forms.Padding(0);
             this.twoRangeWalkControl.Name = "twoRangeWalkControl";
-            this.twoRangeWalkControl.Size = new System.Drawing.Size(246, 302);
+            this.twoRangeWalkControl.Size = new System.Drawing.Size(246, 349);
             this.twoRangeWalkControl.TabIndex = 54;
             this.twoRangeWalkControl.Visible = false;
             // 
@@ -82,7 +82,7 @@
             this.oneRangeWalkControl.Location = new System.Drawing.Point(34, 12);
             this.oneRangeWalkControl.Margin = new System.Windows.Forms.Padding(0);
             this.oneRangeWalkControl.Name = "oneRangeWalkControl";
-            this.oneRangeWalkControl.Size = new System.Drawing.Size(247, 108);
+            this.oneRangeWalkControl.Size = new System.Drawing.Size(247, 139);
             this.oneRangeWalkControl.TabIndex = 53;
             this.oneRangeWalkControl.Visible = false;
             // 
@@ -103,7 +103,7 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.panel);
             this.Name = "WalkSettingsControl";
-            this.Size = new System.Drawing.Size(486, 483);
+            this.Size = new System.Drawing.Size(486, 579);
             this.panel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();

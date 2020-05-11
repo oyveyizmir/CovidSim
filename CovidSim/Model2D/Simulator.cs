@@ -392,7 +392,7 @@ namespace CovidSim.Model2D
         {
             human.IsInfected = true;
             human.InfectionTime = Time;
-            human.TimeToRemoval = Settings.IllnessDuration;
+            human.TimeToRemoval = RandomUtils.GetInt(Settings.MinIllnessDuration, Settings.MaxIllnessDuration);
 
             Stats.InfectedTotalCount++;
             Stats.InfectedCount++;

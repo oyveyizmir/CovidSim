@@ -14,7 +14,8 @@ namespace CovidSim.Model2D
         double transmissionProbabilityAt0 = 0.3;
         double transmissionProbabilityAtRange = 0;
         double worldSize = 1000;
-        int illnessDuration = 1000;
+        int minIllnessDuration = 700;
+        int maxIllnessDuration = 1300;
         double fatalityRate = 0.2;
 
         public double TransmissionRange
@@ -65,15 +66,27 @@ namespace CovidSim.Model2D
             }
         }
 
-        public int IllnessDuration
+        public int MinIllnessDuration
         {
-            get => illnessDuration;
+            get => minIllnessDuration;
 
             set
             {
                 if (value <= 0)
-                    throw new ArgumentException("IllnessDiration");
-                illnessDuration = value;
+                    throw new ArgumentException("MinIllnessDiration");
+                minIllnessDuration = value;
+            }
+        }
+
+        public int MaxIllnessDuration
+        {
+            get => maxIllnessDuration;
+
+            set
+            {
+                if (value <= 0)
+                    throw new ArgumentException("MaxIllnessDiration");
+                maxIllnessDuration = value;
             }
         }
 
@@ -106,8 +119,11 @@ namespace CovidSim.Model2D
             if (Population < InitiallyInfected)
                 throw new ValidationException("Population cannot be less than InitiallyInfected");
 
-            if (Quarantine.StartTime >= IllnessDuration)
-                throw new ValidationException("Quarantine start time should be less than IllnessDuration");
+            if (Quarantine.StartTime >= maxIllnessDuration)
+                throw new ValidationException("Quarantine start time should be less than maximum illness duration");
+
+            if (minIllnessDuration > maxIllnessDuration)
+                throw new ValidationException("Minimum illness duration cannot exceed maximum duration");
 
             Walk.Validate();
         }

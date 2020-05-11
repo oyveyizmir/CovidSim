@@ -44,7 +44,8 @@ namespace CovidSimApp.Model2D
             //General
             populationEdit.Text = Settings.Population.ToString();
             infectedEdit.Text = Settings.InitiallyInfected.ToString();
-            illnessDurationEdit.Text = Settings.IllnessDuration.ToString();
+            minIllnessDurationEdit.Text = Settings.MinIllnessDuration.ToString();
+            maxIllnessDurationEdit.Text = Settings.MaxIllnessDuration.ToString();
             fatalityRateEdit.Text = Settings.FatalityRate.ToString();
             worldSizeEdit.Text = Settings.WorldSize.ToString();
             delayEdit.Text = Delay.ToString();
@@ -82,10 +83,17 @@ namespace CovidSimApp.Model2D
                 var infected = ValidateAndGet<int>(infectedEdit, x => x >= 0,
                     "Expected an integer value greater than 0 for Infected Initially");
 
-                ValidateAndGet<int>(infectedEdit, x => x <= population, "Infected Initially cannot exceed Population");
+                if (infected > population)
+                    throw new ValidationException("Infected Initially cannot exceed Population");
 
-                var illnessDuration = ValidateAndGet<int>(illnessDurationEdit, x => x > 0,
-                    "Illness Duration should be greater than 0");
+                var minIllnessDuration = ValidateAndGet<int>(minIllnessDurationEdit, x => x > 0,
+                    "Mimimum Illness Duration should be greater than 0");
+
+                var maxIllnessDuration = ValidateAndGet<int>(maxIllnessDurationEdit, x => x > 0,
+                    "Maximum Illness Duration should be greater than 0");
+
+                if (minIllnessDuration > maxIllnessDuration)
+                    throw new ValidationException("Minimum illness duration should not exceed maximum duration");
 
                 var fatalityRate = ValidateAndGet<double>(fatalityRateEdit, x => x >= 0 && x <= 1,
                     "Fatality Rate should be between 0 and 1 (including 0 and 1)");
@@ -113,10 +121,18 @@ namespace CovidSimApp.Model2D
                 //Walk
                 walkSettingsControl.ValidateAndSave(false);
 
+                //Quarantine
+                quarantineControl.ValidateAndSave(false);
+
+                //TODO: FIX: Quarantine.StartTime should be available before saving
+                //if (Quarantine.StartTime >= maxIllnessDuration)
+                //    throw new ValidationException("Quarantine start time should be less than maximum illness duration");
+
                 //Save data
                 Settings.Population = population;
                 Settings.InitiallyInfected = infected;
-                Settings.IllnessDuration = illnessDuration;
+                Settings.MinIllnessDuration = minIllnessDuration;
+                Settings.MaxIllnessDuration = maxIllnessDuration;
                 Settings.FatalityRate = fatalityRate;
                 Settings.TransmissionRange = transmissionRange;
                 Settings.TransmissionProbabilityAt0 = transmissionProbabilityAt0;

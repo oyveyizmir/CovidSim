@@ -36,11 +36,11 @@
             this.delayEdit = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.fatalityRateEdit = new System.Windows.Forms.TextBox();
-            this.illnessDurationEdit = new System.Windows.Forms.TextBox();
+            this.minIllnessDurationEdit = new System.Windows.Forms.TextBox();
             this.infectedEdit = new System.Windows.Forms.TextBox();
             this.populationEdit = new System.Windows.Forms.TextBox();
             this.fatalityRateLabel = new System.Windows.Forms.Label();
-            this.illnessDurationLabel = new System.Windows.Forms.Label();
+            this.minIllnessDurationLabel = new System.Windows.Forms.Label();
             this.infectedLabel = new System.Windows.Forms.Label();
             this.populationLabel = new System.Windows.Forms.Label();
             this.tabControl = new System.Windows.Forms.TabControl();
@@ -52,7 +52,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.tabWalk = new System.Windows.Forms.TabPage();
-            this.walkSettingsControl = new CovidSimApp.Model2D.WalkSettingsControl();
             this.tabAvoidance = new System.Windows.Forms.TabPage();
             this.avoidanceEnabledCheck = new System.Windows.Forms.CheckBox();
             this.avoidanceMaxStepEdit = new System.Windows.Forms.TextBox();
@@ -64,6 +63,9 @@
             this.label9 = new System.Windows.Forms.Label();
             this.rangeLabel = new System.Windows.Forms.Label();
             this.tabQuarantine = new System.Windows.Forms.TabPage();
+            this.maxIllnessDurationEdit = new System.Windows.Forms.TextBox();
+            this.maxIllnessDuration = new System.Windows.Forms.Label();
+            this.walkSettingsControl = new CovidSimApp.Model2D.WalkSettingsControl();
             this.quarantineControl = new CovidSimApp.Model2D.QuarantineControl();
             this.tabGeneral.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -97,16 +99,18 @@
             // 
             // tabGeneral
             // 
+            this.tabGeneral.Controls.Add(this.maxIllnessDurationEdit);
+            this.tabGeneral.Controls.Add(this.maxIllnessDuration);
             this.tabGeneral.Controls.Add(this.worldSizeEdit);
             this.tabGeneral.Controls.Add(this.label7);
             this.tabGeneral.Controls.Add(this.delayEdit);
             this.tabGeneral.Controls.Add(this.label1);
             this.tabGeneral.Controls.Add(this.fatalityRateEdit);
-            this.tabGeneral.Controls.Add(this.illnessDurationEdit);
+            this.tabGeneral.Controls.Add(this.minIllnessDurationEdit);
             this.tabGeneral.Controls.Add(this.infectedEdit);
             this.tabGeneral.Controls.Add(this.populationEdit);
             this.tabGeneral.Controls.Add(this.fatalityRateLabel);
-            this.tabGeneral.Controls.Add(this.illnessDurationLabel);
+            this.tabGeneral.Controls.Add(this.minIllnessDurationLabel);
             this.tabGeneral.Controls.Add(this.infectedLabel);
             this.tabGeneral.Controls.Add(this.populationLabel);
             this.tabGeneral.Location = new System.Drawing.Point(4, 22);
@@ -119,15 +123,15 @@
             // 
             // worldSizeEdit
             // 
-            this.worldSizeEdit.Location = new System.Drawing.Point(105, 161);
+            this.worldSizeEdit.Location = new System.Drawing.Point(127, 198);
             this.worldSizeEdit.Name = "worldSizeEdit";
             this.worldSizeEdit.Size = new System.Drawing.Size(100, 20);
-            this.worldSizeEdit.TabIndex = 4;
+            this.worldSizeEdit.TabIndex = 5;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 164);
+            this.label7.Location = new System.Drawing.Point(16, 201);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(58, 13);
             this.label7.TabIndex = 43;
@@ -135,15 +139,15 @@
             // 
             // delayEdit
             // 
-            this.delayEdit.Location = new System.Drawing.Point(105, 196);
+            this.delayEdit.Location = new System.Drawing.Point(127, 233);
             this.delayEdit.Name = "delayEdit";
             this.delayEdit.Size = new System.Drawing.Size(100, 20);
-            this.delayEdit.TabIndex = 5;
+            this.delayEdit.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 199);
+            this.label1.Location = new System.Drawing.Point(16, 236);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 13);
             this.label1.TabIndex = 33;
@@ -151,28 +155,28 @@
             // 
             // fatalityRateEdit
             // 
-            this.fatalityRateEdit.Location = new System.Drawing.Point(105, 124);
+            this.fatalityRateEdit.Location = new System.Drawing.Point(127, 161);
             this.fatalityRateEdit.Name = "fatalityRateEdit";
             this.fatalityRateEdit.Size = new System.Drawing.Size(100, 20);
-            this.fatalityRateEdit.TabIndex = 3;
+            this.fatalityRateEdit.TabIndex = 4;
             // 
-            // illnessDurationEdit
+            // minIllnessDurationEdit
             // 
-            this.illnessDurationEdit.Location = new System.Drawing.Point(105, 89);
-            this.illnessDurationEdit.Name = "illnessDurationEdit";
-            this.illnessDurationEdit.Size = new System.Drawing.Size(100, 20);
-            this.illnessDurationEdit.TabIndex = 2;
+            this.minIllnessDurationEdit.Location = new System.Drawing.Point(127, 89);
+            this.minIllnessDurationEdit.Name = "minIllnessDurationEdit";
+            this.minIllnessDurationEdit.Size = new System.Drawing.Size(100, 20);
+            this.minIllnessDurationEdit.TabIndex = 2;
             // 
             // infectedEdit
             // 
-            this.infectedEdit.Location = new System.Drawing.Point(105, 54);
+            this.infectedEdit.Location = new System.Drawing.Point(127, 54);
             this.infectedEdit.Name = "infectedEdit";
             this.infectedEdit.Size = new System.Drawing.Size(100, 20);
             this.infectedEdit.TabIndex = 1;
             // 
             // populationEdit
             // 
-            this.populationEdit.Location = new System.Drawing.Point(105, 19);
+            this.populationEdit.Location = new System.Drawing.Point(127, 19);
             this.populationEdit.Name = "populationEdit";
             this.populationEdit.Size = new System.Drawing.Size(100, 20);
             this.populationEdit.TabIndex = 0;
@@ -180,20 +184,20 @@
             // fatalityRateLabel
             // 
             this.fatalityRateLabel.AutoSize = true;
-            this.fatalityRateLabel.Location = new System.Drawing.Point(16, 127);
+            this.fatalityRateLabel.Location = new System.Drawing.Point(16, 164);
             this.fatalityRateLabel.Name = "fatalityRateLabel";
             this.fatalityRateLabel.Size = new System.Drawing.Size(66, 13);
             this.fatalityRateLabel.TabIndex = 24;
             this.fatalityRateLabel.Text = "Fatality Rate";
             // 
-            // illnessDurationLabel
+            // minIllnessDurationLabel
             // 
-            this.illnessDurationLabel.AutoSize = true;
-            this.illnessDurationLabel.Location = new System.Drawing.Point(16, 92);
-            this.illnessDurationLabel.Name = "illnessDurationLabel";
-            this.illnessDurationLabel.Size = new System.Drawing.Size(79, 13);
-            this.illnessDurationLabel.TabIndex = 25;
-            this.illnessDurationLabel.Text = "Illness Duration";
+            this.minIllnessDurationLabel.AutoSize = true;
+            this.minIllnessDurationLabel.Location = new System.Drawing.Point(16, 92);
+            this.minIllnessDurationLabel.Name = "minIllnessDurationLabel";
+            this.minIllnessDurationLabel.Size = new System.Drawing.Size(99, 13);
+            this.minIllnessDurationLabel.TabIndex = 25;
+            this.minIllnessDurationLabel.Text = "Min Illness Duration";
             // 
             // infectedLabel
             // 
@@ -303,14 +307,6 @@
             this.tabWalk.Text = "Walk";
             this.tabWalk.UseVisualStyleBackColor = true;
             // 
-            // walkSettingsControl
-            // 
-            this.walkSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.walkSettingsControl.Location = new System.Drawing.Point(3, 3);
-            this.walkSettingsControl.Name = "walkSettingsControl";
-            this.walkSettingsControl.Size = new System.Drawing.Size(306, 393);
-            this.walkSettingsControl.TabIndex = 0;
-            // 
             // tabAvoidance
             // 
             this.tabAvoidance.Controls.Add(this.avoidanceEnabledCheck);
@@ -335,7 +331,7 @@
             this.avoidanceEnabledCheck.Location = new System.Drawing.Point(102, 19);
             this.avoidanceEnabledCheck.Name = "avoidanceEnabledCheck";
             this.avoidanceEnabledCheck.Size = new System.Drawing.Size(65, 17);
-            this.avoidanceEnabledCheck.TabIndex = 56;
+            this.avoidanceEnabledCheck.TabIndex = 0;
             this.avoidanceEnabledCheck.Text = "Enabled";
             this.avoidanceEnabledCheck.UseVisualStyleBackColor = true;
             this.avoidanceEnabledCheck.CheckedChanged += new System.EventHandler(this.avoidanceEnabledCombo_CheckedChanged);
@@ -345,7 +341,7 @@
             this.avoidanceMaxStepEdit.Location = new System.Drawing.Point(102, 157);
             this.avoidanceMaxStepEdit.Name = "avoidanceMaxStepEdit";
             this.avoidanceMaxStepEdit.Size = new System.Drawing.Size(100, 20);
-            this.avoidanceMaxStepEdit.TabIndex = 48;
+            this.avoidanceMaxStepEdit.TabIndex = 4;
             // 
             // maxStepLabel
             // 
@@ -361,21 +357,21 @@
             this.avoidanceStepAtRangeEdit.Location = new System.Drawing.Point(102, 120);
             this.avoidanceStepAtRangeEdit.Name = "avoidanceStepAtRangeEdit";
             this.avoidanceStepAtRangeEdit.Size = new System.Drawing.Size(100, 20);
-            this.avoidanceStepAtRangeEdit.TabIndex = 47;
+            this.avoidanceStepAtRangeEdit.TabIndex = 3;
             // 
             // avoidanceStepAt0Edit
             // 
             this.avoidanceStepAt0Edit.Location = new System.Drawing.Point(102, 85);
             this.avoidanceStepAt0Edit.Name = "avoidanceStepAt0Edit";
             this.avoidanceStepAt0Edit.Size = new System.Drawing.Size(100, 20);
-            this.avoidanceStepAt0Edit.TabIndex = 46;
+            this.avoidanceStepAt0Edit.TabIndex = 2;
             // 
             // avoidanceRangeEdit
             // 
             this.avoidanceRangeEdit.Location = new System.Drawing.Point(102, 50);
             this.avoidanceRangeEdit.Name = "avoidanceRangeEdit";
             this.avoidanceRangeEdit.Size = new System.Drawing.Size(100, 20);
-            this.avoidanceRangeEdit.TabIndex = 45;
+            this.avoidanceRangeEdit.TabIndex = 1;
             // 
             // stepAtRangeLabel
             // 
@@ -413,6 +409,30 @@
             this.tabQuarantine.TabIndex = 4;
             this.tabQuarantine.Text = "Quarantine";
             this.tabQuarantine.UseVisualStyleBackColor = true;
+            // 
+            // maxIllnessDurationEdit
+            // 
+            this.maxIllnessDurationEdit.Location = new System.Drawing.Point(127, 124);
+            this.maxIllnessDurationEdit.Name = "maxIllnessDurationEdit";
+            this.maxIllnessDurationEdit.Size = new System.Drawing.Size(100, 20);
+            this.maxIllnessDurationEdit.TabIndex = 3;
+            // 
+            // maxIllnessDuration
+            // 
+            this.maxIllnessDuration.AutoSize = true;
+            this.maxIllnessDuration.Location = new System.Drawing.Point(16, 127);
+            this.maxIllnessDuration.Name = "maxIllnessDuration";
+            this.maxIllnessDuration.Size = new System.Drawing.Size(102, 13);
+            this.maxIllnessDuration.TabIndex = 45;
+            this.maxIllnessDuration.Text = "Max Illness Duration";
+            // 
+            // walkSettingsControl
+            // 
+            this.walkSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.walkSettingsControl.Location = new System.Drawing.Point(3, 3);
+            this.walkSettingsControl.Name = "walkSettingsControl";
+            this.walkSettingsControl.Size = new System.Drawing.Size(306, 393);
+            this.walkSettingsControl.TabIndex = 0;
             // 
             // quarantineControl
             // 
@@ -462,11 +482,11 @@
         private System.Windows.Forms.TextBox delayEdit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox fatalityRateEdit;
-        private System.Windows.Forms.TextBox illnessDurationEdit;
+        private System.Windows.Forms.TextBox minIllnessDurationEdit;
         private System.Windows.Forms.TextBox infectedEdit;
         private System.Windows.Forms.TextBox populationEdit;
         private System.Windows.Forms.Label fatalityRateLabel;
-        private System.Windows.Forms.Label illnessDurationLabel;
+        private System.Windows.Forms.Label minIllnessDurationLabel;
         private System.Windows.Forms.Label infectedLabel;
         private System.Windows.Forms.Label populationLabel;
         private System.Windows.Forms.TabControl tabControl;
@@ -491,5 +511,7 @@
         private System.Windows.Forms.Label rangeLabel;
         private System.Windows.Forms.TabPage tabQuarantine;
         private QuarantineControl quarantineControl;
+        private System.Windows.Forms.TextBox maxIllnessDurationEdit;
+        private System.Windows.Forms.Label maxIllnessDuration;
     }
 }

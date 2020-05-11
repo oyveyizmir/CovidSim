@@ -43,7 +43,7 @@
             this.quarantineEnabledCheck.Location = new System.Drawing.Point(95, 16);
             this.quarantineEnabledCheck.Name = "quarantineEnabledCheck";
             this.quarantineEnabledCheck.Size = new System.Drawing.Size(65, 17);
-            this.quarantineEnabledCheck.TabIndex = 65;
+            this.quarantineEnabledCheck.TabIndex = 0;
             this.quarantineEnabledCheck.Text = "Enabled";
             this.quarantineEnabledCheck.UseVisualStyleBackColor = true;
             this.quarantineEnabledCheck.CheckedChanged += new System.EventHandler(this.quarantineEnabledCheck_CheckedChanged);
@@ -53,7 +53,7 @@
             this.maxCapacityEdit.Location = new System.Drawing.Point(95, 121);
             this.maxCapacityEdit.Name = "maxCapacityEdit";
             this.maxCapacityEdit.Size = new System.Drawing.Size(100, 20);
-            this.maxCapacityEdit.TabIndex = 60;
+            this.maxCapacityEdit.TabIndex = 3;
             // 
             // maxStepLabel
             // 
@@ -69,14 +69,14 @@
             this.probabilityEdit.Location = new System.Drawing.Point(95, 84);
             this.probabilityEdit.Name = "probabilityEdit";
             this.probabilityEdit.Size = new System.Drawing.Size(100, 20);
-            this.probabilityEdit.TabIndex = 59;
+            this.probabilityEdit.TabIndex = 2;
             // 
             // startTimeEdit
             // 
             this.startTimeEdit.Location = new System.Drawing.Point(95, 49);
             this.startTimeEdit.Name = "startTimeEdit";
             this.startTimeEdit.Size = new System.Drawing.Size(100, 20);
-            this.startTimeEdit.TabIndex = 58;
+            this.startTimeEdit.TabIndex = 1;
             // 
             // stepAtRangeLabel
             // 
