@@ -54,6 +54,7 @@ namespace CovidSimApp.Model2D
             transmissionRangeEdit.Text = Settings.TransmissionRange.ToString();
             transmissionProbabilityAt0Edit.Text = Settings.TransmissionProbabilityAt0.ToString();
             transmissionProbabilityAtRangeEdit.Text = Settings.TransmissionProbabilityAtRange.ToString();
+            reinfectionProbabilityEdit.Text = Settings.ReinfectionProbability.ToString();
 
             //Avoidance
             avoidanceEnabledCheck.Checked = Avoidance.Enabled;
@@ -111,6 +112,9 @@ namespace CovidSimApp.Model2D
                 var transmissionProbabilityAtRange = ValidateAndGet<double>(transmissionProbabilityAtRangeEdit, x => x >= 0 && x <= 1,
                     "Transmission Probability at Range should be between 0 and 1 (including 0 and 1)");
 
+                var reinfectionProbability = ValidateAndGet<double>(reinfectionProbabilityEdit, x => x >= 0 && x <= 1,
+                    "Reinfection Probability at Range should be between 0 and 1 (including 0 and 1)");
+
                 //Avoidance
                 var avoidanceEnabled = avoidanceEnabledCheck.Checked;
                 var avoidanceRange = ValidateAndGet<double>(avoidanceRangeEdit, x => x > 0, "Avoidance Range should be greater than 0");
@@ -137,6 +141,7 @@ namespace CovidSimApp.Model2D
                 Settings.TransmissionRange = transmissionRange;
                 Settings.TransmissionProbabilityAt0 = transmissionProbabilityAt0;
                 Settings.TransmissionProbabilityAtRange = transmissionProbabilityAtRange;
+                Settings.ReinfectionProbability = reinfectionProbability;
                 Settings.WorldSize = worldSize;
                 Avoidance.Enabled = avoidanceEnabled;
                 Avoidance.Range = avoidanceRange;

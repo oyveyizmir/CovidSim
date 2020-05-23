@@ -167,7 +167,7 @@ namespace CovidSimApp.Model2D
                 return PersonState.Quarantined;
             else if (human.IsInfected)
                 return PersonState.Infected;
-            else if (human.IsImmune)
+            else if (human.IsRecovered)
                 return PersonState.Recovered;
             else
                 return PersonState.Susceptible;

@@ -33,12 +33,15 @@ namespace CovidSim
 
         public T RecoveredCount { get; set; }
 
+        public T RecoveredTotalCount { get; set; }
+
         public T DiedCount { get; set; }
 
         public override string ToString()
         {
             return $"PopulationCount: {PopulationCount}, Susceptible: {SusceptibleCount}, Infected Total: {InfectedTotalCount},"
-                + $" Infected: {InfectedCount}, Max Infected: {MaxInfectedCount}, Recovered: {RecoveredCount}, Deaths: {DiedCount}";
+                + $" Infected: {InfectedCount}, Max Infected: {MaxInfectedCount}, Recovered: {RecoveredCount},"
+                + $" Recovered Total: {RecoveredTotalCount}, Deaths: {DiedCount}";
         }
     }
 }

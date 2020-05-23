@@ -12,6 +12,8 @@ namespace CovidSim.Model2D
 
         public bool IsAlive { get; set; } = true;
 
+        public bool IsRecovered { get; set; }
+
         public bool IsImmune { get; set; }
 
         public bool IsInfected { get; set; }

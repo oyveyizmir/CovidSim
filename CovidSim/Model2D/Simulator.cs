@@ -344,6 +344,10 @@ namespace CovidSim.Model2D
                     {
                         double transmissionProbability = Settings.TransmissionProbabilityAt0
                             + transmissionProbabilityRange * distance / Settings.TransmissionRange;
+
+                        if (@object.IsRecovered)
+                            transmissionProbability *= Settings.ReinfectionProbability;
+
                         if (RandomUtils.LessThanThreshold(transmissionProbability))
                         {
                             Infect(@object, area);
@@ -396,7 +400,10 @@ namespace CovidSim.Model2D
 
             Stats.InfectedTotalCount++;
             Stats.InfectedCount++;
-            Stats.SusceptibleCount--;
+            if (human.IsRecovered)
+                Stats.RecoveredCount--;
+            else
+                Stats.SusceptibleCount--;
 
             area.Susceptible.Remove(human);
         }
@@ -412,19 +419,24 @@ namespace CovidSim.Model2D
                 Stats.Quarantined--;
         }
 
-        void Recover(Human human)
+        void Recover(Human human, Area area)
         {
-            human.IsImmune = true;
+            human.IsRecovered = true;
+            human.IsImmune = !Settings.ReinfectionEnabled;
             human.IsInfected = false;
             
             Stats.InfectedCount--;
             Stats.RecoveredCount++;
+            Stats.RecoveredTotalCount++;
 
             if (human.IsQuarantined)
             {
                 human.IsQuarantined = false;
                 Stats.Quarantined--;
             }
+
+            if (!human.IsImmune)
+                area.Susceptible.Add(human);
         }
 
         void Remove()
@@ -436,7 +448,7 @@ namespace CovidSim.Model2D
                     if (RandomUtils.LessThanThreshold(Settings.FatalityRate))
                         Die(human);
                     else
-                        Recover(human);
+                        Recover(human, GetArea(human.Position));
                 }
             }
         }

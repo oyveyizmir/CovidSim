@@ -31,6 +31,8 @@
             this.cancelButton = new System.Windows.Forms.Button();
             this.okButton = new System.Windows.Forms.Button();
             this.tabGeneral = new System.Windows.Forms.TabPage();
+            this.maxIllnessDurationEdit = new System.Windows.Forms.TextBox();
+            this.maxIllnessDuration = new System.Windows.Forms.Label();
             this.worldSizeEdit = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.delayEdit = new System.Windows.Forms.TextBox();
@@ -63,10 +65,10 @@
             this.label9 = new System.Windows.Forms.Label();
             this.rangeLabel = new System.Windows.Forms.Label();
             this.tabQuarantine = new System.Windows.Forms.TabPage();
-            this.maxIllnessDurationEdit = new System.Windows.Forms.TextBox();
-            this.maxIllnessDuration = new System.Windows.Forms.Label();
             this.walkSettingsControl = new CovidSimApp.Model2D.WalkSettingsControl();
             this.quarantineControl = new CovidSimApp.Model2D.QuarantineControl();
+            this.label5 = new System.Windows.Forms.Label();
+            this.reinfectionProbabilityEdit = new System.Windows.Forms.TextBox();
             this.tabGeneral.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabTransmission.SuspendLayout();
@@ -120,6 +122,22 @@
             this.tabGeneral.TabIndex = 0;
             this.tabGeneral.Text = "General";
             this.tabGeneral.UseVisualStyleBackColor = true;
+            // 
+            // maxIllnessDurationEdit
+            // 
+            this.maxIllnessDurationEdit.Location = new System.Drawing.Point(127, 124);
+            this.maxIllnessDurationEdit.Name = "maxIllnessDurationEdit";
+            this.maxIllnessDurationEdit.Size = new System.Drawing.Size(100, 20);
+            this.maxIllnessDurationEdit.TabIndex = 3;
+            // 
+            // maxIllnessDuration
+            // 
+            this.maxIllnessDuration.AutoSize = true;
+            this.maxIllnessDuration.Location = new System.Drawing.Point(16, 127);
+            this.maxIllnessDuration.Name = "maxIllnessDuration";
+            this.maxIllnessDuration.Size = new System.Drawing.Size(102, 13);
+            this.maxIllnessDuration.TabIndex = 45;
+            this.maxIllnessDuration.Text = "Max Illness Duration";
             // 
             // worldSizeEdit
             // 
@@ -235,8 +253,10 @@
             // 
             // tabTransmission
             // 
+            this.tabTransmission.Controls.Add(this.reinfectionProbabilityEdit);
             this.tabTransmission.Controls.Add(this.transmissionProbabilityAtRangeEdit);
             this.tabTransmission.Controls.Add(this.transmissionProbabilityAt0Edit);
+            this.tabTransmission.Controls.Add(this.label5);
             this.tabTransmission.Controls.Add(this.transmissionRangeEdit);
             this.tabTransmission.Controls.Add(this.label4);
             this.tabTransmission.Controls.Add(this.label3);
@@ -410,22 +430,6 @@
             this.tabQuarantine.Text = "Quarantine";
             this.tabQuarantine.UseVisualStyleBackColor = true;
             // 
-            // maxIllnessDurationEdit
-            // 
-            this.maxIllnessDurationEdit.Location = new System.Drawing.Point(127, 124);
-            this.maxIllnessDurationEdit.Name = "maxIllnessDurationEdit";
-            this.maxIllnessDurationEdit.Size = new System.Drawing.Size(100, 20);
-            this.maxIllnessDurationEdit.TabIndex = 3;
-            // 
-            // maxIllnessDuration
-            // 
-            this.maxIllnessDuration.AutoSize = true;
-            this.maxIllnessDuration.Location = new System.Drawing.Point(16, 127);
-            this.maxIllnessDuration.Name = "maxIllnessDuration";
-            this.maxIllnessDuration.Size = new System.Drawing.Size(102, 13);
-            this.maxIllnessDuration.TabIndex = 45;
-            this.maxIllnessDuration.Text = "Max Illness Duration";
-            // 
             // walkSettingsControl
             // 
             this.walkSettingsControl.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -440,6 +444,22 @@
             this.quarantineControl.Name = "quarantineControl";
             this.quarantineControl.Size = new System.Drawing.Size(286, 279);
             this.quarantineControl.TabIndex = 0;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(16, 129);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(112, 13);
+            this.label5.TabIndex = 43;
+            this.label5.Text = "Reinfection Probability";
+            // 
+            // reinfectionProbabilityEdit
+            // 
+            this.reinfectionProbabilityEdit.Location = new System.Drawing.Point(190, 126);
+            this.reinfectionProbabilityEdit.Name = "reinfectionProbabilityEdit";
+            this.reinfectionProbabilityEdit.Size = new System.Drawing.Size(100, 20);
+            this.reinfectionProbabilityEdit.TabIndex = 44;
             // 
             // SettingsForm
             // 
@@ -513,5 +533,7 @@
         private QuarantineControl quarantineControl;
         private System.Windows.Forms.TextBox maxIllnessDurationEdit;
         private System.Windows.Forms.Label maxIllnessDuration;
+        private System.Windows.Forms.TextBox reinfectionProbabilityEdit;
+        private System.Windows.Forms.Label label5;
     }
 }

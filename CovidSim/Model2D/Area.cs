@@ -8,9 +8,9 @@ namespace CovidSim.Model2D
 {
     class Area
     {
-        public List<Human> Susceptible { get; set; } = new List<Human>();
+        public List<Human> Susceptible { get; private set; } = new List<Human>();
 
-        public List<Human> Humans { get; set; } = new List<Human>();
+        public List<Human> Humans { get; private set; } = new List<Human>();
 
         public void Add(Human human)
         {

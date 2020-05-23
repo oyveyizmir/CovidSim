@@ -13,6 +13,7 @@ namespace CovidSim.Model2D
         double transmissionRange = 10;
         double transmissionProbabilityAt0 = 0.3;
         double transmissionProbabilityAtRange = 0;
+        double reinfectionProbability = 0;
         double worldSize = 1000;
         int minIllnessDuration = 700;
         int maxIllnessDuration = 1300;
@@ -53,6 +54,20 @@ namespace CovidSim.Model2D
                 transmissionProbabilityAtRange = value;
             }
         }
+
+        public double ReinfectionProbability
+        {
+            get => reinfectionProbability;
+
+            set
+            {
+                if (value < 0 || value > 1)
+                    throw new ArgumentException("ReinfectionProbability");
+                reinfectionProbability = value;
+            }
+        }
+
+        public bool ReinfectionEnabled => reinfectionProbability > 0;
 
         public double WorldSize
         {
