@@ -346,7 +346,7 @@ namespace CovidSim.Model2D
                             + transmissionProbabilityRange * distance / Settings.TransmissionRange;
 
                         if (@object.IsRecovered)
-                            transmissionProbability *= Settings.ReinfectionProbability;
+                            transmissionProbability *= Power(Settings.ReinfectionProbability, @object.InfectedCount);
 
                         if (RandomUtils.LessThanThreshold(transmissionProbability))
                         {
@@ -356,6 +356,14 @@ namespace CovidSim.Model2D
                     }
                 }
             }
+        }
+
+        static double Power(double x, int p)
+        {
+            double result = 1;
+            for (; p > 0; p--)
+                result *= x;
+            return result;
         }
 
         IEnumerable<Human> GetHumansWithinRange(Point point, double range)
@@ -395,13 +403,20 @@ namespace CovidSim.Model2D
         void Infect(Human human, Area area)
         {
             human.IsInfected = true;
+            human.InfectedCount++;
             human.InfectionTime = Time;
             human.TimeToRemoval = RandomUtils.GetInt(Settings.MinIllnessDuration, Settings.MaxIllnessDuration);
 
             Stats.InfectedTotalCount++;
             Stats.InfectedCount++;
             if (human.IsRecovered)
+            {
                 Stats.RecoveredCount--;
+                if (human.InfectedCount - 1 > Stats.Reinfected.Count)
+                    Stats.Reinfected.Add(1);
+                else
+                    Stats.Reinfected[human.InfectedCount - 2]++;
+            }
             else
                 Stats.SusceptibleCount--;
 

@@ -46,6 +46,8 @@
             this.maxInfectedLabel = new System.Windows.Forms.Label();
             this.quarantinedValue = new System.Windows.Forms.Label();
             this.quarantinedLabel = new System.Windows.Forms.Label();
+            this.reinfectedLabel = new System.Windows.Forms.Label();
+            this.reinfectedValue = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -210,11 +212,31 @@
             this.quarantinedLabel.TabIndex = 2;
             this.quarantinedLabel.Text = "Quarantined:";
             // 
+            // reinfectedLabel
+            // 
+            this.reinfectedLabel.AutoSize = true;
+            this.reinfectedLabel.Location = new System.Drawing.Point(314, 30);
+            this.reinfectedLabel.Name = "reinfectedLabel";
+            this.reinfectedLabel.Size = new System.Drawing.Size(62, 13);
+            this.reinfectedLabel.TabIndex = 2;
+            this.reinfectedLabel.Text = "Reinfected:";
+            // 
+            // reinfectedValue
+            // 
+            this.reinfectedValue.AutoSize = true;
+            this.reinfectedValue.Location = new System.Drawing.Point(380, 30);
+            this.reinfectedValue.Name = "reinfectedValue";
+            this.reinfectedValue.Size = new System.Drawing.Size(54, 13);
+            this.reinfectedValue.TabIndex = 3;
+            this.reinfectedValue.Text = "reinfected";
+            // 
             // RealTimeStats
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.reinfectedValue);
             this.Controls.Add(this.quarantinedValue);
+            this.Controls.Add(this.reinfectedLabel);
             this.Controls.Add(this.quarantinedLabel);
             this.Controls.Add(this.deadLabel);
             this.Controls.Add(this.recoveredLabel);
@@ -259,5 +281,7 @@
         private System.Windows.Forms.Label maxInfectedLabel;
         private System.Windows.Forms.Label quarantinedValue;
         private System.Windows.Forms.Label quarantinedLabel;
+        private System.Windows.Forms.Label reinfectedLabel;
+        private System.Windows.Forms.Label reinfectedValue;
     }
 }

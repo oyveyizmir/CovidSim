@@ -48,57 +48,35 @@ namespace CovidSimApp.Controls
             recoveredLabel.Text = EmptyValue;
             deadLabel.Text = EmptyValue;
             quarantinedValue.Text = EmptyValue;
+            reinfectedValue.Text = EmptyValue;
         }
 
-        public void SetTime(int time)
-        {
-            SetValue(timeLabel, time);
-        }
+        public void SetTime(int time) => SetValue(timeLabel, time);
 
-        public void SetPopulation(double population)
-        {
-            SetValue(populationLabel, (int)Math.Round(population));
-        }
+        public void SetPopulation(double population) => SetValue(populationLabel, (int)Math.Round(population));
 
-        public void SetInfectedTotal(double infectedTotal)
-        {
-            SetValue(infectedTotalLabel, (int)Math.Round(infectedTotal));
-        }
+        public void SetInfectedTotal(double infectedTotal) => SetValue(infectedTotalLabel, (int)Math.Round(infectedTotal));
 
-        public void SetMaxInfected(double maxInfected)
-        {
-            SetValue(maxInfectedLabel, (int)Math.Round(maxInfected));
-        }
+        public void SetMaxInfected(double maxInfected) => SetValue(maxInfectedLabel, (int)Math.Round(maxInfected));
 
-        public void SetSusceptible(double susceptible)
-        {
-            SetValue(susceptibleLabel, (int)Math.Round(susceptible));
-        }
+        public void SetSusceptible(double susceptible) => SetValue(susceptibleLabel, (int)Math.Round(susceptible));
 
-        public void SetInfected(double infected)
-        {
-            SetValue(infectedLabel, (int)Math.Round(infected));
-        }
+        public void SetInfected(double infected) => SetValue(infectedLabel, (int)Math.Round(infected));
 
-        public void SetRecovered(double recovered)
-        {
-            SetValue(recoveredLabel, (int)Math.Round(recovered));
-        }
+        public void SetRecovered(double recovered) => SetValue(recoveredLabel, (int)Math.Round(recovered));
 
-        public void SetDead(double dead)
-        {
-            SetValue(deadLabel, (int)Math.Round(dead));
-        }
+        public void SetDead(double dead) => SetValue(deadLabel, (int)Math.Round(dead));
 
-        public void SetQuarantined(int quarantined)
-        {
-            SetValue(quarantinedValue, quarantined);
-        }
+        public void SetQuarantined(int quarantined) => SetValue(quarantinedValue, quarantined);
+
+        public void SetReinfected(List<int> reinfected) => reinfectedValue.Text = string.Join(",", reinfected);
 
         void OnShowExtraStatsChanged()
         {
             quarantinedLabel.Visible = showExtraStats;
             quarantinedValue.Visible = showExtraStats;
+            reinfectedLabel.Visible = showExtraStats;
+            reinfectedValue.Visible = showExtraStats;
         }
     }
 }

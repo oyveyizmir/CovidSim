@@ -24,6 +24,8 @@ namespace CovidSim.Model2D
 
         public bool IsQuarantined { get; set; }
 
+        public int InfectedCount { get; set; }
+
         public bool CanInfect(int time) => CanBeRemoved(time) && !IsQuarantined;
 
         public bool CanBeRemoved(int time) => IsAlive && IsInfected && InfectionTime < time;
